@@ -1,0 +1,343 @@
+﻿/* ===================== RESET ===================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* ===================== VARIABLES ===================== */
+:root {
+    --container-w: min(1200px, 92vw);
+    --gap: clamp(16px, 2vw, 28px);
+}
+
+/* ===================== HEADER ===================== */
+.header {
+    background-color: #43221c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* Shared container width for header/footer sections */
+.dongTren,
+.dongDuoi,
+.footer-inner {
+    width: var(--container-w);
+    margin: 0 auto;
+}
+
+/* Top row: 3 equal columns (Logo | Search | Actions) */
+.dongTren {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: var(--gap);
+}
+
+/* Logo sizing */
+.logo {
+    height: clamp(44px, 8vw, 64px);
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* ===================== SEARCH (no border-gap) ===================== */
+.groupTimkiem {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    height: 42px;
+    background: #fff;
+    border-radius: 999px;
+    overflow: hidden; /* clip inner radius exactly */
+}
+
+    .groupTimkiem .timKiem,
+    input[type="text"].timKiem {
+        flex: 1 1 auto;
+        min-width: 0;
+        height: 100%;
+        border: none;
+        border-radius: 0;
+        background: transparent;
+        padding: 0 14px;
+        font-size: 14px;
+        outline: none;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+    .groupTimkiem .btnTimKiem {
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: #371d18;
+        font-weight: 700;
+        padding: 0 18px;
+        cursor: pointer;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+        .groupTimkiem .btnTimKiem:hover {
+            background: #f1f1f1;
+        }
+
+/* Kill old rounded corners that caused mismatches */
+input[type="text"], .timKiem {
+    border-radius: 0;
+}
+
+.btnTimKiem, input[type="submit"], button, .aspNetButton {
+    border-radius: 0;
+}
+
+/* Right column (account + cart) */
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: clamp(16px, 2vw, 28px);
+}
+
+.taiKhoan, .gioHang {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+    .taiKhoan img, .gioHang img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+
+    .taiKhoan p, .gioHang p {
+        font-size: 13px;
+        color: #fff;
+        margin: 0;
+    }
+
+/* Divider line */
+.vachKeNgang {
+    width: 100%;
+    height: 1px;
+    background-color: #4e2a23;
+    margin: 10px 0;
+}
+
+/* ===================== MENU ROW ===================== */
+.dongDuoi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    color: #fff; /* toàn bộ chữ trong hàng menu là trắng */
+}
+
+    /* Base link styles for anchors */
+    a, .dongDuoi a,
+    .dongDuoi .aspNetLinkButton,
+    .dongDuoi input[type="submit"],
+    .dongDuoi .aspNetButton {
+        color: inherit; /* kế thừa từ .dongDuoi => trắng */
+        text-decoration: none;
+        font-size: 15px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+        .dongDuoi a:hover,
+        .dongDuoi .aspNetLinkButton:hover {
+            color: #d0a57c;
+        }
+
+/* Dropdown base */
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+}
+
+.navbar li {
+    position: relative;
+    display: flex; /* center vertically with button */
+    align-items: center;
+}
+
+.mega-menu {
+    display: none;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    background-color: #4b2620;
+    border-radius: 8px;
+    padding: 10px 15px;
+    flex-direction: row;
+    gap: 20px;
+    white-space: nowrap;
+}
+
+.dropdown:hover .mega-menu {
+    display: flex;
+}
+
+#megaMenu[hidden] {
+    display: none !important;
+}
+
+.mega-menu .aspNetLinkButton,
+.mega-menu a {
+    color: #fff;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-weight: normal;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+    .mega-menu .aspNetLinkButton:hover,
+    .mega-menu a:hover {
+        color: #d0a57c;
+    }
+
+/* ===== ALIGN "Sản phẩm" like links; remove duplicate caret & border ===== */
+.dongDuoi a,
+.dongDuoi .menu-link {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    line-height: 1.25;
+    padding: 6px 0;
+    gap: 6px;
+    font-weight: 700;
+}
+
+/* Button looks like a link, no UA border; custom focus */
+.dongDuoi .menu-link {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    color: inherit; /* trắng vì .dongDuoi set */
+    cursor: pointer;
+}
+
+    .dongDuoi .menu-link:focus-visible {
+        outline: 2px dashed #d0a57c;
+        outline-offset: 2px;
+    }
+/* Nếu HTML đang có ký tự ▾, tắt caret CSS để không bị 2 cái */
+#btnSanPham::after {
+    content: none !important;
+}
+
+/* ===================== BODY ===================== */
+.main {
+    background-color: #c6cc8d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+    background-color: #4b2620;
+    color: white;
+}
+
+/* Columns: Contact (left) | Policy (center) | Connect (right) */
+.footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--gap);
+    padding: 40px 0;
+    align-items: start;
+}
+
+.thongTinLienHe {
+    text-align: left;
+}
+
+.chinhSach {
+    text-align: center;
+}
+
+.ketNoi {
+    text-align: right;
+}
+
+footer h3 {
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+footer h4, footer h5 {
+    font-size: 14px;
+    margin: 8px 0 4px;
+    font-weight: bold;
+}
+
+footer p {
+    font-size: 14px;
+    margin: 2px 0 10px;
+}
+
+.thongTinLienHe, .chinhSach, .ketNoi {
+    min-width: 220px;
+}
+
+    .ketNoi img {
+        width: 28px;
+        height: 28px;
+        margin-left: 10px;
+        cursor: pointer;
+        object-fit: contain;
+    }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+    .dongTren {
+        grid-template-columns: 1fr;
+        row-gap: 12px;
+    }
+
+    .actions {
+        justify-content: center;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .chinhSach {
+        text-align: left;
+    }
+
+    .ketNoi {
+        text-align: left;
+    }
+}

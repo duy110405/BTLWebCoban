@@ -1,0 +1,104 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Khung.Master.cs" Inherits="btlweb.khung" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="css/Khung.css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+     
+        <!----------------------------------------------------------------- HEADER ------------------------------------------->
+        <header class="header">
+
+            <!--------------------------- Dòng trên --------------->
+            <div class="dongTren">
+                <asp:LinkButton ID="btnTrangChuLogo" runat="server" OnClick="btnTrangChuLogo_Click">
+                    <img src="anh/logoshop.png" alt="Logo" class="logo" />
+                </asp:LinkButton>
+                
+                <div class="groupTimkiem">
+                    <asp:TextBox ID="txtTimKiem" runat="server" CssClass="timKiem" placeholder="Bạn đang tìm kiếm gì?"></asp:TextBox>
+                    <asp:Button ID="btnTimKiem" runat="server" Text="Tìm kiếm" CssClass="btnTimKiem" OnClick="btnTimKiem_Click" />        
+                </div>
+               
+
+                <div class="taiKhoan">
+                    <asp:LinkButton ID="btnTaiKhoan" runat="server" OnClick="btnTaiKhoan_Click">
+                        <img src="anh/account.png" alt="Tài khoản" />
+                        <p>Tài khoản</p>
+                    </asp:LinkButton>
+                </div>
+
+                <div class="gioHang">
+                    <asp:LinkButton ID="btnGioHang" runat="server" OnClick="btnGioHang_Click">
+                        <img src="anh/shopping-cart_12456235.png" alt="Giỏ hàng" />
+                        <p>Giỏ hàng</p>
+                    </asp:LinkButton>
+                </div>
+            </div>
+
+            <div class="vachKeNgang"></div>
+
+            <!--------------------------- Dòng dưới --------------->
+            <div class="dongDuoi">
+                <asp:LinkButton ID="btnTrangChu" runat="server" CssClass="trangchu" Text="Trang chủ" OnClick="btnTrangChu_Click" />
+
+                <nav class="navbar">
+                    <ul>
+                        <li class="dropdown">
+                            <asp:LinkButton ID="btnSanPham" runat="server" Text="Sản phẩm ▾" CssClass="menu-link" />
+                            <div class="mega-menu">
+                                <asp:LinkButton ID="btnBanPhim" runat="server" Text="Bàn phím" OnClick="btnBanPhim_Click" />
+                                <asp:LinkButton ID="btnLaptop" runat="server" Text="Laptop" OnClick="btnLaptop_Click" />
+                                <asp:LinkButton ID="btnPC" runat="server" Text="PC" OnClick="btnPC_Click" />
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+                <asp:LinkButton ID="btnLienHe" runat="server" CssClass="lienhe" Text="Liên hệ" OnClick="btnLienHe_Click" />
+                <asp:LinkButton ID="btnGioiThieu" runat="server" CssClass="gioithieu" Text="Giới thiệu" OnClick="btnGioiThieu_Click" />
+            </div>
+        </header>
+
+        <!----------------------------------------------------------------- BODY ------------------------------------------->
+       <main class="main">
+    <asp:ContentPlaceHolder ID="mainContent" runat="server">
+    </asp:ContentPlaceHolder>
+      </main>  
+        <!----------------------------------------------------------------- FOOTER ------------------------------------------->
+        <footer class="footer">
+            <div class="thongTinLienHe">
+                <h3>Thông tin liên hệ</h3>
+                <h4>Tên cửa hàng</h4>
+                <p></p>
+                <h4>Địa chỉ</h4>
+                <p>Số 96 - Định Công - Hà Nội</p>
+                <h4>Email</h4>
+                <p>abc@gmail.com</p>
+                <h5>Hotline</h5>
+                <p>0912345678</p>
+            </div>
+
+            <div class="chinhSach">
+                <h3>Chính sách</h3>
+                <p>Chính sách giao hàng</p>
+                <p>Chính sách bảo mật</p>
+                <p>Chính sách bảo hành</p>
+            </div>
+
+            <div class="ketNoi">
+                <h3>Kết nối</h3>
+                <img src="anh/logoFB.jpg" alt="Facebook" />
+                <img src="anh/LogoZL.jpg" alt="Zalo" />
+                <img src="anh/logoEmail.jpg" alt="Email" />
+            </div>
+        </footer>
+    </form>
+</body>
+</html>
