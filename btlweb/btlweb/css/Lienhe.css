@@ -1,2 +1,111 @@
-﻿body {
+﻿/* ------------------------------------------------ */
+/* 1. Bố cục tổng thể (Hai cột: Form và Map) */
+/* ------------------------------------------------ */
+.lienHeWrapper {
+    /* Kích hoạt Flexbox để sắp xếp các phần tử con (Ảnh và Form) theo chiều ngang */
+    display: flex;
+    /* Thiết lập khoảng cách giữa hai cột */
+    gap: 30px;
+    /* Giới hạn chiều rộng và căn giữa khối trên trang */
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px 0;
+}
+
+/* ------------------------------------------------ */
+/* 2. Định dạng cột thông tin và Form (Khối .thongTin) */
+/* ------------------------------------------------ */
+.thongTin {
+    /* Đảm bảo khối Form chiếm một nửa không gian của wrapper */
+    flex: 1;
+    padding-right: 20px;
+    text-align: left; /* Đảm bảo nội dung căn lề trái */
+    font-family: Arial, sans-serif; /* Chọn font chữ phù hợp */
+}
+
+    /* Giảm khoảng cách giữa các dòng thông tin (Địa chỉ, Email,...) */
+    .lienHeWrapper .thongTin p {
+        margin: 5px 0;
+        line-height: 1.5;
+        font-size: 14px;
+    }
+
+        /* Tiêu đề "LIÊN HỆ VỚI CHÚNG TÔI" */
+       .lienHeWrapper .thongTin p:nth-child(10) {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #333; /* Màu chữ tiêu đề */
+        }
+
+/* ------------------------------------------------ */
+/* 3. Định dạng các ô nhập liệu (.nhapTT) */
+/* ------------------------------------------------ */
+.nhapTT {
+    display: flex;
+    flex-direction: column; /* Xếp các ô nhập theo chiều dọc */
+    gap: 15px; /* Khoảng cách giữa các TextBox */
+    margin: 20px 0;
+}
+
+    /* Định dạng chung cho tất cả TextBox và TextArea */
+    .nhapTT input[type="text"],
+    .nhapTT input[type="email"],
+    .nhapTT textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ccc;
+        box-sizing: border-box; /* Quan trọng: giúp padding không làm tăng chiều rộng tổng thể */
+        font-size: 15px;
+        /* Loại bỏ border-radius nếu bạn muốn góc vuông như hình mẫu */
+        border-radius: 0;
+    }
+
+    /* Thiết lập chiều cao cho ô Nội dung (TextMode="MultiLine") */
+    .nhapTT textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+/* ------------------------------------------------ */
+/* 4. Định dạng Map (Hình ảnh) */
+/* ------------------------------------------------ */
+.lienHeWrapper img {
+    /* Đảm bảo Map chiếm một nửa không gian */
+    flex: 1;
+    /* Dùng width 50% và max-width để đảm bảo chia đều */
+    width: 50%; /* Đảm bảo cả hai cột đều có kích thước tương đương */
+    max-width: 550px;
+    height: auto;
+    object-fit: contain; /* Thay vì cover */
+}
+
+/* ------------------------------------------------ */
+/* 5. Định dạng Nút Gửi Thông Tin */
+/* ------------------------------------------------ */
+#btnGuiYeuCau {
+    /* Màu nền xám đậm như hình mẫu */
+    background-color: #363636 !important;
+    color: white !important; /* Đảm bảo chữ trắng được áp dụng */
+    /* Thiết lập lại padding và font như hình mẫu */
+    padding: 12px 25px !important; /* Đã điều chỉnh nhỏ lại để gần với hình mẫu hơn */
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    border: none !important;
+    /* Xóa bỏ mọi box-shadow/outline có thể có từ Master Page */
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+    /* Các thuộc tính khác (cursor, text-transform) */
+    cursor: pointer;
+    text-transform: none;
+    display: inline-block; /* Bị ảnh hưởng bởi quy tắc header của master */
+}
+
+/* Định dạng cho Label thông báo (lblStatusMessage) */
+#lblStatusMessage {
+    display: block;
+    margin-bottom: 10px;
 }

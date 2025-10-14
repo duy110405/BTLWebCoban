@@ -13,5 +13,10 @@ namespace btlweb
         {
 
         }
+        protected void btnGuiYeuCau_Click(object sender , EventArgs e)
+        {
+            txtFullName.Text = txtEmail.Text = txtPhone.Text = txtMessage.Text = "" ;
+            lblStatusMessage.Text = "Bạn đã gửi yêu cầu thành công";
+        }
     }
 }
