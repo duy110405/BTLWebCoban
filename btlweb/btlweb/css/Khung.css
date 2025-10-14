@@ -3,30 +3,69 @@
     box-sizing: border-box;
 }
 
+html, body, #form1 {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+html {
+    background: #43221c;
+}
+/* trùng màu header để giấu hairline khi zoom */
+body {
+    background: #FFEED6;
+}
+/* nền chung của site */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+/* tránh thanh cuộn ngang khi dùng 100vw */
+
+/* Chặn mọi bo góc/đổ bóng ở khung ngoài */
+html, body, #form1, .header, .footer, .main {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
 /* ===================== VARIABLES ===================== */
 :root {
-    --container-w: min(1200px, 92vw);
+    --container-max: 1200px;
+    --container-w: min(var(--container-max), 92vw);
     --gap: clamp(16px, 2vw, 28px);
 }
 
-/* ===================== HEADER ===================== */
+/* ===================== HEADER (FULL-BLEED) ===================== */
 .header {
-    background-color: #43221c;
+    background: #43221c;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px 0;
+    /* tràn sát mép trái/phải & đè mọi layout center */
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* dính đỉnh */
 }
 
-/* Shared container width for header/footer sections */
-.dongTren,
-.dongDuoi,
-.footer-inner {
+/* Container nội bộ cho header/footer (căn giữa theo max-width) */
+.dongTren, .dongDuoi, .footer-inner {
+    max-width: var(--container-max);
     width: var(--container-w);
     margin: 0 auto;
 }
 
-/* Top row: 3 equal columns (Logo | Search | Actions) */
+/* Hàng trên: Logo | Search | Actions */
 .dongTren {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -34,24 +73,22 @@
     gap: var(--gap);
 }
 
-/* Logo sizing */
+/* Logo */
 .logo {
     height: clamp(44px, 8vw, 64px);
     width: auto;
-    display: block;
     object-fit: contain;
 }
 
-/* ===================== SEARCH (no border-gap) ===================== */
+/* ===================== SEARCH ===================== */
 .groupTimkiem {
     display: inline-flex;
     align-items: center;
     width: 100%;
-    max-width: 100%;
     height: 42px;
     background: #fff;
     border-radius: 999px;
-    overflow: hidden; /* clip inner radius exactly */
+    overflow: hidden;
 }
 
     .groupTimkiem .timKiem,
@@ -60,7 +97,6 @@
         min-width: 0;
         height: 100%;
         border: none;
-        border-radius: 0;
         background: transparent;
         padding: 0 14px;
         font-size: 14px;
@@ -72,7 +108,6 @@
     .groupTimkiem .btnTimKiem {
         height: 100%;
         border: 0;
-        border-radius: 0;
         background: transparent;
         color: #371d18;
         font-weight: 700;
@@ -82,15 +117,12 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        appearance: none;
-        -webkit-appearance: none;
     }
 
         .groupTimkiem .btnTimKiem:hover {
             background: #f1f1f1;
         }
 
-/* Kill old rounded corners that caused mismatches */
 input[type="text"], .timKiem {
     border-radius: 0;
 }
@@ -99,7 +131,7 @@ input[type="text"], .timKiem {
     border-radius: 0;
 }
 
-/* Right column (account + cart) */
+/* ===================== ACTIONS (tài khoản/giỏ hàng) ===================== */
 .actions {
     display: flex;
     justify-content: flex-end;
@@ -127,12 +159,12 @@ input[type="text"], .timKiem {
         margin: 0;
     }
 
-/* Divider line */
+/* Divider */
 .vachKeNgang {
     width: 100%;
     height: 1px;
-    background-color: #4e2a23;
-    margin: 10px 0;
+    background: #4e2a23;
+    margin: 0 !important;
 }
 
 /* ===================== MENU ROW ===================== */
@@ -142,16 +174,13 @@ input[type="text"], .timKiem {
     justify-content: center;
     gap: 40px;
     font-weight: bold;
-    padding-bottom: 10px;
-    color: #fff; /* toàn bộ chữ trong hàng menu là trắng */
+    padding: 10px 0;
+    color: #fff;
 }
 
-    /* Base link styles for anchors */
-    a, .dongDuoi a,
-    .dongDuoi .aspNetLinkButton,
-    .dongDuoi input[type="submit"],
-    .dongDuoi .aspNetButton {
-        color: inherit; /* kế thừa từ .dongDuoi => trắng */
+    /* Link base (a + LinkButton) */
+    a, .dongDuoi a, .dongDuoi .aspNetLinkButton, .dongDuoi input[type="submit"], .dongDuoi .aspNetButton {
+        color: inherit;
         text-decoration: none;
         font-size: 15px;
         background: none;
@@ -160,12 +189,10 @@ input[type="text"], .timKiem {
         font-family: inherit;
     }
 
-        .dongDuoi a:hover,
-        .dongDuoi .aspNetLinkButton:hover {
+        .dongDuoi a:hover, .dongDuoi .aspNetLinkButton:hover {
             color: #d0a57c;
         }
 
-/* Dropdown base */
 .navbar ul {
     list-style: none;
     margin: 0;
@@ -176,7 +203,7 @@ input[type="text"], .timKiem {
 
 .navbar li {
     position: relative;
-    display: flex; /* center vertically with button */
+    display: flex;
     align-items: center;
 }
 
@@ -185,7 +212,7 @@ input[type="text"], .timKiem {
     position: absolute;
     top: 25px;
     left: 0;
-    background-color: #4b2620;
+    background: #4b2620;
     border-radius: 8px;
     padding: 10px 15px;
     flex-direction: row;
@@ -201,8 +228,7 @@ input[type="text"], .timKiem {
     display: none !important;
 }
 
-.mega-menu .aspNetLinkButton,
-.mega-menu a {
+.mega-menu .aspNetLinkButton, .mega-menu a {
     color: #fff;
     text-decoration: none;
     background: none;
@@ -212,14 +238,12 @@ input[type="text"], .timKiem {
     cursor: pointer;
 }
 
-    .mega-menu .aspNetLinkButton:hover,
-    .mega-menu a:hover {
+    .mega-menu .aspNetLinkButton:hover, .mega-menu a:hover {
         color: #d0a57c;
     }
 
-/* ===== ALIGN "Sản phẩm" like links; remove duplicate caret & border ===== */
-.dongDuoi a,
-.dongDuoi .menu-link {
+/* "Sản phẩm" hiển thị như link; caret vẽ bằng CSS */
+.dongDuoi a, .dongDuoi .menu-link {
     display: inline-flex;
     align-items: center;
     vertical-align: middle;
@@ -229,7 +253,6 @@ input[type="text"], .timKiem {
     font-weight: 700;
 }
 
-/* Button looks like a link, no UA border; custom focus */
 .dongDuoi .menu-link {
     background: transparent;
     border: 0;
@@ -238,35 +261,37 @@ input[type="text"], .timKiem {
     appearance: none;
     -webkit-appearance: none;
     font: inherit;
-    color: inherit; /* trắng vì .dongDuoi set */
+    color: inherit;
     cursor: pointer;
 }
 
-    .dongDuoi .menu-link:focus-visible {
+    .dongDuoi .menu-link:focus-visible, .dongDuoi a:focus-visible {
         outline: 2px dashed #d0a57c;
         outline-offset: 2px;
     }
-/* Nếu HTML đang có ký tự ▾, tắt caret CSS để không bị 2 cái */
+
 #btnSanPham::after {
-    content: none !important;
+    content: "▾";
+    margin-left: 6px;
+    position: relative;
+    top: -1px;
 }
 
-/* ===================== BODY ===================== */
+/* ===================== MAIN ===================== */
 .main {
-    background-color: #c6cc8d;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-/* ===================== FOOTER ===================== */
-footer {
-    background-color: #4b2620;
-    color: white;
+/* ===================== FOOTER (FULL-BLEED) ===================== */
+.footer {
+    background: #4b2620;
+    color: #fff;
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
 }
 
-/* Columns: Contact (left) | Policy (center) | Connect (right) */
 .footer-inner {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -283,39 +308,84 @@ footer {
     text-align: center;
 }
 
+/* ===== KẾT NỐI: chỉ hiển thị (không link) và căn SÁT PHẢI ===== */
 .ketNoi {
     text-align: right;
+    justify-self: end; /* kéo cả block sát mép phải của grid */
 }
 
-footer h3 {
+    .ketNoi .social {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-end; /* căn các dòng về bên phải */
+    }
+
+    .ketNoi .social-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0 8px 10px; /* bỏ padding phải để sát mép phải */
+        border-radius: 12px;
+        background: transparent;
+        transition: background .15s ease, transform .1s ease;
+    }
+
+        .ketNoi .social-row:hover {
+            background: rgba(255,255,255,.06);
+            transform: translateX(1px);
+        }
+
+    .ketNoi .icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        background: #fff;
+        display: grid;
+        place-items: center;
+        flex: 0 0 34px;
+        box-shadow: 0 1px 0 rgba(0,0,0,.15) inset;
+    }
+
+        .ketNoi .icon img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            display: block;
+        }
+
+    .ketNoi .label {
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1;
+    }
+
+/* kích thước cột tối thiểu để không gãy chữ */
+.thongTinLienHe, .chinhSach, .ketNoi {
+    min-width: 220px;
+}
+
+footer h3, .footer h3 {
     font-size: 18px;
     text-transform: uppercase;
     margin-bottom: 15px;
     font-weight: bold;
 }
 
-footer h4, footer h5 {
+footer h4, footer h5, .footer h4, .footer h5 {
     font-size: 14px;
     margin: 8px 0 4px;
     font-weight: bold;
 }
 
-footer p {
+footer p, .footer p {
     font-size: 14px;
     margin: 2px 0 10px;
 }
-
-.thongTinLienHe, .chinhSach, .ketNoi {
-    min-width: 220px;
-}
-
-    .ketNoi img {
-        width: 28px;
-        height: 28px;
-        margin-left: 10px;
-        cursor: pointer;
-        object-fit: contain;
-    }
 
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 768px) {
@@ -333,11 +403,21 @@ footer p {
         text-align: left;
     }
 
-    .chinhSach {
+    /* về trái cho dễ đọc trên mobile */
+    .ketNoi {
         text-align: left;
+        justify-self: start;
     }
 
-    .ketNoi {
+        .ketNoi .social {
+            align-items: flex-start;
+        }
+
+        .ketNoi .social-row {
+            padding: 8px 10px;
+        }
+
+    .chinhSach {
         text-align: left;
     }
 }

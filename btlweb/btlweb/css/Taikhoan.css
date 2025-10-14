@@ -1,2 +1,152 @@
-﻿body {
+﻿/* Giữ nền chung từ Master; chỉ style khu vực đăng nhập */
+:root {
+    --card-bg: #ffffff;
+    --card-border: #dcdcdc;
+    --text: #1f1f1f;
+    --muted: #666;
+    --btn: #333333;
+    --btn-hover: #2a2a2a;
+    --fb: #2d5ba6;
+    --gg: #de4b3a;
+    --radius: 10px;
+}
+
+/* Bọc và canh giữa */
+.login-wrap {
+    display: flex;
+    justify-content: center;
+    padding: clamp(24px, 5vw, 48px) 16px; /* tạo khoảng cách so với header như ảnh */
+}
+
+/* Thẻ “card” giữa trang */
+.login-card {
+    width: min(520px, 92vw);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 22px 26px 28px;
+    box-shadow: 0 1px 0 rgba(0,0,0,.04);
+}
+
+.login-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 4px 0 14px;
+}
+
+/* Input */
+.form-group {
+    margin-bottom: 12px;
+}
+
+.input {
+    width: 100%;
+    height: 38px;
+    padding: 0 12px;
+    border: 1px solid #c9c9c9;
+    border-radius: 6px;
+    background: #eee; /* giống ảnh: input xám nhạt */
+    font-size: 14px;
+    outline: none;
+}
+
+    .input:focus {
+        border-color: #b4b4b4;
+        background: #f4f4f4;
+    }
+
+/* Hàng “Quên mật khẩu?” canh phải */
+.row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 6px 0 14px;
+}
+
+.pseudo-link {
+    color: var(--muted);
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: default; /* chỉ là chữ, không phải link */
+}
+
+/* Nút Đăng nhập */
+.btn {
+    width: 100%;
+    height: 42px;
+    border: 0;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.btn-primary {
+    background: var(--btn);
+    color: #fff;
+}
+
+    .btn-primary:hover {
+        background: var(--btn-hover);
+    }
+
+/* Divider với chữ “hoặc đăng nhập bằng” */
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 14px 0 10px;
+}
+
+    .divider::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+        background: #e7e1db; /* line nhạt như trong ảnh */
+    }
+
+    .divider > span {
+        position: relative;
+        background: transparent;
+        padding: 0 10px;
+        color: var(--text);
+    }
+
+/* Hàng nút mạng xã hội (chỉ tượng trưng, không phải <a>) */
+.social-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.btn-social {
+    height: 36px;
+    border: 0;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+    .btn-social.fb {
+        background: var(--fb);
+    }
+
+    .btn-social.gg {
+        background: var(--gg);
+    }
+
+    .btn-social:active {
+        transform: translateY(1px);
+    }
+
+/* Mobile */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 18px 16px 22px;
+    }
 }
