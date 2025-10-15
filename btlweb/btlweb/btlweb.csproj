@@ -73,7 +73,11 @@
     <Content Include="anh\shopping-cart_12456235.png" />
     <Content Include="anh\sp_acer_nitro5.jpg" />
     <Content Include="anh\sp_inspiron3000.jpg" />
+    <Content Include="anh\sp_legion_back.png" />
+    <Content Include="anh\sp_legion_open.png" />
+    <Content Include="anh\sp_legion_port.png" />
     <Content Include="anh\sp_legion_pro5.jpg" />
+    <Content Include="anh\sp_legion_side.png" />
     <Content Include="anh\sp_msi_modern15.jpg" />
     <Content Include="anh\sp_rog_strix16.jpg" />
     <Content Include="anh\sp_thinkbook14p.jpg" />
@@ -81,7 +85,9 @@
     <Content Include="anh\sp_xps14.jpg" />
     <Content Include="anh\sp_yoga9i.jpg" />
     <Content Include="Banphim.aspx" />
+    <Content Include="ChitietLegion5.aspx" />
     <Content Include="css\Banphim.css" />
+    <Content Include="css\ChitietLegion5.css" />
     <Content Include="css\Giohang.css" />
     <Content Include="css\Gioithieu.css" />
     <Content Include="css\Khung.css" />
@@ -94,6 +100,7 @@
     <Content Include="Dangnhap.aspx" />
     <Content Include="Giohang.aspx" />
     <Content Include="Gioithieu.aspx" />
+    <Content Include="js\ChitietLegion5.js" />
     <Content Include="Laptop.aspx" />
     <Content Include="Lienhe.aspx" />
     <Content Include="Pc.aspx" />
@@ -108,6 +115,13 @@
     </Compile>
     <Compile Include="Banphim.aspx.designer.cs">
       <DependentUpon>Banphim.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChitietLegion5.aspx.cs">
+      <DependentUpon>ChitietLegion5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChitietLegion5.aspx.designer.cs">
+      <DependentUpon>ChitietLegion5.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dangky.aspx.cs">
       <DependentUpon>Dangky.aspx</DependentUpon>

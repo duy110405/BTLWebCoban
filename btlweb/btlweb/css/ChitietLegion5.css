@@ -1,0 +1,278 @@
+﻿:root {
+    --cream: #FFEED6;
+    --card: #fff;
+    --line: #d9cfc4;
+    --text: #222;
+    --sub: #666;
+    --accent: #e53a2e;
+    --radius: 14px;
+    --gap: 22px;
+    /* Kích thước khung ảnh lớn (stage) */
+    --stage-max-w: 560px; /* độ rộng tối đa */
+    --stage-ratio-w: 4; /* tỉ lệ khung: 4:3  */
+    --stage-ratio-h: 3;
+}
+
+/* Nền thân trang */
+.main {
+    background: var(--cream);
+}
+
+/* ================== LAYOUT ================== */
+.detail-wrap {
+    width: min(1200px, 92vw);
+    margin: clamp(16px,3vw,24px) auto 48px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--gap);
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+}
+
+/* ============ LEFT: GALLERY + SPECS ============ */
+/* Khung chứa ảnh lớn: cố định theo tỉ lệ 4:3 để ảnh luôn “bằng nhau” */
+.gallery-card .main-img {
+    width: min(var(--stage-max-w), 95%);
+    aspect-ratio: calc(var(--stage-ratio-w)) / calc(var(--stage-ratio-h));
+    margin-inline: auto;
+    padding: 8px 8px 12px;
+    display: grid;
+    place-items: center;
+    overflow: hidden; /* nếu ảnh lố thì giấu phần thừa */
+}
+
+    /* Ảnh lớn lấp đầy khung nhưng không méo */
+    .gallery-card .main-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+    }
+
+.thumbs {
+    display: flex;
+    gap: 10px;
+    padding: 0;
+    margin: 0 0 10px 0;
+    list-style: none;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+    .thumbs li {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 6px;
+        background: #fff;
+    }
+
+    .thumbs img {
+        width: 90px;
+        height: 56px;
+        object-fit: cover;
+        display: block;
+    }
+
+        /* thumbnails có thể bấm + trạng thái đang chọn */
+        .thumbs img.jsThumb {
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            opacity: .85;
+            outline: none;
+            transition: opacity .15s ease, box-shadow .15s ease, border-color .15s ease;
+        }
+
+            .thumbs img.jsThumb:hover {
+                opacity: .95;
+            }
+
+            .thumbs img.jsThumb:focus-visible {
+                outline: 2px dashed #7fbf9f;
+                outline-offset: 2px;
+            }
+
+            .thumbs img.jsThumb.active {
+                border-color: #7fbf9f;
+                box-shadow: 0 0 0 2px rgba(127,191,159,.25);
+                opacity: 1;
+            }
+
+.specs {
+    padding: 4px 6px 2px;
+}
+
+    .specs h3 {
+        margin: 6px 0 10px;
+        font-size: 18px;
+        color: var(--text);
+    }
+
+/* Bảng key/value 2 cột */
+.kv {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 6px 12px;
+    margin-bottom: 14px;
+}
+
+    .kv .k {
+        color: #444;
+    }
+
+    .kv .v {
+        color: #111;
+    }
+
+.info-block {
+    margin-top: 14px;
+}
+
+    .info-block h4 {
+        margin: 0 0 6px;
+        font-size: 16px;
+    }
+
+    .info-block p {
+        margin: 0;
+        color: #222;
+    }
+
+/* ============ RIGHT: BUY BOX ============ */
+.buy-card .title {
+    font-size: 18px;
+    margin: 2px 0 10px;
+    line-height: 1.35;
+}
+
+.form-label {
+    display: block;
+    margin: 8px 0 6px;
+    color: #333;
+}
+
+.select {
+    width: 100%;
+    height: 36px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0 10px;
+    background: #f7efe7;
+}
+
+.color-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.chip {
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #f7efe7;
+    cursor: default;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 0 10px;
+}
+
+    .price-row .price {
+        color: var(--accent);
+        font-size: 18px;
+    }
+
+.action-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    flex: 1 1 0;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    font-weight: 600;
+}
+
+.btn-buy {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+.btn-ghost {
+    background: #f7efe7;
+}
+
+/* ============ METERS ============ */
+.meter-box h3 {
+    margin: 8px 0 8px;
+}
+
+.meter {
+    display: grid;
+    grid-template-columns: 120px 1fr 48px;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+}
+
+    .meter .label {
+        color: #333;
+    }
+
+    .meter .score {
+        text-align: right;
+        color: #333;
+    }
+
+.bar {
+    height: 10px;
+    background: #eee;
+    border-radius: 999px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+    .bar i {
+        display: block;
+        height: 100%;
+        width: var(--val, 50%);
+        background: linear-gradient(90deg, #58b173, #57b06f);
+        border-radius: 999px;
+    }
+
+/* ============ Responsive ============ */
+@media (max-width: 980px) {
+    .detail-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .kv {
+        grid-template-columns: 140px 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .thumbs img {
+        width: 76px;
+        height: 48px;
+    }
+
+    .meter {
+        grid-template-columns: 110px 1fr 44px;
+    }
+}
