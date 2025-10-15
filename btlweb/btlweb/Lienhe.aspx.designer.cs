@@ -24,6 +24,15 @@ namespace btlweb
         protected global::System.Web.UI.WebControls.TextBox txtFullName;
 
         /// <summary>
+        /// errFullName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errFullName;
+
+        /// <summary>
         /// txtEmail control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace btlweb
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+
+        /// <summary>
+        /// errEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errEmail;
 
         /// <summary>
         /// txtPhone control.
@@ -42,6 +60,15 @@ namespace btlweb
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
 
         /// <summary>
+        /// errPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errPhone;
+
+        /// <summary>
         /// txtMessage control.
         /// </summary>
         /// <remarks>
@@ -49,6 +76,15 @@ namespace btlweb
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMessage;
+
+        /// <summary>
+        /// errMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errMessage;
 
         /// <summary>
         /// lblStatusMessage control.
