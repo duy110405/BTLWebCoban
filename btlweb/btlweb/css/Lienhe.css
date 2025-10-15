@@ -85,15 +85,15 @@
 /* ------------------------------------------------ */
 /* 5. Định dạng Nút Gửi Thông Tin */
 /* ------------------------------------------------ */
-#btnGuiYeuCau {
+ .lienHeWrapper #btnGuiYeuCau {
     /* Màu nền xám đậm như hình mẫu */
     background-color: #363636 !important;
-    color: white !important; /* Đảm bảo chữ trắng được áp dụng */
+    color: aliceblue !important; /* Đảm bảo chữ trắng được áp dụng */
     /* Thiết lập lại padding và font như hình mẫu */
-    padding: 12px 25px !important; /* Đã điều chỉnh nhỏ lại để gần với hình mẫu hơn */
+    padding: 20px 35px !important; 
     font-size: 16px !important;
     font-weight: 500 !important;
-    border: none !important;
+    border: 5px !important;
     /* Xóa bỏ mọi box-shadow/outline có thể có từ Master Page */
     box-shadow: none !important;
     outline: none !important;
