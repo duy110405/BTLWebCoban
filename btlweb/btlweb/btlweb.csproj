@@ -88,6 +88,7 @@
     <Content Include="ChitietLegion5.aspx" />
     <Content Include="css\Banphim.css" />
     <Content Include="css\ChitietLegion5.css" />
+    <Content Include="css\Dangky.css" />
     <Content Include="css\Giohang.css" />
     <Content Include="css\Gioithieu.css" />
     <Content Include="css\Khung.css" />
