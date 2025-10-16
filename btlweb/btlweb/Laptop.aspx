@@ -39,12 +39,14 @@
 
         <!-- CONTENT: LƯỚI SẢN PHẨM -->
         <section class="product-grid">
-            <article class="card">
+            <a href="ChitietLegion5.aspx">
+                <article class="card">
                 <img src="anh/sp_legion_pro5.jpg" alt="Legion Pro 5" />
                 <h4 class="spec">i5 12400hx | Rtx 4060<br />16gb | 512gb | 16 full hd</h4>
                 <p class="name">Laptop Legion pro 5</p>
                 <p class="price">25.000.000đ</p>
-            </article>
+                </article>
+            </a>
 
             <article class="card">
                 <img src="anh/sp_rog_strix16.jpg" alt="ROG Strix 16" />

@@ -1,2 +1,275 @@
-﻿body {
+﻿:root {
+    --cream: #FFEED6;
+    --card: #fff;
+    --line: #d9cfc4;
+    --text: #222;
+    --muted: #666;
+    --accent: #e53a2e;
+    --radius: 14px;
+    --gap: 22px;
+    /* đồng bộ với trang Laptop */
+    --body-gap-top: clamp(16px, 3vw, 40px);
+}
+
+/* nền body */
+.main {
+    background: var(--cream);
+}
+
+/* ===== Container: KHỚP TRANG LAPTOP (1200 + padding 16) ===== */
+.cart-wrap {
+    max-width: 1200px;
+    margin: var(--body-gap-top) auto 48px;
+    padding: 0 16px;
+}
+
+.cart-title {
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+
+/* Lưới 2 cột */
+.cart-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--gap);
+}
+
+/* Card chung */
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px;
+}
+
+/* ==================== CART ITEMS ==================== */
+.cart-item {
+    display: grid;
+    grid-template-columns: 120px 1fr 140px; /* ảnh | info | giá */
+    gap: 14px;
+    align-items: center;
+}
+
+    .cart-item + .cart-item {
+        margin-top: 14px;
+    }
+
+    .cart-item .thumb {
+        width: 120px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+    }
+
+    .cart-item .name {
+        font-size: 16px;
+        margin: 0 0 4px;
+    }
+
+    .cart-item .desc {
+        margin: 0 0 8px;
+        color: var(--muted);
+        line-height: 1.35;
+    }
+
+.controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.qty {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f7efe7;
+    padding: 4px 6px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+}
+
+    .qty .stepper {
+        width: 26px;
+        height: 26px;
+        border: 0;
+        background: #fff;
+        border-radius: 6px;
+        line-height: 1;
+        font-size: 16px;
+        cursor: pointer;
+        border: 1px solid var(--line);
+    }
+
+    .qty input {
+        width: 38px;
+        height: 26px;
+        text-align: center;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+.cart-item .price {
+    text-align: right;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* ==================== GIFT ==================== */
+.gift .gift-head {
+    font-weight: 700;
+    margin: 4px 4px 10px;
+    color: #333;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+}
+
+.gift .gift-body {
+    display: grid;
+    grid-template-columns: 64px 1fr 80px;
+    gap: 12px;
+    align-items: center;
+}
+
+.gift-thumb {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+}
+
+.gift-name {
+    font-size: 14px;
+}
+
+.gift-price {
+    text-align: right;
+}
+
+/* ==================== CUSTOMER FORM ==================== */
+.customer .block-title {
+    margin: 4px 0 12px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 10px 14px;
+}
+
+.input, .select, .textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px 10px;
+    font-size: 14px;
+}
+
+.textarea {
+    resize: vertical;
+}
+
+/* ==================== RIGHT COLUMN ==================== */
+.cart-right {
+    display: grid;
+    gap: var(--gap);
+}
+
+.block-title {
+    font-size: 16px;
+    margin: 2px 0 10px;
+}
+
+.summary .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+    .summary .row:last-child {
+        border-bottom: 0;
+    }
+
+.summary .money {
+    color: var(--accent);
+}
+
+.summary .total .money {
+    font-size: 18px;
+}
+
+/* Nút thanh toán xuống đáy & căn giữa */
+.summary {
+    display: flex;
+    flex-direction: column;
+    min-height: 240px; /* để có “đáy” rõ ràng; chỉnh tùy ý */
+}
+
+.summary-actions {
+    margin-top: auto;
+    padding-top: 12px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid var(--line);
+}
+
+    .summary-actions .btn {
+        min-width: 200px;
+    }
+
+.btn {
+    height: 38px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+.btn-ghost {
+    background: #f7efe7;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 980px) {
+    .cart-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-item {
+        grid-template-columns: 100px 1fr 120px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+        .form-grid label {
+            margin-top: 6px;
+        }
+}
+
+@media (max-width: 560px) {
+    .cart-item {
+        grid-template-columns: 90px 1fr;
+    }
+
+        .cart-item .price {
+            grid-column: 1 / -1;
+            text-align: left;
+        }
 }
