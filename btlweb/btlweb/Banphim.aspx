@@ -32,9 +32,11 @@
         <section class="product-grid">
 
             <article class="card">
-                <img src="anh/banphim1.jpg" alt="Aula 3 MODE F75" />
+                <a href="Aula3MODEF75.aspx">
+                    <img src="anh/banphim1.jpg" alt="Aula 3 MODE F75" />
+                </a>
                 <h4 class="spec">Kiểu dáng: Tenkeyless (nhỏ gọn)<br />Kết nối: Bluetooth/ Wireless<br />Switch: Reaper switch<br />Keycap: PBT cao cấp<br />Đèn: LED RGB</h4>
-                <p class="name">Bàn phím cơ Aula 3 MODE F75 đen + hồng gradient</p>
+                <a href="Aula3MODEF75.aspx" class="name">Bàn phím cơ Aula 3 MODE F75 đen + hồng gradient</a>
                 <p class="price">1.290.000 ₫</p>
             </article>
 

@@ -39,13 +39,17 @@
         <!-- GRID: DANH SÁCH PC -->
         <section class="product-grid">
 
+            <!-- ✅ SẢN PHẨM 1: CÓ LINK -->
             <article class="card">
-                <img src="anh/pc1.jpg" alt="PC Lenovo ThinkCentre Neo 50T G5" />
-                <h4 class="spec">i3 14100 | 8GB | 512GB SSD<br />Intel UHD 730</h4>
-                <p class="name">PC Lenovo ThinkCentre Neo 50T G5 12UB0001VA</p>
-                <p class="price">10.590.000đ</p>
+                <a href="LenovoThinkCentre.aspx">
+                    <img src="anh/pc1.jpg" alt="PC Lenovo ThinkCentre Neo 50T G5" />
+                    <h4 class="spec">i3 14100 | 8GB | 512GB SSD<br />Intel UHD 730</h4>
+                    <p class="name">PC Lenovo ThinkCentre Neo 50T G5 12UB0001VA</p>
+                    <p class="price">10.590.000đ</p>
+                </a>
             </article>
 
+            <!-- ❌ CÁC SẢN PHẨM KHÁC KHÔNG CÓ LINK -->
             <article class="card">
                 <img src="anh/pc2.jpg" alt="PC HP Pro Tower 280 G9" />
                 <h4 class="spec">i3 13100 | 8GB | 256GB SSD<br />Intel UHD 730 | Win 11</h4>

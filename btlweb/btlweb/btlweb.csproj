@@ -84,8 +84,10 @@
     <Content Include="anh\sp_x1_carbon.jpg" />
     <Content Include="anh\sp_xps14.jpg" />
     <Content Include="anh\sp_yoga9i.jpg" />
+    <Content Include="Aula3MODEF75.aspx" />
     <Content Include="Banphim.aspx" />
     <Content Include="ChitietLegion5.aspx" />
+    <Content Include="css\Aula3MODEF75.css" />
     <Content Include="css\Banphim.css" />
     <Content Include="css\ChitietLegion5.css" />
     <Content Include="css\Dangky.css" />
@@ -93,6 +95,7 @@
     <Content Include="css\Gioithieu.css" />
     <Content Include="css\Khung.css" />
     <Content Include="css\Laptop.css" />
+    <Content Include="css\LenovoThinkCentre.css" />
     <Content Include="css\Lienhe.css" />
     <Content Include="css\Pc.css" />
     <Content Include="css\Taikhoan.css" />
@@ -101,8 +104,11 @@
     <Content Include="Dangnhap.aspx" />
     <Content Include="Giohang.aspx" />
     <Content Include="Gioithieu.aspx" />
+    <Content Include="js\Aula3MODEF75.js" />
     <Content Include="js\ChitietLegion5.js" />
+    <Content Include="js\LenovoThinkCentre.js" />
     <Content Include="Laptop.aspx" />
+    <Content Include="LenovoThinkCentre.aspx" />
     <Content Include="Lienhe.aspx" />
     <Content Include="Pc.aspx" />
     <Content Include="Taikhoan.aspx" />
@@ -110,6 +116,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aula3MODEF75.aspx.cs">
+      <DependentUpon>Aula3MODEF75.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aula3MODEF75.aspx.designer.cs">
+      <DependentUpon>Aula3MODEF75.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Banphim.aspx.cs">
       <DependentUpon>Banphim.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -165,6 +178,13 @@
     </Compile>
     <Compile Include="Laptop.aspx.designer.cs">
       <DependentUpon>Laptop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LenovoThinkCentre.aspx.cs">
+      <DependentUpon>LenovoThinkCentre.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LenovoThinkCentre.aspx.designer.cs">
+      <DependentUpon>LenovoThinkCentre.aspx</DependentUpon>
     </Compile>
     <Compile Include="Lienhe.aspx.cs">
       <DependentUpon>Lienhe.aspx</DependentUpon>
