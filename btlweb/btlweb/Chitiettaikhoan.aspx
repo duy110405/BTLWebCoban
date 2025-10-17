@@ -126,15 +126,6 @@
               <button class="btn ghost">Xóa</button>
             </div>
           </article>
-          <article class="card">
-            <h3 class="card-title">Địa chỉ xuất hóa đơn</h3>
-            <p>Công ty ABC — 0102xxxx</p>
-            <p>Tầng 5, Tòa XYZ, Cầu Giấy, Hà Nội</p>
-            <div class="right">
-              <button class="btn ghost">Sửa</button>
-              <button class="btn ghost">Xóa</button>
-            </div>
-          </article>
         </div>
       </section>
 
@@ -148,16 +139,7 @@
             <label class="radio"><input type="radio" name="pay"> Chuyển khoản</label>
             <label class="radio"><input type="radio" name="pay"> QR ngân hàng</label>
             <button class="btn">Lưu thay đổi</button>
-          </article>
-          <article class="card">
-            <h3 class="card-title">Thông tin xuất hóa đơn</h3>
-            <div class="form">
-              <input class="inp" placeholder="Tên công ty">
-              <input class="inp" placeholder="Mã số thuế">
-              <input class="inp" placeholder="Địa chỉ">
-            </div>
-            <button class="btn">Lưu thông tin</button>
-          </article>
+          </article>      
         </div>
       </section>
 
