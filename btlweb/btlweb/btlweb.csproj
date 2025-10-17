@@ -87,9 +87,11 @@
     <Content Include="Aula3MODEF75.aspx" />
     <Content Include="Banphim.aspx" />
     <Content Include="ChitietLegion5.aspx" />
+    <Content Include="Chitiettaikhoan.aspx" />
     <Content Include="css\Aula3MODEF75.css" />
     <Content Include="css\Banphim.css" />
     <Content Include="css\ChitietLegion5.css" />
+    <Content Include="css\Chitiettaikhoan.css" />
     <Content Include="css\Dangky.css" />
     <Content Include="css\Giohang.css" />
     <Content Include="css\Gioithieu.css" />
@@ -136,6 +138,13 @@
     </Compile>
     <Compile Include="ChitietLegion5.aspx.designer.cs">
       <DependentUpon>ChitietLegion5.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Chitiettaikhoan.aspx.cs">
+      <DependentUpon>Chitiettaikhoan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Chitiettaikhoan.aspx.designer.cs">
+      <DependentUpon>Chitiettaikhoan.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dangky.aspx.cs">
       <DependentUpon>Dangky.aspx</DependentUpon>

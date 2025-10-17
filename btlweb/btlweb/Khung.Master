@@ -26,12 +26,17 @@
 
       <!-- Gộp Tài khoản + Giỏ hàng để canh cột phải -->
       <div class="actions">
-        <div class="taiKhoan">
+
+<center>
+
+       <div class="taiKhoan">
           <asp:LinkButton ID="btnTaiKhoan" runat="server" OnClick="btnTaiKhoan_Click" CssClass="link-plain">
             <img src="anh/account.png" alt="Tài khoản" />
             <p>Tài khoản</p>
           </asp:LinkButton>
         </div>
+
+</center>  
 
         <div class="gioHang">
           <asp:LinkButton ID="btnGioHang" runat="server" OnClick="btnGioHang_Click" CssClass="link-plain">
