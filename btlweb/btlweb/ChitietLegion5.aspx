@@ -35,9 +35,6 @@
         </ul>
         
 
-
-
-
       <div class="specs">
         <h3>Cấu hình và đặc điểm chi tiết:</h3>
 

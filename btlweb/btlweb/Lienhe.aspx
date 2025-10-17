@@ -75,9 +75,10 @@
           <asp:Label ID="errMessage" runat="server" CssClass="error" Text="tin nhắn không được để trống" Visible="false" />
         
       </div>
-        <asp:Label ID="lblStatusMessage" runat="server" ForeColor="green" />
+        <asp:Label ID="lblStatusMessage" runat="server" ForeColor="green" />   
         <asp:Button ID="btnGuiYeuCau" runat="server" Text="Gửi Thông Tin " OnClick="btnGuiYeuCau_Click" OnClientClick="return checkDuLieuNhap();"  />
-   </div>
+   </div> 
+      
     </div>
     
 </asp:Content>

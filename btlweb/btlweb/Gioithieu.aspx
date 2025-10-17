@@ -26,6 +26,5 @@
             <p style="color:black">HouComputer cam kết mang đến giá trị tối đa cho khách hàng bằng việc cung cấp sản phẩm chất lượng cao, dịch vụ chuyên nghiệp và tận tâm. Với tinh thần đổi mới không ngừng và sự hỗ trợ của công nghệ hiện đại, chúng tôi hướng đến việc tạo ra trải nghiệm mua sắm tối ưu, tiện lợi và đáng tin cậy cho mọi khách hàng.</p>
         </div>
     </div>
-</div>
-
+</div>   
 </asp:Content>

@@ -1,1 +1,163 @@
-﻿
+﻿/* ====================================================================== ẢNH TRƯNG BÀY (Ảnh trên cùng) ================================== */
+.anhTrungBay {
+    width: 100%;
+    text-align: center; /* Căn giữa ảnh inline/inline-block */
+    margin-bottom: 30px; /* Thêm khoảng cách với khung bên dưới */
+}
+
+    .anhTrungBay img {
+        width: 700px;
+        height: 380px;
+        object-fit: cover; /* Đảm bảo ảnh hiển thị đẹp */
+        border-radius: 8px; /* Thêm bo góc cho ảnh */
+    }
+
+/* ============================================================================= KHUNG CHUNG (CHA) ============================================ */
+
+.khung-san-pham-chung {
+    position: relative;
+    margin: 40px auto;
+    max-width: 1100px;
+    width: 90%;
+    margin-top: 60px;
+}
+
+/* ============================================================================== TIÊU ĐỀ/TAB CHUNG =================================================== */
+
+.tieude-chung {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    /* STYLE CHUNG */
+    color: white;
+    font-weight: bold;
+    padding: 6px 15px;
+    border-radius: 8px 8px 0 0;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+/* Style Riêng cho Tab Giảm Giá */
+.tieudegiamgia {
+    background-color: #5b46d5;
+}
+
+/* Style Riêng cho Tab Bán Chạy */
+.tieudebanchay {
+    background-color: #d84e4e; 
+}
+
+.tieudethich{
+    background-color :chocolate;
+}
+
+/* ========================================================================== KHUNG NỘI DUNG CHUNG (Viền & Flexbox) ================================ */
+
+.khung-noi-dung-chung { /* Áp dụng cho cả .khungSpGiamGia và .khungSpBanChay */
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    border: 3px solid #63a4e9; 
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 250px;
+    /* Thiết lập Flexbox cho các sản phẩm */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+/* ================================================================= CARD SẢN PHẨM ========================================= */
+
+.khung-noi-dung-chung .card { /* Dùng class chung */
+    width: calc(25% - 15px) !important;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+    .khung-noi-dung-chung .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .khung-noi-dung-chung .card img {
+        width: 100%;
+        max-height: 180px;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+
+    .khung-noi-dung-chung .card .name {
+        font-weight: bold;
+        margin: 5px 0;
+        color: #333;
+    }
+
+    .khung-noi-dung-chung .card .spec {
+        font-size: 13px;
+        color: #666;
+        margin: 5px 0;
+        line-height: 1.4;
+    }
+
+    /* GIÁ TIỀN: SỬ DỤNG LẠI CLASS CHUNG VÀ MÀU CHUNG */
+    .khung-noi-dung-chung .card .price {
+        font-weight: 700;
+        color: #d84e4e; 
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+
+/* ======================================================== RESPONSIVE CHUNG ========================================== */
+
+@media (max-width: 992px) {
+    .khung-noi-dung-chung .card {
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 600px) {
+    .khung-noi-dung-chung .card {
+        width: 100%;
+    }
+}
+
+/* ======================================================== SẢN PHẨM CÓ THỂ THÍCH ========================================== */
+
+.dongMenu {
+    display: flex; /* xếp các p trên cùng 1 dòng */
+    justify-content: center; /* căn giữa ngang */
+    align-items: center; /* căn giữa dọc */
+    gap: 30px; 
+    margin: 15px 0; /* khoảng cách trên/dưới */
+}
+
+    .dongMenu p {
+        white-space: nowrap; /* không xuống dòng */
+        font-weight: bold;
+        color: #444;
+        cursor: pointer;
+        transition: color 0.2s, transform 0.2s;
+    }
+
+        .dongMenu p:hover {
+            color: #d84e4e;
+            transform: scale(1.05);
+        }
+
+/* ====================== KHUNG SẢN PHẨM "CÓ THỂ THÍCH" ====================== */
+
+.khungSpThich {
+    display: flex; /* hiển thị ngang */
+    flex-wrap: wrap; /* xuống hàng khi không đủ chỗ */
+    justify-content: space-between;
+    gap: 20px;
+}

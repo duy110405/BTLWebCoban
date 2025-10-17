@@ -4,9 +4,7 @@
 .lienHeWrapper {
     /* Kích hoạt Flexbox để sắp xếp các phần tử con (Ảnh và Form) theo chiều ngang */
     display: flex;
-    /* Thiết lập khoảng cách giữa hai cột */
     gap: 30px;
-    /* Giới hạn chiều rộng và căn giữa khối trên trang */
     width: 90%;
     max-width: 1100px;
     margin: 40px auto;
@@ -16,12 +14,12 @@
 /* ------------------------------------------------ */
 /* 2. Định dạng cột thông tin và Form (Khối .thongTin) */
 /* ------------------------------------------------ */
-.thongTin {
+.lienHeWrapper .thongTin {
     /* Đảm bảo khối Form chiếm một nửa không gian của wrapper */
     flex: 1;
     padding-right: 20px;
-    text-align: left; /* Đảm bảo nội dung căn lề trái */
-    font-family: Arial, sans-serif; /* Chọn font chữ phù hợp */
+    text-align: left; 
+    font-family: Arial, sans-serif;
 }
 
     /* Giảm khoảng cách giữa các dòng thông tin (Địa chỉ, Email,...) */
@@ -43,7 +41,7 @@
 /* ------------------------------------------------ */
 /* 3. Định dạng các ô nhập liệu (.nhapTT) */
 /* ------------------------------------------------ */
-.nhapTT {
+.lienHeWrapper .nhapTT {
     display: flex;
     flex-direction: column; /* Xếp các ô nhập theo chiều dọc */
     gap: 15px; /* Khoảng cách giữa các TextBox */
@@ -75,7 +73,6 @@
 .lienHeWrapper img {
     /* Đảm bảo Map chiếm một nửa không gian */
     flex: 1;
-    /* Dùng width 50% và max-width để đảm bảo chia đều */
     width: 50%; /* Đảm bảo cả hai cột đều có kích thước tương đương */
     max-width: 550px;
     height: auto;
@@ -86,19 +83,15 @@
 /* 5. Định dạng Nút Gửi Thông Tin */
 /* ------------------------------------------------ */
  .lienHeWrapper #btnGuiYeuCau {
-    /* Màu nền xám đậm như hình mẫu */
-    background-color: #363636 !important;
-    color: aliceblue !important; /* Đảm bảo chữ trắng được áp dụng */
-    /* Thiết lập lại padding và font như hình mẫu */
+    background-color :darkblue !important;
+    color: aliceblue !important;
     padding: 20px 35px !important; 
     font-size: 16px !important;
     font-weight: 500 !important;
-    border: 5px !important;
-    /* Xóa bỏ mọi box-shadow/outline có thể có từ Master Page */
+    border: 10px !important;
     box-shadow: none !important;
     outline: none !important;
     border-radius: 0 !important;
-    /* Các thuộc tính khác (cursor, text-transform) */
     cursor: pointer;
     text-transform: none;
     display: inline-block; /* Bị ảnh hưởng bởi quy tắc header của master */
@@ -108,4 +101,8 @@
 #lblStatusMessage {
     display: block;
     margin-bottom: 10px;
+}
+
+.lienHeWrapper .nhapTT .error {
+    color:red ;
 }

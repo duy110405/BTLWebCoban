@@ -9,6 +9,7 @@ html, body, #form1 {
     border: 0 !important;
 }
 
+/* Các thuộc tính cấp cao vẫn nên giữ nguyên cho thẻ gốc */
 html {
     background: #43221c;
 }
@@ -17,7 +18,9 @@ body {
     background: #FFEED6;
 }
 /* nền chung của site */
-img {
+
+/* Hạn chế gọi thẻ <img> mà gọi class/parent */
+.header img, .footer img, .taiKhoan img, .gioHang img, .ketNoi .icon img {
     max-width: 100%;
     height: auto;
     display: block;
@@ -74,7 +77,7 @@ html, body, #form1, .header, .footer, .main {
 }
 
 /* Logo */
-.logo {
+.header .logo { /* Gọi qua class cha .header */
     height: clamp(44px, 8vw, 64px);
     width: auto;
     object-fit: contain;
@@ -92,7 +95,7 @@ html, body, #form1, .header, .footer, .main {
 }
 
     .groupTimkiem .timKiem,
-    input[type="text"].timKiem {
+    .groupTimkiem input[type="text"] { /* Chỉ định rõ input[type="text"] trong groupTimkiem */
         flex: 1 1 auto;
         min-width: 0;
         height: 100%;
@@ -123,13 +126,15 @@ html, body, #form1, .header, .footer, .main {
             background: #f1f1f1;
         }
 
-input[type="text"], .timKiem {
-    border-radius: 0;
-}
+    /* Giữ lại cho textbox tìm kiếm */
+    .groupTimkiem input[type="text"], .groupTimkiem .timKiem {
+        border-radius: 0;
+    }
 
-.btnTimKiem, input[type="submit"], button, .aspNetButton {
-    border-radius: 0;
-}
+    /* Giữ lại cho button tìm kiếm */
+    .groupTimkiem .btnTimKiem, .groupTimkiem input[type="submit"], .groupTimkiem button, .groupTimkiem .aspNetButton {
+        border-radius: 0;
+    }
 
 /* ===================== ACTIONS (tài khoản/giỏ hàng) ===================== */
 .actions {
@@ -178,8 +183,8 @@ input[type="text"], .timKiem {
     color: #fff;
 }
 
-    /* Link base (a + LinkButton) */
-    a, .dongDuoi a, .dongDuoi .aspNetLinkButton, .dongDuoi input[type="submit"], .dongDuoi .aspNetButton {
+    /* Link base (a + LinkButton) - Chỉ áp dụng trong .dongDuoi */
+    .dongDuoi a, .dongDuoi .aspNetLinkButton, .dongDuoi input[type="submit"], .dongDuoi .aspNetButton {
         color: inherit;
         text-decoration: none;
         font-size: 15px;
@@ -243,7 +248,7 @@ input[type="text"], .timKiem {
     }
 
 /* "Sản phẩm" hiển thị như link; caret vẽ bằng CSS */
-.dongDuoi a, .dongDuoi .menu-link {
+.dongDuoi .trangchu, .dongDuoi .lienhe, .dongDuoi .gioithieu, .dongDuoi .menu-link { /* Chỉ định rõ các link trong .dongDuoi */
     display: inline-flex;
     align-items: center;
     vertical-align: middle;
@@ -279,8 +284,11 @@ input[type="text"], .timKiem {
 
 /* ===================== MAIN ===================== */
 .main {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0 auto; /* Đảm bảo nội dung Body căn giữa */
+    max-width: var(--container-max);
+    width: var(--container-w);
+    padding: var(--gap) 0; /* Thêm padding trên dưới cho nội dung */
+    min-height: 60vh; /* Đảm bảo có chiều cao tối thiểu */
 }
 
 /* ===================== FOOTER (FULL-BLEED) ===================== */
@@ -369,20 +377,21 @@ input[type="text"], .timKiem {
     min-width: 220px;
 }
 
-footer h3, .footer h3 {
+/* Chỉ định các thẻ tiêu đề bên trong .footer */
+.footer h3 {
     font-size: 18px;
     text-transform: uppercase;
     margin-bottom: 15px;
     font-weight: bold;
 }
 
-footer h4, footer h5, .footer h4, .footer h5 {
+.footer h4, .footer h5 {
     font-size: 14px;
     margin: 8px 0 4px;
     font-weight: bold;
 }
 
-footer p, .footer p {
+.footer p {
     font-size: 14px;
     margin: 2px 0 10px;
 }
