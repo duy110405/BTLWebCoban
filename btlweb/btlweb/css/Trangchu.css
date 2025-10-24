@@ -1,351 +1,449 @@
-﻿/* ====================================================================== ẢNH TRƯNG BÀY (Ảnh trên cùng) ================================== */
-/*.anhTrungBay {
-    width: 100%;
-    text-align: center;*/ /* Căn giữa ảnh inline/inline-block */
-    /*margin-bottom: 30px;*/ /* Thêm khoảng cách với khung bên dưới */
-/*}
-
-    .anhTrungBay img {
-        width: 700px;
-        height: 380px;
-        object-fit: cover;*/ /* Đảm bảo ảnh hiển thị đẹp */
-        /*border-radius: 8px;*/ /* Thêm bo góc cho ảnh */
-    /*}*/
-
-/* ============================================================================= KHUNG CHUNG (CHA) ============================================ */
-
-/*.khung-san-pham-chung {
-    position: relative;
-    margin: 40px auto;
-    max-width: 1100px;
-    width: 90%;
-    margin-top: 60px;
-}*/
-
-/* ============================================================================== TIÊU ĐỀ/TAB CHUNG =================================================== */
-
-/*.tieude-chung {
-    position: absolute;
-    top: -20px;
-    left: 20px;*/
-    /* STYLE CHUNG */
-    /*color: white;
-    font-weight: bold;
-    padding: 6px 15px;
-    border-radius: 8px 8px 0 0;
-    z-index: 2;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-}*/
-
-/* Style Riêng cho Tab Giảm Giá */
-/*.tieudegiamgia {
-    background-color: #5b46d5;
-}*/
-
-/* Style Riêng cho Tab Bán Chạy */
-/*.tieudebanchay {
-    background-color: #d84e4e; 
-}
-
-.tieudethich{
-    background-color :chocolate;
-}*/
-
-/* ========================================================================== KHUNG NỘI DUNG CHUNG (Viền & Flexbox) ================================ */
-
-/*.khung-noi-dung-chung {*/ /* Áp dụng cho cả .khungSpGiamGia và .khungSpBanChay */
-    /*position: relative;
-    z-index: 1;
-    background-color: white;
-    border: 3px solid #63a4e9; 
-    border-radius: 8px;
-    padding: 20px;
-    min-height: 250px;*/
-    /* Thiết lập Flexbox cho các sản phẩm */
-    /*display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-}*/
-/* ================================================================= CARD SẢN PHẨM ========================================= */
-
-/*.khung-noi-dung-chung .card {*/ /* Dùng class chung */
-    /*width: calc(25% - 15px) !important;
-    padding: 15px;
-    border: 1px solid #eee;
-    border-radius: 6px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s;
-}
-
-    .khung-noi-dung-chung .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .khung-noi-dung-chung .card img {
-        width: 100%;
-        max-height: 180px;
-        height: auto;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto 10px auto;
-    }
-
-    .khung-noi-dung-chung .card .name {
-        font-weight: bold;
-        margin: 5px 0;
-        color: #333;
-    }
-
-    .khung-noi-dung-chung .card .spec {
-        font-size: 13px;
-        color: #666;
-        margin: 5px 0;
-        line-height: 1.4;
-    }*/
-
-    /* GIÁ TIỀN: SỬ DỤNG LẠI CLASS CHUNG VÀ MÀU CHUNG */
-    /*.khung-noi-dung-chung .card .price {
-        font-weight: 700;
-        color: #d84e4e; 
-        font-size: 18px;
-        margin-top: 10px;
-    }*/
-
-
-/* ======================================================== RESPONSIVE CHUNG ========================================== */
-
-/*@media (max-width: 992px) {
-    .khung-noi-dung-chung .card {
-        width: calc(50% - 10px);
-    }
-}
-
-@media (max-width: 600px) {
-    .khung-noi-dung-chung .card {
-        width: 100%;
-    }
-}*/
-
-/* ======================================================== SẢN PHẨM CÓ THỂ THÍCH ========================================== */
-
-/*.dongMenu {
-    display: flex;*/ /* xếp các p trên cùng 1 dòng */
-    /*justify-content: center;*/ /* căn giữa ngang */
-    /*align-items: center;*/ /* căn giữa dọc */
-    /*gap: 30px; 
-    margin: 15px 0;*/ /* khoảng cách trên/dưới */
-/*}
-
-    .dongMenu p {
-        white-space: nowrap;*/ /* không xuống dòng */
-        /*font-weight: bold;
-        color: #444;
-        cursor: pointer;
-        transition: color 0.2s, transform 0.2s;
-    }
-
-        .dongMenu p:hover {
-            color: #d84e4e;
-            transform: scale(1.05);
-        }*/
-
-/* ====================== KHUNG SẢN PHẨM "CÓ THỂ THÍCH" ====================== */
-
-/*.khungSpThich {
-    display: flex;*/ /* hiển thị ngang */
-    /*flex-wrap: wrap;*/ /* xuống hàng khi không đủ chỗ */
-    /*justify-content: space-between;
-    gap: 20px;
-}*/
-
-/* ====== Trang chủ bám sát thiết kế screenshot: nhãn trái, khung viền xanh, divider ====== */
+﻿/* ====== VARIABLES & LAYOUT ====== */
 :root {
     --max: 1200px;
     --wrap: min(var(--max), 92vw);
-    --radius: 10px;
-    --line: #5f8fe9; /* xanh viền */
-    --ink: #222;
-    --muted: #666;
-    --price: #d84e4e;
+    --radius: 12px;
+    --line: #5f8fe9;
+    --ink: #111827;
+    --muted: #6b7280;
+    --price: #dc2626;
+    --accent: #7c3aed; /* dùng cho nút primary */
+    --bg: #f7f9fc;
+    --shadow: 0 8px 24px rgba(17,24,39,.06);
 }
 
-/* ---------- HERO ---------- */
-.home-hero {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 12px 0 24px;
+html {
+    scroll-behavior: smooth;
+}
+a {
+    text-decoration: none;
 }
 
-    .home-hero img {
-        width: min(820px, 96vw); /* giống tỉ lệ ảnh trong screenshot: khá hẹp */
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
-        border-radius: 12px;
-        box-shadow: 0 8px 30px rgba(0,0,0,.06);
-        display: block;
+/* ====== HERO ====== */
+.hero {
+    width: var(--wrap);
+    margin: 18px auto 8px;
+}
+
+    .hero .hero-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 16px;
     }
 
-/* ---------- SECTION BOX ---------- */
+        .hero .hero-grid .banner {
+            background: linear-gradient(135deg, #1f0147, #0d0124);
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            min-height: 220px;
+        }
+
+            .hero .hero-grid .banner .content {
+                position: absolute;
+                inset: 0;
+                display: grid;
+                grid-template-columns: 1.2fr .8fr;
+                align-items: center;
+                padding: 32px;
+            }
+
+            .hero .hero-grid .banner h1 {
+                margin: 0 0 6px;
+                font-size: 32px;
+                font-weight: 700;
+                color: #fff;
+            }
+
+            .hero .hero-grid .banner p {
+                margin: 0 0 16px;
+                color: #e5e7eb;
+            }
+
+            .hero .hero-grid .btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                border: 0;
+                cursor: pointer;
+                padding: 10px 18px;
+                border-radius: 8px;
+                font-weight: 600;
+                transition: background .2s, border-color .2s, transform .15s;
+            }
+
+                .hero .hero-grid .btn.primary {
+                    background: var(--accent);
+                    color: #fff;
+                }
+
+                    .hero .hero-grid .btn.primary:hover {
+                        background: #6d28d9;
+                        transform: translateY(-1px);
+                    }
+
+                .hero .hero-grid .banner .btn.outline-light {
+                    background: transparent;
+                    color: #fff;
+                    border: 2px solid #fff;
+                }
+
+                    .hero .hero-grid .banner .btn.outline-light:hover {
+                        background: rgba(255,255,255,.1);
+                    }
+
+        .hero .hero-grid .mini {
+            min-height: 220px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--radius);
+            background: linear-gradient(180deg, #fefce8, #ffffff);
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+        }
+
+
+
+/* ====== POLICY STRIP ====== */
+.strip {
+    width: var(--wrap);
+    margin: 18px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+    .strip .policy {
+        background: #fff;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        padding: 12px 14px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+        .strip .policy .ic {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: #f3f4f6;
+            display: grid;
+            place-items: center;
+        }
+
+        .strip .policy h4 {
+            margin: 0;
+            font-size: 15px;
+            color: var(--ink);
+        }
+
+        .strip .policy p {
+            margin: 2px 0 0;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+/* ====== SECTION ====== */
 .section {
     width: var(--wrap);
     margin: 22px auto 0;
 }
 
-.section-box {
-    position: relative;
-    background: #fff;
-    border: 3px solid var(--line);
-    border-radius: 12px;
-    padding: 18px;
-}
-
-/* Tag nhỏ nằm ở góc trái như ảnh */
-.section-tag {
-    position: absolute;
-    top: -12px;
-    left: 14px;
-    padding: 6px 12px;
-    font-size: 13px;
-    line-height: 1;
-    color: #fff;
-    font-weight: 800;
-    border-radius: 8px;
-    box-shadow: 0 1px 2px rgba(0,0,0,.12);
-}
-
-.tag-sale {
-    background: #6a57e6;
-}
-
-.tag-hot {
-    background: #e35a5a;
-}
-
-.tag-like {
-    background: #d28a3a;
-}
-
-/* Divider mảnh ở phần Bạn Có Thể Thích */
-.section-divider {
-    height: 1px;
-    background: #e9e9e9;
-    margin: 10px 8px 6px;
-}
-
-/* ---------- CHIPS ---------- */
-.chips {
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    margin: 2px 8px 6px;
-    flex-wrap: wrap;
-    color: #444;
-    font-weight: 700;
-}
-
-    .chips span {
-        padding: 6px 10px;
-        border: 1px solid #e7e7e7;
-        border-radius: 999px;
+    .section .section-box {
+        position: relative;
         background: #fff;
+        border: 3px solid var(--line);
+        border-radius: 12px;
+        padding: 18px;
     }
 
-/* ---------- GRID ---------- */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0,1fr));
-    gap: 22px;
-}
-
-/* ---------- CARD ---------- */
-.card {
-    background: #fff;
-    border: 1px solid #ececec;
-    border-radius: 10px;
-    padding: 14px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,.05);
-    transition: transform .15s ease, box-shadow .15s ease;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-}
-
-    .card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 16px rgba(0,0,0,.08);
+    .section .section-tag {
+        position: absolute;
+        top: -12px;
+        left: 14px;
+        padding: 6px 12px;
+        font-size: 13px;
+        line-height: 1;
+        color: #fff;
+        font-weight: 800;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0,0,0,.12);
     }
 
-    .card img {
-        width: 100%;
-        aspect-ratio: 4 / 3;
-        object-fit: contain;
-        margin: 0 auto 8px;
+    .section .tag-sale {
+        background: #6a57e6;
     }
 
-.spec {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.35;
-    margin: 2px 0 6px;
-    white-space: normal;
-    word-break: break-word;
+    .section .tag-hot {
+        background: #e35a5a;
+    }
+
+    .section .tag-like {
+        background: #d28a3a;
+    }
+
+    .section .section-divider {
+        height: 1px;
+        background: #e9e9e9;
+        margin: 10px 8px 6px;
+    }
+
+    /* ====== GRID & CARD ====== */
+    .section .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0,1fr));
+        gap: 22px;
+    }
+
+        .section .grid .card {
+            position: relative;
+            background: #fff;
+            border: 1px solid #ececec;
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,.05);
+            transition: transform .15s ease, box-shadow .15s ease;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+            .section .grid .card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(0,0,0,.08);
+            }
+
+            .section .grid .card .badge {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background: #ef4444;
+                color: #fff;
+                font-size: 12px;
+                font-weight: 800;
+                padding: 4px 8px;
+                border-radius: 6px;
+            }
+
+            .section .grid .card img {
+                width: 100%;
+                aspect-ratio: 4/3;
+                object-fit: contain;
+                margin: 0 auto 8px;
+            }
+
+            .section .grid .card .spec {
+                font-size: 12px;
+                color: var(--muted);
+                line-height: 1.35;
+                margin: 2px 0 6px;
+                white-space: normal;
+                word-break: break-word;
+            }
+
+            .section .grid .card .name {
+                font-size: 13px;
+                font-weight: 800;
+                color: var(--ink);
+                margin: 2px 0 4px;
+                white-space: normal;
+                word-break: break-word;
+            }
+
+            .section .grid .card .price {
+                margin-top: auto;
+                color: var(--price);
+                font-weight: 900;
+                font-size: 16px;
+            }
+
+            .section .grid .card .rating {
+                margin-top: 6px;
+                font-size: 12px;
+                color: #f59e0b;
+                font-weight: 700;
+            }
+      .price .old {
+          color: #999;
+          text-decoration: line-through;
+          font-size: 12px;
+       }
+
+
+    .section .section-title {
+        font-size: 24px; /* đồng bộ kích thước */
+        font-weight: 800;
+        text-align: center;
+        color: #2c1a4d;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+        position: relative;
+        display: inline-block;
+        background: linear-gradient(90deg, #7c3aed, #dc2626);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+        /* Thanh gạch trang trí dưới tiêu đề */
+        .section .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #7c3aed, #dc2626);
+            border-radius: 4px;
+            margin: 8px auto 0;
+            box-shadow: 0 2px 6px rgba(124, 58, 237, 0.4);
+        }
+
+
+    /* ====== TABS (Gợi ý hôm nay) ====== */
+    .section[data-tabs] .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+
+        .section[data-tabs] .section-head .section-title {
+            margin: 0;
+            font-size: 20px;
+            color: var(--ink);
+        }
+
+    .section[data-tabs] .tabs {
+        display: inline-flex;
+        background: #f3f4f6;
+        padding: 4px;
+        border-radius: 10px;
+        gap: 4px;
+    }
+
+        .section[data-tabs] .tabs .tab {
+            border: 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 700;
+            color: #374151;
+        }
+
+            .section[data-tabs] .tabs .tab.is-active {
+                background: #fff;
+                color: var(--accent);
+                box-shadow: 0 1px 2px rgba(0,0,0,.06);
+            }
+
+    .section[data-tabs] .panel {
+        display: none;
+    }
+
+        .section[data-tabs] .panel.is-active {
+            display: block;
+        }
+
+
+        /* Hidden legacy class support */
+        .section[data-tabs] .tab-panels .panel.hidden {
+            display: none;
+        }
+     
+/*=========BẠN CÓ THỂ THÍCH ==============================*/
+    /* ====== BẠN CÓ THỂ THÍCH - NÚT TAB & PANEL ====== */
+    .section .chips {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin: 10px 0 14px;
+    }
+
+        .section .chips .tab {
+            border: 2px solid var(--line);
+            background: #fff;
+            color: var(--ink);
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+            .section .chips .tab:hover {
+                background: var(--accent);
+                color: #fff;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .section .chips .tab.is-active {
+                background: var(--accent);
+                color: #fff;
+                border-color: var(--accent);
+                box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+            }
+
+/* Ẩn các panel chưa chọn */
+#bancothethich .panel,
+#bancothethich .panel-hidden {
+    display: none;
 }
 
-.name {
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--ink);
-    margin: 2px 0 4px;
-    white-space: normal;
-    word-break: break-word;
-}
+    #bancothethich .panel.is-active,
+    #bancothethich .panel-hidden.is-active {
+        display: block;
+    }
 
-.price {
-    margin-top: auto;
-    color: var(--price);
-    font-weight: 900;
-    font-size: 14px;
-}
-
-/* ---------- RESPONSIVE ---------- */
+/* ================================== RESPONSIVE ===================== */
 @media (max-width: 1024px) {
-    .grid {
+    .hero .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+        .hero .hero-grid .banner .content {
+            grid-template-columns: 1fr;
+            row-gap: 16px;
+        }
+
+    .section .grid {
         grid-template-columns: repeat(3, minmax(0,1fr));
     }
 }
 
 @media (max-width: 760px) {
-    .grid {
+    .section .grid {
         grid-template-columns: repeat(2, minmax(0,1fr));
     }
 
-    .section-tag {
+    .section .section-tag {
         top: -10px;
     }
 }
 
 @media (max-width: 480px) {
-    .section-box {
+    .section .section-box {
         padding: 14px;
         border-width: 2px;
     }
 
-    .grid {
+    .section .grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
 
-    .home-hero img {
-        width: 96vw;
+    .hero .hero-grid .banner h1 {
+        font-size: 24px;
     }
 
-    .price {
+    .section .grid .card .price {
         font-size: 15px;
     }
 }

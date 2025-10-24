@@ -15,9 +15,10 @@
         <asp:TextBox ID="txtPassword" runat="server" CssClass="input" TextMode="Password" placeholder="Mật khẩu"></asp:TextBox>
       </div>
 
-      <!-- Thêm dòng Đăng ký ở bên trái, Quên mật khẩu ở bên phải -->
       <div class="row-between">
-        <span class="pseudo-link">Đăng ký</span>
+        <a href="Dangky.aspx">
+          <span class="pseudo-link">Đăng ký</span>
+        </a>
         <span class="pseudo-link">Quên mật khẩu?</span>
       </div>
 
@@ -25,7 +26,6 @@
 
       <div class="divider"><span>hoặc đăng nhập bằng</span></div>
 
-      <!-- Nút tượng trưng, không phải link -->
       <div class="social-row">
         <button type="button" class="btn-social fb">Facebook</button>
         <button type="button" class="btn-social gg">Google</button>

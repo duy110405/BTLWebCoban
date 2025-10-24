@@ -109,6 +109,7 @@
     <Content Include="js\Aula3MODEF75.js" />
     <Content Include="js\ChitietLegion5.js" />
     <Content Include="js\LenovoThinkCentre.js" />
+    <Content Include="js\TrangChu.js" />
     <Content Include="Laptop.aspx" />
     <Content Include="LenovoThinkCentre.aspx" />
     <Content Include="Lienhe.aspx" />

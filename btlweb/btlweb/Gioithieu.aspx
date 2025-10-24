@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/khung.Master" AutoEventWireup="true" CodeBehind="Gioithieu.aspx.cs" Inherits="btlweb.Gioithieu" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href ="css/Gioithieu.css" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
@@ -8,8 +9,8 @@
     <div class="dongTren">
         <div class="left">
             <p class="tieude"><b>Giới thiệu về HouComputer</b></p>
-            <p>Được thành lập vào năm 2025, HouComputer ra đời với sự đam mê công nghệ và khát khao mang đến những sản phẩm chất lượng cao cho người dùng Việt Nam. Từ một cửa hàng nhỏ tại Hà Nội với nguồn vốn khởi đầu khiêm tốn, HouComputer đã không ngừng phát triển và dần khẳng định vị thế trong lĩnh vực kinh doanh laptop và phụ kiện công nghệ.</p>
-            <p>Với sứ mệnh đem lại trải nghiệm mua sắm hiện đại, tiện lợi, HouComputer tập trung xây dựng mô hình bán lẻ chuyên nghiệp, kết hợp dịch vụ chăm sóc khách hàng tận tâm. Thương hiệu Vietanhcomputer hướng đến sự tin cậy cho người yêu công nghệ, mang đến những sản phẩm chính hãng, giá cả hợp lý cùng không gian trải nghiệm đầy cảm hứng.</p>
+            <p>Được thành lập vào năm 2025, HouComputer ra đời với sự đam mê công nghệ và khát khao mang đến những sản phẩm chất </br>lượng cao cho người dùng Việt Nam. Từ một cửa hàng nhỏ tại Hà Nội với nguồn vốn khởi đầu khiêm tốn, HouComputer đã </br> không ngừng phát triển và dần khẳng định vị thế trong lĩnh vực kinh doanh laptop và phụ kiện công nghệ.</p>
+            <p>Với sứ mệnh đem lại trải nghiệm mua sắm hiện đại, tiện lợi, HouComputer tập trung xây dựng mô hình bán lẻ chuyên nghiệp, kết <br /> hợp dịch vụ chăm sóc khách hàng tận tâm. Thương hiệu Vietanhcomputer hướng đến sự tin cậy cho người yêu công nghệ, <br />mang đến những sản phẩm chính hãng, giá cả hợp lý cùng không gian trải nghiệm đầy cảm hứng.</p>
         </div>
         <div class="right">
             <img src="anh/anhcuahang.jpg" alt="Ảnh cửa hàng" />
