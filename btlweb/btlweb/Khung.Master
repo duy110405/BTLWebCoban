@@ -1,126 +1,154 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Khung.Master.cs" Inherits="btlweb.khung" %>
-
 <!DOCTYPE html>
-
 <html>
 <head runat="server">
     <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
     <link rel="stylesheet" href="css/Khung.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-    <form id="form1" runat="server">
-  <!-------------------------------------------------- HEADER -------------------------------------------------->
-  <header class="header">
-    <!-- Dòng trên: 3 cột đều nhau (Logo | Search | Actions) -->
-    <div class="dongTren">
-      <asp:LinkButton ID="btnTrangChuLogo" runat="server" OnClick="btnTrangChuLogo_Click" CssClass="logo-link">
-        <img src="anh/logoshop.png" alt="Logo" class="logo" />
-      </asp:LinkButton>
+<form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
 
-      <div class="groupTimkiem">
-        <asp:TextBox ID="txtTimKiem" runat="server" CssClass="timKiem" placeholder="Bạn đang tìm kiếm gì?"></asp:TextBox>
-        <asp:Button ID="btnTimKiem" runat="server" Text="Tìm kiếm" CssClass="btnTimKiem" OnClick="btnTimKiem_Click" />
-      </div>
+    <header class="header">
+      <div class="dongTren">
+        <asp:LinkButton ID="btnTrangChuLogo" runat="server" OnClick="btnTrangChuLogo_Click" CssClass="logo-link">
+          <img src="anh/logoshop.png" alt="Logo" class="logo" />
+        </asp:LinkButton>
 
-      <!-- Gộp Tài khoản + Giỏ hàng để canh cột phải -->
-      <div class="actions">
-
-<center>
-
-       <div class="taiKhoan">
-          <asp:LinkButton ID="btnTaiKhoan" runat="server" OnClick="btnTaiKhoan_Click" CssClass="link-plain">
-            <img src="anh/account.png" alt="Tài khoản" />
-            <p>Tài khoản</p>
-          </asp:LinkButton>
+        <div class="groupTimkiem">
+          <asp:TextBox ID="txtTimKiem" runat="server" CssClass="timKiem" placeholder="Bạn đang tìm kiếm gì?" autocomplete="off"></asp:TextBox>
+          <asp:Button ID="btnTimKiem" runat="server" Text="Tìm kiếm" CssClass="btnTimKiem" OnClick="btnTimKiem_Click" />
+          <div id="search-results-popup"></div>
         </div>
 
-</center>  
+        <div class="actions">
+          <!-- ACCOUNT DROPDOWN: mở bằng hover -->
+          <div class="taiKhoan account">
+            <button type="button" class="account-trigger">
+              <img src="anh/account.png" alt="Tài khoản" />
+              <p>Tài khoản</p>
+            </button>
 
-        <div class="gioHang">
-          <asp:LinkButton ID="btnGioHang" runat="server" OnClick="btnGioHang_Click" CssClass="link-plain">
-            <img src="anh/shopping-cart_12456235.png" alt="Giỏ hàng" />
-            <p>Giỏ hàng</p>
-          </asp:LinkButton>
-        </div>
-      </div>
-    </div>
-
-    <div class="vachKeNgang"></div>
-
-    <!-- Dòng dưới: menu -->
-    <div class="dongDuoi">
-      <asp:LinkButton ID="btnTrangChu" runat="server" CssClass="trangchu" Text="Trang chủ" OnClick="btnTrangChu_Click" />
-
-      <nav class="navbar" aria-label="Danh mục">
-        <ul>
-          <li class="dropdown">
-            <!-- LƯU Ý: bỏ ký tự ▾ trong Text. Caret sẽ do CSS vẽ -->
-            <asp:LinkButton ID="btnSanPham" runat="server" Text="Sản phẩm" CssClass="menu-link" />
-            <div class="mega-menu">
-              <asp:LinkButton ID="btnBanPhim" runat="server" Text="Bàn phím" OnClick="btnBanPhim_Click" />
-              <asp:LinkButton ID="btnLaptop" runat="server" Text="Laptop" OnClick="btnLaptop_Click" />
-              <asp:LinkButton ID="btnPC" runat="server" Text="PC" OnClick="btnPC_Click" />
+            <div class="account-menu">
+              <!-- Chưa đăng nhập -->
+              <asp:Panel ID="pnlAccountGuest" runat="server">
+                <asp:LinkButton ID="lnkDangNhap" runat="server" OnClick="lnkDangNhap_Click" CssClass="menu-item">Đăng nhập</asp:LinkButton>
+                <asp:LinkButton ID="lnkDangKy" runat="server" OnClick="lnkDangKy_Click" CssClass="menu-item">Đăng ký</asp:LinkButton>
+              </asp:Panel>
+              <!-- Đã đăng nhập -->
+              <asp:Panel ID="pnlAccountUser" runat="server" Visible="false">
+                <div class="menu-item username"><asp:Literal ID="litUserName" runat="server" /></div>
+                <asp:LinkButton ID="lnkDangXuat" runat="server" OnClick="lnkDangXuat_Click" CssClass="menu-item danger">Đăng xuất</asp:LinkButton>
+              </asp:Panel>
             </div>
-          </li>
-        </ul>
-      </nav>
+          </div>
 
-      <asp:LinkButton ID="btnLienHe" runat="server" CssClass="lienhe" Text="Liên hệ" OnClick="btnLienHe_Click" />
-      <asp:LinkButton ID="btnGioiThieu" runat="server" CssClass="gioithieu" Text="Giới thiệu" OnClick="btnGioiThieu_Click" />
-    </div>
-  </header>
-
-  <!-------------------------------------------------- BODY -------------------------------------------------->
-  <main class="main">
-    <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>
-  </main>
-
-  <!-------------------------------------------------- FOOTER -------------------------------------------------->
-  <footer class="footer">
-    <!-- Bọc nội dung footer để thẳng mép với header -->
-    <div class="footer-inner">
-      <div class="thongTinLienHe">
-        <h3>Thông tin liên hệ</h3>
-        <h4>Tên cửa hàng</h4>
-        <p></p>
-        <h4>Địa chỉ</h4>
-        <p>Số 96 - Định Công - Hà Nội</p>
-        <h4>Email</h4>
-        <p>abc@gmail.com</p>
-        <h5>Hotline</h5>
-        <p>0912345678</p>
+          <div class="gioHang">
+            <asp:LinkButton ID="btnGioHang" runat="server" OnClick="btnGioHang_Click" CssClass="link-plain">
+              <img src="anh/shopping-cart_12456235.png" alt="Giỏ hàng" />
+              <p>Giỏ hàng</p>
+            </asp:LinkButton>
+          </div>
+        </div>
       </div>
 
-      <div class="chinhSach">
-        <h3>Chính sách</h3>
-        <p>Chính sách giao hàng</p>
-        <p>Chính sách bảo mật</p>
-        <p>Chính sách bảo hành</p>
+      <div class="vachKeNgang"></div>
+
+      <div class="dongDuoi">
+        <asp:LinkButton ID="btnTrangChu" runat="server" CssClass="trangchu" Text="Trang chủ" OnClick="btnTrangChu_Click" />
+        <nav class="navbar" aria-label="Danh mục">
+          <ul>
+            <li class="dropdown" id="navDropdown">
+              <asp:LinkButton ID="btnSanPham" runat="server" Text="Sản phẩm" CssClass="menu-link" />
+              <div class="mega-menu" id="megaMenu">
+                <asp:LinkButton ID="btnBanPhim" runat="server" Text="Bàn phím" OnClick="btnBanPhim_Click" />
+                <asp:LinkButton ID="btnLaptop" runat="server" Text="Laptop" OnClick="btnLaptop_Click" />
+                <asp:LinkButton ID="btnPC" runat="server" Text="PC" OnClick="btnPC_Click" />
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <asp:LinkButton ID="btnLienHe" runat="server" CssClass="lienhe" Text="Liên hệ" OnClick="btnLienHe_Click" />
+        <asp:LinkButton ID="btnGioiThieu" runat="server" CssClass="gioithieu" Text="Giới thiệu" OnClick="btnGioiThieu_Click" />
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- BREADCRUMB -->
+      <div id="breadcrumbWrap" runat="server" class="breadcrumb">
+        <a href="Trangchu.aspx">Trang chủ</a>
+        <span class="sep">›</span>
+        <asp:Literal ID="litBreadcrumb" runat="server" />
       </div>
 
-      <div class="ketNoi">
-  <h3>Kết nối</h3>
-  <ul class="social">
-    <li class="social-row">
-      <span class="icon"><img src="anh/logoFB.jpg" alt="Facebook" /></span>
-      <span class="label">Facebook</span>
-    </li>
-    <li class="social-row">
-      <span class="icon"><img src="anh/LogoZL.jpg" alt="Zalo" /></span>
-      <span class="label">Zalo</span>
-    </li>
-    <li class="social-row">
-      <span class="icon"><img src="anh/logoEmail.jpg" alt="Email" /></span>
-      <span class="label">Email</span>
-    </li>
-  </ul>
-</div>
+      <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>
+    </main>
 
-    </div>
-  </footer>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="thongTinLienHe">
+          <h3>Thông tin liên hệ</h3>
+          <h4>Tên cửa hàng</h4><p></p>
+          <h4>Địa chỉ</h4><p>Số 96 - Định Công - Hà Nội</p>
+          <h4>Email</h4><p>abc@gmail.com</p>
+          <h5>Hotline</h5><p>0912345678</p>
+        </div>
+        <div class="chinhSach">
+          <h3>Chính sách</h3>
+          <p>Chính sách giao hàng</p>
+          <p>Chính sách bảo mật</p>
+          <p>Chính sách bảo hành</p>
+        </div>
+        <div class="ketNoi">
+          <h3>Kết nối</h3>
+          <ul class="social">
+            <li class="social-row"><span class="icon"><img src="anh/logoFB.jpg" alt="Facebook" /></span><span class="label">Facebook</span></li>
+            <li class="social-row"><span class="icon"><img src="anh/LogoZL.jpg" alt="Zalo" /></span><span class="label">Zalo</span></li>
+            <li class="social-row"><span class="icon"><img src="anh/logoEmail.jpg" alt="Email" /></span><span class="label">Email</span></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+        // mega-menu hover
+        (function () { var dd = document.getElementById('navDropdown'); if (!dd) return;['mouseenter', 'focusin'].forEach(function (ev) { dd.addEventListener(ev, function () { dd.classList.add('open'); }); });['mouseleave', 'focusout'].forEach(function (ev) { dd.addEventListener(ev, function () { dd.classList.remove('open'); }); }); })();
+    </script>
+
+    <script type="text/javascript">
+        // search suggestions
+        (function () {
+            var searchBox = document.getElementById('<%= txtTimKiem.ClientID %>');
+            var resultsPopup = document.getElementById('search-results-popup');
+            var debounceTimer;
+            function formatCurrency(n) { return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(n); }
+            function fetchSuggestions(term) {
+                if (term.length < 2) { resultsPopup.style.display = 'none'; return; }
+                var parts = window.location.pathname.split('/'); var current = parts[parts.length - 1] || "Trangchu.aspx";
+                fetch(current + '/GetSearchSuggestions', { method: 'POST', headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify({ searchText: term }) })
+                    .then(r => r.json()).then(d => showSuggestions(d.d)).catch(() => { resultsPopup.style.display = 'none'; });
+            }
+            function showSuggestions(list) {
+                resultsPopup.innerHTML = '';
+                if (!list || list.length === 0) { resultsPopup.style.display = 'none'; return; }
+                var h = document.createElement('div'); h.className = 'search-results-header'; h.innerText = 'Sản phẩm gợi ý'; resultsPopup.appendChild(h);
+                list.forEach(function (p) {
+                    var a = document.createElement('a'); a.href = 'Laptop.aspx?search=' + encodeURIComponent(p.TenSP); a.className = 'search-result-item';
+                    var img = document.createElement('img'); img.src = p.AnhChinh || 'anh/placeholder.png'; a.appendChild(img);
+                    var info = document.createElement('div'); info.className = 'search-result-info';
+                    var n = document.createElement('p'); n.className = 'name'; n.innerText = p.TenSP; info.appendChild(n);
+                    var pr = document.createElement('p'); pr.className = 'price'; pr.innerText = formatCurrency(p.Gia); info.appendChild(pr);
+                    a.appendChild(info); resultsPopup.appendChild(a);
+                });
+                resultsPopup.style.display = 'block';
+            }
+            searchBox.addEventListener('input', function () { var term = searchBox.value.trim(); clearTimeout(debounceTimer); debounceTimer = setTimeout(function () { fetchSuggestions(term); }, 300); });
+            document.addEventListener('click', function (e) { if (!searchBox.contains(e.target)) resultsPopup.style.display = 'none'; });
+            resultsPopup.addEventListener('click', function (e) { e.stopPropagation(); });
+        })();
+    </script>
 </form>
 </body>
 </html>

@@ -1,89 +1,80 @@
-﻿/* ===================== RESET ===================== */
+﻿/* RESET */
 *, *::before, *::after {
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 html, body, #form1 {
     margin: 0 !important;
     padding: 0 !important;
-    border: 0 !important;
+    border: 0 !important
 }
 
-/* Các thuộc tính cấp cao vẫn nên giữ nguyên cho thẻ gốc */
 html {
-    background: #43221c;
+    background: #43221c
 }
-/* trùng màu header để giấu hairline khi zoom */
-body {
-    background: #FFEED6;
-}
-/* nền chung của site */
 
-/* Hạn chế gọi thẻ <img> mà gọi class/parent */
+body {
+    background: #FFEED6
+}
+
 .header img, .footer img, .taiKhoan img, .gioHang img, .ketNoi .icon img {
     max-width: 100%;
     height: auto;
-    display: block;
+    display: block
 }
 
 html, body {
-    overflow-x: hidden;
+    overflow-x: hidden
 }
-/* tránh thanh cuộn ngang khi dùng 100vw */
 
-/* Chặn mọi bo góc/đổ bóng ở khung ngoài */
 html, body, #form1, .header, .footer, .main {
     border-radius: 0 !important;
     box-shadow: none !important;
-    outline: 0 !important;
+    outline: 0 !important
 }
 
-/* ===================== VARIABLES ===================== */
+/* VARS */
 :root {
     --container-max: 1200px;
-    --container-w: min(var(--container-max), 92vw);
-    --gap: clamp(16px, 2vw, 28px);
+    --container-w: min(var(--container-max),92vw);
+    --gap: clamp(16px,2vw,28px)
 }
 
-/* ===================== HEADER (FULL-BLEED) ===================== */
+/* HEADER */
 .header {
     background: #43221c;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px 0;
-    /* tràn sát mép trái/phải & đè mọi layout center */
     width: 100vw !important;
     margin-left: calc(50% - 50vw) !important;
     margin-right: calc(50% - 50vw) !important;
     position: sticky;
     top: 0;
-    z-index: 1000; /* dính đỉnh */
+    z-index: 1000
 }
 
-/* Container nội bộ cho header/footer (căn giữa theo max-width) */
 .dongTren, .dongDuoi, .footer-inner {
     max-width: var(--container-max);
     width: var(--container-w);
-    margin: 0 auto;
+    margin: 0 auto
 }
 
-/* Hàng trên: Logo | Search | Actions */
 .dongTren {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    gap: var(--gap);
+    gap: var(--gap)
 }
 
-/* Logo */
-.header .logo { /* Gọi qua class cha .header */
-    height: clamp(44px, 8vw, 64px);
+.header .logo {
+    height: clamp(44px,8vw,64px);
     width: auto;
-    object-fit: contain;
+    object-fit: contain
 }
 
-/* ===================== SEARCH ===================== */
+/* SEARCH */
 .groupTimkiem {
     display: inline-flex;
     align-items: center;
@@ -92,10 +83,10 @@ html, body, #form1, .header, .footer, .main {
     background: #fff;
     border-radius: 999px;
     overflow: hidden;
+    position: relative
 }
 
-    .groupTimkiem .timKiem,
-    .groupTimkiem input[type="text"] { /* Chỉ định rõ input[type="text"] trong groupTimkiem */
+    .groupTimkiem .timKiem, .groupTimkiem input[type="text"] {
         flex: 1 1 auto;
         min-width: 0;
         height: 100%;
@@ -105,7 +96,7 @@ html, body, #form1, .header, .footer, .main {
         font-size: 14px;
         outline: none;
         appearance: none;
-        -webkit-appearance: none;
+        -webkit-appearance: none
     }
 
     .groupTimkiem .btnTimKiem {
@@ -119,29 +110,19 @@ html, body, #form1, .header, .footer, .main {
         line-height: 1;
         display: inline-flex;
         align-items: center;
-        justify-content: center;
+        justify-content: center
     }
 
         .groupTimkiem .btnTimKiem:hover {
-            background: #f1f1f1;
+            background: #f1f1f1
         }
 
-    /* Giữ lại cho textbox tìm kiếm */
-    .groupTimkiem input[type="text"], .groupTimkiem .timKiem {
-        border-radius: 0;
-    }
-
-    /* Giữ lại cho button tìm kiếm */
-    .groupTimkiem .btnTimKiem, .groupTimkiem input[type="submit"], .groupTimkiem button, .groupTimkiem .aspNetButton {
-        border-radius: 0;
-    }
-
-/* ===================== ACTIONS (tài khoản/giỏ hàng) ===================== */
+/* ACTIONS */
 .actions {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: clamp(16px, 2vw, 28px);
+    gap: clamp(16px,2vw,28px)
 }
 
 .taiKhoan, .gioHang {
@@ -149,19 +130,19 @@ html, body, #form1, .header, .footer, .main {
     align-items: center;
     flex-direction: column;
     gap: 5px;
-    cursor: pointer;
+    cursor: pointer
 }
 
     .taiKhoan img, .gioHang img {
         width: 40px;
         height: 40px;
-        object-fit: contain;
+        object-fit: contain
     }
 
     .taiKhoan p, .gioHang p {
         font-size: 13px;
         color: #fff;
-        margin: 0;
+        margin: 0
     }
 
 /* Divider */
@@ -169,10 +150,10 @@ html, body, #form1, .header, .footer, .main {
     width: 100%;
     height: 1px;
     background: #4e2a23;
-    margin: 0 !important;
+    margin: 0 !important
 }
 
-/* ===================== MENU ROW ===================== */
+/* MENU ROW */
 .dongDuoi {
     display: flex;
     align-items: center;
@@ -180,10 +161,9 @@ html, body, #form1, .header, .footer, .main {
     gap: 40px;
     font-weight: bold;
     padding: 10px 0;
-    color: #fff;
+    color: #fff
 }
 
-    /* Link base (a + LinkButton) - Chỉ áp dụng trong .dongDuoi */
     .dongDuoi a, .dongDuoi .aspNetLinkButton, .dongDuoi input[type="submit"], .dongDuoi .aspNetButton {
         color: inherit;
         text-decoration: none;
@@ -191,11 +171,11 @@ html, body, #form1, .header, .footer, .main {
         background: none;
         border: none;
         cursor: pointer;
-        font-family: inherit;
+        font-family: inherit
     }
 
         .dongDuoi a:hover, .dongDuoi .aspNetLinkButton:hover {
-            color: #d0a57c;
+            color: #d0a57c
         }
 
 .navbar ul {
@@ -203,13 +183,13 @@ html, body, #form1, .header, .footer, .main {
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 30px;
+    gap: 30px
 }
 
 .navbar li {
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: center
 }
 
 .mega-menu {
@@ -222,15 +202,15 @@ html, body, #form1, .header, .footer, .main {
     padding: 10px 15px;
     flex-direction: row;
     gap: 20px;
-    white-space: nowrap;
+    white-space: nowrap
 }
 
 .dropdown:hover .mega-menu {
-    display: flex;
+    display: flex
 }
 
 #megaMenu[hidden] {
-    display: none !important;
+    display: none !important
 }
 
 .mega-menu .aspNetLinkButton, .mega-menu a {
@@ -240,22 +220,21 @@ html, body, #form1, .header, .footer, .main {
     border: none;
     font-weight: normal;
     font-size: 14px;
-    cursor: pointer;
+    cursor: pointer
 }
 
     .mega-menu .aspNetLinkButton:hover, .mega-menu a:hover {
-        color: #d0a57c;
+        color: #d0a57c
     }
 
-/* "Sản phẩm" hiển thị như link; caret vẽ bằng CSS */
-.dongDuoi .trangchu, .dongDuoi .lienhe, .dongDuoi .gioithieu, .dongDuoi .menu-link { /* Chỉ định rõ các link trong .dongDuoi */
+.dongDuoi .trangchu, .dongDuoi .lienhe, .dongDuoi .gioithieu, .dongDuoi .menu-link {
     display: inline-flex;
     align-items: center;
     vertical-align: middle;
     line-height: 1.25;
     padding: 6px 0;
     gap: 6px;
-    font-weight: 700;
+    font-weight: 700
 }
 
 .dongDuoi .menu-link {
@@ -267,37 +246,54 @@ html, body, #form1, .header, .footer, .main {
     -webkit-appearance: none;
     font: inherit;
     color: inherit;
-    cursor: pointer;
+    cursor: pointer
 }
 
     .dongDuoi .menu-link:focus-visible, .dongDuoi a:focus-visible {
         outline: 2px dashed #d0a57c;
-        outline-offset: 2px;
+        outline-offset: 2px
     }
-
-#btnSanPham::after {
-    content: "▾";
-    margin-left: 6px;
-    position: relative;
-    top: -1px;
+    /* Tắt caret */
+    #btnSanPham::after, .dongDuoi .menu-link::after {
+        content: none !important
+    }
+/* Active underline */
+.dongDuoi .is-active {
+    color: #d0a57c !important;
+    position: relative
 }
 
-/* ===================== MAIN ===================== */
+    .dongDuoi .is-active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 2px;
+        background: #d0a57c;
+        border-radius: 2px
+    }
+/* Mở mega-menu bằng JS */
+.dropdown.open .mega-menu {
+    display: flex
+}
+
+/* MAIN */
 .main {
-    margin: 0 auto; /* Đảm bảo nội dung Body căn giữa */
+    margin: 0 auto;
     max-width: var(--container-max);
     width: var(--container-w);
-    padding: var(--gap) 0; /* Thêm padding trên dưới cho nội dung */
-    min-height: 60vh; /* Đảm bảo có chiều cao tối thiểu */
+    padding: var(--gap) 0;
+    min-height: 60vh
 }
 
-/* ===================== FOOTER (FULL-BLEED) ===================== */
+/* FOOTER */
 .footer {
     background: #4b2620;
     color: #fff;
     width: 100vw !important;
     margin-left: calc(50% - 50vw) !important;
-    margin-right: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important
 }
 
 .footer-inner {
@@ -305,21 +301,20 @@ html, body, #form1, .header, .footer, .main {
     grid-template-columns: 1fr 1fr 1fr;
     gap: var(--gap);
     padding: 40px 0;
-    align-items: start;
+    align-items: start
 }
 
 .thongTinLienHe {
-    text-align: left;
+    text-align: left
 }
 
 .chinhSach {
-    text-align: center;
+    text-align: center
 }
 
-/* ===== KẾT NỐI: chỉ hiển thị (không link) và căn SÁT PHẢI ===== */
 .ketNoi {
     text-align: right;
-    justify-self: end; /* kéo cả block sát mép phải của grid */
+    justify-self: end
 }
 
     .ketNoi .social {
@@ -329,22 +324,22 @@ html, body, #form1, .header, .footer, .main {
         display: flex;
         flex-direction: column;
         gap: 14px;
-        align-items: flex-end; /* căn các dòng về bên phải */
+        align-items: flex-end
     }
 
     .ketNoi .social-row {
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 8px 0 8px 10px; /* bỏ padding phải để sát mép phải */
+        padding: 8px 0 8px 10px;
         border-radius: 12px;
         background: transparent;
-        transition: background .15s ease, transform .1s ease;
+        transition: background .15s ease,transform .1s ease
     }
 
         .ketNoi .social-row:hover {
             background: rgba(255,255,255,.06);
-            transform: translateX(1px);
+            transform: translateX(1px)
         }
 
     .ketNoi .icon {
@@ -355,78 +350,283 @@ html, body, #form1, .header, .footer, .main {
         display: grid;
         place-items: center;
         flex: 0 0 34px;
-        box-shadow: 0 1px 0 rgba(0,0,0,.15) inset;
+        box-shadow: 0 1px 0 rgba(0,0,0,.15) inset
     }
 
         .ketNoi .icon img {
             width: 22px;
             height: 22px;
             object-fit: contain;
-            display: block;
+            display: block
         }
 
     .ketNoi .label {
         color: #fff;
         font-size: 15px;
         font-weight: 600;
-        line-height: 1;
+        line-height: 1
     }
 
-/* kích thước cột tối thiểu để không gãy chữ */
 .thongTinLienHe, .chinhSach, .ketNoi {
-    min-width: 220px;
+    min-width: 220px
 }
 
-/* Chỉ định các thẻ tiêu đề bên trong .footer */
 .footer h3 {
     font-size: 18px;
     text-transform: uppercase;
     margin-bottom: 15px;
-    font-weight: bold;
+    font-weight: bold
 }
 
 .footer h4, .footer h5 {
     font-size: 14px;
     margin: 8px 0 4px;
-    font-weight: bold;
+    font-weight: bold
 }
 
 .footer p {
     font-size: 14px;
-    margin: 2px 0 10px;
+    margin: 2px 0 10px
 }
 
-/* ===================== RESPONSIVE ===================== */
-@media (max-width: 768px) {
+/* RESPONSIVE */
+@media (max-width:768px) {
     .dongTren {
         grid-template-columns: 1fr;
-        row-gap: 12px;
+        row-gap: 12px
     }
 
     .actions {
-        justify-content: center;
+        justify-content: center
     }
 
     .footer-inner {
         grid-template-columns: 1fr;
-        text-align: left;
+        text-align: left
     }
 
-    /* về trái cho dễ đọc trên mobile */
     .ketNoi {
         text-align: left;
-        justify-self: start;
+        justify-self: start
     }
 
         .ketNoi .social {
-            align-items: flex-start;
+            align-items: flex-start
         }
 
         .ketNoi .social-row {
-            padding: 8px 10px;
+            padding: 8px 10px
         }
 
     .chinhSach {
-        text-align: left;
+        text-align: left
     }
+}
+
+/* SEARCH SUGGESTIONS */
+#search-results-popup {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.12);
+    z-index: 1001;
+    max-height: 450px;
+    overflow-y: auto;
+    color: #222
+}
+
+.search-results-header {
+    padding: 12px 15px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 12px;
+    text-decoration: none;
+    color: #222;
+    border-bottom: 1px solid #f5f5f5
+}
+
+    .search-result-item:last-child {
+        border-bottom: none
+    }
+
+    .search-result-item:hover {
+        background: #f9f9f9
+    }
+
+    .search-result-item img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        flex-shrink: 0
+    }
+
+.search-result-info {
+    flex-grow: 1;
+    min-width: 0
+}
+
+    .search-result-info .name {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0 0 4px 0;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis
+    }
+
+    .search-result-info .price {
+        font-size: 14px;
+        font-weight: 700;
+        color: #d62929;
+        margin: 0
+    }
+
+/* BREADCRUMB */
+.breadcrumb {
+    max-width: var(--container-max);
+    width: var(--container-w);
+    margin: 8px auto 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #b9b9b9
+}
+
+    .breadcrumb a {
+        color: #b9b9b9;
+        text-decoration: none
+    }
+
+        .breadcrumb a:hover {
+            color: #d0a57c
+        }
+
+    .breadcrumb .sep {
+        color: #cfcfcf
+    }
+
+    .breadcrumb .current {
+        color: #2b2b2b;
+        font-weight: 700
+    }
+
+/* ALIGN icons + text */
+.actions .link-plain,
+.actions .link-plain:link,
+.actions .link-plain:visited,
+.actions .link-plain:hover,
+.actions .link-plain:active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none !important;
+    color: #fff !important;
+    text-align: center
+}
+
+    .actions .link-plain img {
+        width: 40px;
+        height: 40px;
+        display: block;
+        object-fit: contain
+    }
+
+    .actions .link-plain p {
+        margin: 0;
+        line-height: 1;
+        color: inherit !important
+    }
+
+.actions .taiKhoan, .actions .gioHang {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+
+/* ACCOUNT DROPDOWN: hover, không có khoảng hở */
+.actions .account {
+    position: relative
+}
+
+.account-trigger {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #fff
+}
+
+    .account-trigger:focus-visible {
+        outline: 2px dashed #d0a57c;
+        outline-offset: 2px
+    }
+
+.account-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 180px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.18);
+    display: none;
+    overflow: hidden;
+    z-index: 1001
+}
+
+.account:hover .account-menu {
+    display: block
+}
+/* mở khi hover */
+.account-menu .menu-item {
+    display: block;
+    padding: 12px 16px;
+    text-align: center;
+    background: #fff;
+    color: #222;
+    text-decoration: none;
+    border-top: 1px solid #f0f0f0
+}
+
+    .account-menu .menu-item:first-child {
+        border-top: 0
+    }
+
+    .account-menu .menu-item:hover {
+        background: #f7f7f7
+    }
+
+.account-menu .username {
+    font-weight: 700;
+    border-bottom: 1px solid #f0f0f0
+}
+
+.account-menu .danger {
+    color: #d62929
 }

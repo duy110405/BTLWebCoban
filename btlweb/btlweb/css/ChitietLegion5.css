@@ -4,23 +4,23 @@
     --line: #d9cfc4;
     --text: #222;
     --sub: #666;
-    --accent: #e53a2e;
+    --accent: #d62929;
     --radius: 14px;
     --gap: 22px;
-    /* Kích thước khung ảnh lớn (stage) */
-    --stage-max-w: 560px; /* độ rộng tối đa */
-    --stage-ratio-w: 4; /* tỉ lệ khung: 4:3  */
+    /* khung ảnh lớn */
+    --stage-max-w: 560px;
+    --stage-ratio-w: 4;
     --stage-ratio-h: 3;
 }
 
-/* Nền thân trang */
+/* nền phần body */
 .main {
     background: var(--cream);
 }
 
-/* ================== LAYOUT ================== */
+/* =============== LAYOUT =============== */
 .detail-wrap {
-    width: min(1200px, 92vw);
+    width: min(1200px,92vw);
     margin: clamp(16px,3vw,24px) auto 48px;
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -34,8 +34,7 @@
     padding: 14px;
 }
 
-/* ============ LEFT: GALLERY + SPECS ============ */
-/* Khung chứa ảnh lớn: cố định theo tỉ lệ 4:3 để ảnh luôn “bằng nhau” */
+/* =============== GALLERY + SPECS LEFT =============== */
 .gallery-card .main-img {
     width: min(var(--stage-max-w), 95%);
     aspect-ratio: calc(var(--stage-ratio-w)) / calc(var(--stage-ratio-h));
@@ -43,10 +42,9 @@
     padding: 8px 8px 12px;
     display: grid;
     place-items: center;
-    overflow: hidden; /* nếu ảnh lố thì giấu phần thừa */
+    overflow: hidden;
 }
 
-    /* Ảnh lớn lấp đầy khung nhưng không méo */
     .gallery-card .main-img img {
         width: 100%;
         height: 100%;
@@ -61,7 +59,6 @@
     padding: 0;
     margin: 0 0 10px 0;
     list-style: none;
-    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
@@ -79,14 +76,13 @@
         display: block;
     }
 
-        /* thumbnails có thể bấm + trạng thái đang chọn */
         .thumbs img.jsThumb {
             cursor: pointer;
             border: 2px solid transparent;
             border-radius: 12px;
             opacity: .85;
             outline: none;
-            transition: opacity .15s ease, box-shadow .15s ease, border-color .15s ease;
+            transition: opacity .15s, box-shadow .15s, border-color .15s;
         }
 
             .thumbs img.jsThumb:hover {
@@ -114,7 +110,6 @@
         color: var(--text);
     }
 
-/* Bảng key/value 2 cột */
 .kv {
     display: grid;
     grid-template-columns: 160px 1fr;
@@ -144,7 +139,7 @@
         color: #222;
     }
 
-/* ============ RIGHT: BUY BOX ============ */
+/* =============== BUY BOX RIGHT =============== */
 .buy-card .title {
     font-size: 18px;
     margin: 2px 0 10px;
@@ -217,7 +212,7 @@
     background: #f7efe7;
 }
 
-/* ============ METERS ============ */
+/* =============== METERS =============== */
 .meter-box h3 {
     margin: 8px 0 8px;
 }
@@ -250,13 +245,170 @@
     .bar i {
         display: block;
         height: 100%;
-        width: var(--val, 50%);
-        background: linear-gradient(90deg, #58b173, #57b06f);
+        width: var(--val,50%);
+        background: linear-gradient(90deg,#58b173,#57b06f);
         border-radius: 999px;
     }
 
-/* ============ Responsive ============ */
-@media (max-width: 980px) {
+/* =============== RELATED STRIP =============== */
+.rel-section {
+    width: min(1200px,92vw);
+    margin: 28px auto 64px;
+}
+
+.rel-title {
+    margin: 0 0 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+
+/* khung trắng đồng bộ, giấu mọi tràn */
+.rel-track-wrap {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px 48px;
+    overflow: hidden;
+    box-shadow: 0 2px 0 rgba(0,0,0,.02);
+}
+
+    /* mép mờ 2 bên theo nền trắng khung */
+    .rel-track-wrap::before,
+    .rel-track-wrap::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 56px;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .rel-track-wrap::before {
+        left: 0;
+        background: linear-gradient(90deg,#fff,rgba(255,255,255,0));
+    }
+
+    .rel-track-wrap::after {
+        right: 0;
+        background: linear-gradient(270deg,#fff,rgba(255,255,255,0));
+    }
+
+/* dải ngang một hàng */
+.rel-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(260px,1fr);
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 6px 8px 10px;
+    scrollbar-width: none; /* Firefox: ẩn thanh cuộn */
+}
+
+    .rel-track::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+        display: none; /* WebKit: ẩn thanh cuộn */
+    }
+
+/* card nhỏ */
+.p-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    scroll-snap-align: start;
+    transition: transform .15s, box-shadow .15s;
+}
+
+    .p-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(0,0,0,.06);
+    }
+
+.p-img img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+    background: #fafafa;
+    border-radius: 8px;
+}
+
+.p-name {
+    margin-top: 6px;
+    line-height: 1.35;
+    min-height: calc(1.35em * 2);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.p-spec {
+    color: #666;
+    font-size: 13px;
+    min-height: 36px;
+    margin: 0;
+}
+
+.p-price {
+    margin-top: auto;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 16px;
+}
+
+/* nút điều hướng tròn */
+.rel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 999px;
+    background: #fff;
+    color: #333;
+    box-shadow: 0 6px 20px rgba(0,0,0,.15);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: transform .15s, opacity .15s, box-shadow .15s;
+}
+
+    .rel-arrow.left {
+        left: 6px;
+    }
+
+    .rel-arrow.right {
+        right: 6px;
+    }
+
+    .rel-arrow:hover {
+        transform: translateY(-50%) scale(1.05);
+        box-shadow: 0 10px 26px rgba(0,0,0,.18);
+    }
+
+    .rel-arrow[disabled] {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-50%) scale(.9);
+    }
+
+/* =============== Responsive =============== */
+@media (max-width:980px) {
     .detail-wrap {
         grid-template-columns: 1fr;
     }
@@ -266,7 +418,7 @@
     }
 }
 
-@media (max-width: 560px) {
+@media (max-width:560px) {
     .thumbs img {
         width: 76px;
         height: 48px;
@@ -274,5 +426,13 @@
 
     .meter {
         grid-template-columns: 110px 1fr 44px;
+    }
+
+    .rel-arrow {
+        display: none;
+    }
+    /* mobile vuốt tay là đủ */
+    .rel-track-wrap::before, .rel-track-wrap::after {
+        display: none;
     }
 }

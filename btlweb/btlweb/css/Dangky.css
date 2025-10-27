@@ -171,3 +171,23 @@
         width: 80px;
     }
 }
+
+/* ====================== Message dưới nút Đăng ký ====================== */
+.auth-msg {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+    .auth-msg.error {
+        background: #ffe8e6;
+        color: #a11;
+        border: 1px solid #f3b4ae;
+    }
+
+    .auth-msg.ok {
+        background: #eaf7ec;
+        color: #146c2e;
+        border: 1px solid #9fd3ad;
+    }

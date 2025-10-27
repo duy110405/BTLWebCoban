@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.Script.Services;
+using System.Web.Services;
 
 namespace btlweb
 {
@@ -11,54 +12,143 @@ namespace btlweb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                HighlightCurrent();
+                SetupBreadcrumb();
+                BuildAccountMenu();
+            }
+        }
 
-        }
-        protected void btnTrangChuLogo_Click(object sender, EventArgs e)
+        private void HighlightCurrent()
         {
-            Response.Redirect("Trangchu.aspx");
+            var file = VirtualPathUtility.GetFileName(Request.AppRelativeCurrentExecutionFilePath) ?? "";
+            void Active(System.Web.UI.WebControls.LinkButton b)
+            {
+                if (b == null) return;
+                b.CssClass = (b.CssClass + " is-active").Trim();
+                b.Attributes["aria-current"] = "page";
+            }
+
+            switch ((file ?? "").ToLower())
+            {
+                case "trangchu.aspx": Active(btnTrangChu); break;
+                case "laptop.aspx": Active(btnSanPham); Active(btnLaptop); break;
+                case "banphim.aspx": Active(btnSanPham); Active(btnBanPhim); break;
+                case "pc.aspx": Active(btnSanPham); Active(btnPC); break;
+                case "lienhe.aspx": Active(btnLienHe); break;
+                case "gioithieu.aspx": Active(btnGioiThieu); break;
+            }
         }
 
-        protected void btnTrangChu_Click(object sender, EventArgs e)
+        private void SetupBreadcrumb()
         {
-            Response.Redirect("Trangchu.aspx");
+            var file = VirtualPathUtility.GetFileName(Request.AppRelativeCurrentExecutionFilePath) ?? "";
+            if (file.Equals("Trangchu.aspx", StringComparison.OrdinalIgnoreCase))
+            {
+                breadcrumbWrap.Visible = false;
+                return;
+            }
+            breadcrumbWrap.Visible = true;
+
+            string label = Page.Title ?? "";
+            switch (file.ToLower())
+            {
+                case "laptop.aspx": label = "Instock".Equals(Page.Title, StringComparison.OrdinalIgnoreCase) ? "Instock" : "Laptop"; break;
+                case "banphim.aspx": label = "Bàn phím"; break;
+                case "pc.aspx": label = "PC"; break;
+                case "giohang.aspx": label = "Giỏ hàng"; break;
+                case "taikhoan.aspx":
+                case "chitiettaikhoan.aspx": label = "Tài khoản"; break;
+                case "lienhe.aspx": label = "Liên hệ"; break;
+                case "gioithieu.aspx": label = "Giới thiệu"; break;
+            }
+            litBreadcrumb.Text = $"<span class='current'>{Server.HtmlEncode(label)}</span>";
         }
+
+        private void BuildAccountMenu()
+        {
+            bool loggedIn = (Session["UserId"] != null);
+            pnlAccountGuest.Visible = !loggedIn;
+            pnlAccountUser.Visible = loggedIn;
+            if (loggedIn)
+            {
+                var name = Convert.ToString(Session["UserName"]);
+                if (string.IsNullOrWhiteSpace(name)) name = "Tài khoản";
+                litUserName.Text = Server.HtmlEncode(name);
+            }
+        }
+
+        protected void btnTrangChuLogo_Click(object sender, EventArgs e) { Response.Redirect("Trangchu.aspx"); }
+        protected void btnTrangChu_Click(object sender, EventArgs e) { Response.Redirect("Trangchu.aspx"); }
+
         protected void btnTimKiem_Click(object sender, EventArgs e)
         {
+            string searchTerm = txtTimKiem.Text.Trim();
+            if (!string.IsNullOrEmpty(searchTerm))
+                Response.Redirect($"Laptop.aspx?search={Server.UrlEncode(searchTerm)}");
+            else
+                Response.Redirect("Laptop.aspx");
         }
 
-        protected void btnTaiKhoan_Click(object sender, EventArgs e)
+        // Account actions
+        protected void lnkDangNhap_Click(object sender, EventArgs e) { Response.Redirect("Taikhoan.aspx"); }
+        protected void lnkDangKy_Click(object sender, EventArgs e) { Response.Redirect("Taikhoan.aspx"); }
+        protected void lnkDangXuat_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Taikhoan.aspx");
+            Session.Clear();
+            Session.Abandon();
+            Response.Redirect("Trangchu.aspx");
         }
 
-        protected void btnGioHang_Click(object sender, EventArgs e)
+        protected void btnGioHang_Click(object sender, EventArgs e) { Response.Redirect("Giohang.aspx"); }
+        protected void btnBanPhim_Click(object sender, EventArgs e) { Response.Redirect("Banphim.aspx"); }
+        protected void btnLaptop_Click(object sender, EventArgs e) { Response.Redirect("Laptop.aspx"); }
+        protected void btnPC_Click(object sender, EventArgs e) { Response.Redirect("Pc.aspx"); }
+        protected void btnLienHe_Click(object sender, EventArgs e) { Response.Redirect("Lienhe.aspx"); }
+        protected void btnGioiThieu_Click(object sender, EventArgs e) { Response.Redirect("Gioithieu.aspx"); }
+
+        // Search suggestions API
+        public class ProductSuggestion
         {
-            Response.Redirect("Giohang.aspx");
+            public int MaSP { get; set; }
+            public string TenSP { get; set; }
+            public decimal Gia { get; set; }
+            public string AnhChinh { get; set; }
         }
 
-        protected void btnBanPhim_Click(object sender, EventArgs e)
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static List<ProductSuggestion> GetSearchSuggestions(string searchText)
         {
-            Response.Redirect("Banphim.aspx");
-        }
+            var list = new List<ProductSuggestion>();
+            var connStr = ConfigurationManager.ConnectionStrings["Baitaplonlaptrinhweb"].ConnectionString;
+            if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2) return list;
 
-        protected void btnLaptop_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Laptop.aspx");
-        }
-
-        protected void btnPC_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Pc.aspx");
-        }
-
-        protected void btnLienHe_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Lienhe.aspx");
-        }
-
-        protected void btnGioiThieu_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Gioithieu.aspx");
+            const string sql = @"SELECT TOP 5 MaSP, TenSP, Gia, AnhChinh
+                                 FROM dbo.SanPham
+                                 WHERE TenSP LIKE @q
+                                 ORDER BY TenSP";
+            using (var con = new SqlConnection(connStr))
+            using (var cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.AddWithValue("@q", "%" + searchText + "%");
+                con.Open();
+                using (var rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        list.Add(new ProductSuggestion
+                        {
+                            MaSP = Convert.ToInt32(rd["MaSP"]),
+                            TenSP = rd["TenSP"].ToString(),
+                            Gia = Convert.ToDecimal(rd["Gia"]),
+                            AnhChinh = rd["AnhChinh"].ToString()
+                        });
+                    }
+                }
+            }
+            return list;
         }
     }
 }

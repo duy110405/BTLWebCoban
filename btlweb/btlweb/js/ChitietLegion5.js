@@ -1,25 +1,47 @@
-﻿(function () {
-    const main = document.getElementById('jsMainImg');
-    const thumbs = Array.from(document.querySelectorAll('.jsThumb'));
-    if (!main || !thumbs.length) return;
-
-    function setActive(img) {
-        // đổi ảnh lớn = đúng ảnh của thumbnail
-        main.src = img.currentSrc || img.src;
-        thumbs.forEach(t => t.classList.remove('active'));
-        img.classList.add('active');
+﻿document.addEventListener('DOMContentLoaded', () => {
+    /* ===== Gallery: đổi ảnh lớn theo thumbnail ===== */
+    const mainImg = document.getElementById('jsMainImg');
+    const thumbs = document.querySelectorAll('.jsThumb');
+    if (thumbs.length) {
+        thumbs.forEach(t => {
+            t.addEventListener('click', () => {
+                mainImg.src = t.src;               // nếu có ảnh lớn riêng, thay bằng t.dataset.large
+                thumbs.forEach(x => x.classList.remove('active'));
+                t.classList.add('active');
+            });
+        });
+        thumbs[0].classList.add('active');
     }
 
-    // active ban đầu
-    setActive(thumbs[0]);
+    /* ===== Related scroller: nút trái/phải ===== */
+    const track = document.getElementById('relTrack');
+    const btnL = document.querySelector('.rel-arrow.left');
+    const btnR = document.querySelector('.rel-arrow.right');
 
-    // click + bàn phím
-    thumbs.forEach(img => {
-        img.tabIndex = 0;
-        img.setAttribute('role', 'button');
-        img.addEventListener('click', () => setActive(img));
-        img.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(img); }
+    if (track && btnL && btnR) {
+        const cardWidth = () => {
+            const card = track.querySelector('.p-card');
+            if (!card) return 300;
+            const style = getComputedStyle(track);
+            const gap = parseFloat(style.columnGap || style.gap || 20);
+            return card.getBoundingClientRect().width + gap;
+        };
+
+        const updateArrows = () => {
+            const tol = 4;
+            btnL.disabled = track.scrollLeft <= tol;
+            btnR.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - tol;
+        };
+
+        btnL.addEventListener('click', () => {
+            track.scrollBy({ left: -cardWidth(), behavior: 'smooth' });
         });
-    });
-})();
+        btnR.addEventListener('click', () => {
+            track.scrollBy({ left: cardWidth(), behavior: 'smooth' });
+        });
+
+        track.addEventListener('scroll', updateArrows);
+        window.addEventListener('resize', updateArrows);
+        updateArrows();
+    }
+});

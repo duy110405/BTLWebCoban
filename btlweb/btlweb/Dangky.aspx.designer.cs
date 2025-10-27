@@ -60,6 +60,15 @@ namespace btlweb
         protected global::System.Web.UI.WebControls.TextBox txtPass;
 
         /// <summary>
+        /// txtPass2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPass2;
+
+        /// <summary>
         /// btnDangKy control.
         /// </summary>
         /// <remarks>
@@ -67,5 +76,14 @@ namespace btlweb
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDangKy;
+
+        /// <summary>
+        /// ltMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltMsg;
     }
 }

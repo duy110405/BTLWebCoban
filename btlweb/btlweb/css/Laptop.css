@@ -1,24 +1,28 @@
-﻿/* ===================== Trangchu.css (updated) ===================== */
+﻿/* ===================== Laptop.css ===================== */
+
+/* Biến dùng chung (đồng bộ Trangchu.css) */
 :root {
-    --brown: #371A16;
-    --cream: #FFEED6;
+    --max: 1200px;
+    --ink: #111827;
+    --muted: #6b7280;
+    --line: #ececec;
+    --price: #dc2626;
+    --accent: #7c3aed;
     --card: #ffffff;
-    --line: #e8d6c8;
-    --price: #d62929;
-    --radius: 14px;
-    /* khoảng trống phía trên phần body (tùy chỉnh) */
+    --radius: 10px; /* = trang chủ */
+    --shadow: 0 1px 3px rgba(0,0,0,.05);
+    --shadow-hover: 0 6px 16px rgba(0,0,0,.08);
     --body-gap-top: clamp(16px, 3vw, 40px);
 }
 
-/* Không sơn nền body ở file con; để Master quản */
+/* Nền (giữ nguyên nếu Master đang dùng) */
 .main {
-    background: var(--cream);
+    background: #FFEED6;
 }
 
-/* Khối tổng: sidebar + grid */
+/* ===== Khối tổng: sidebar + grid ===== */
 .page-container {
     max-width: 1200px;
-    /* đẩy toàn bộ lưới xuống khỏi header */
     margin: var(--body-gap-top) auto 48px;
     padding: 0 16px;
     display: grid;
@@ -26,11 +30,11 @@
     gap: 24px;
 }
 
-/* Sidebar */
+/* ===== Sidebar ===== */
 .filter {
     background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border: 1px solid #e8d6c8;
+    border-radius: 14px;
     padding: 18px 16px;
     position: sticky;
     top: 16px;
@@ -43,26 +47,6 @@
         color: #222;
     }
 
-.cat-list {
-    list-style: none;
-    margin: 0 0 12px 0;
-    padding: 0;
-}
-
-    .cat-list li {
-        padding: 6px 0;
-        border-bottom: 1px dashed var(--line);
-    }
-
-        .cat-list li:last-child {
-            border-bottom: 0;
-        }
-
-    .cat-list a {
-        text-decoration: none;
-        color: #222;
-    }
-
 .check-group {
     display: grid;
     gap: 8px;
@@ -70,61 +54,142 @@
     font-size: 14px;
 }
 
-    .check-group input {
-        accent-color: var(--brown);
+.auth-input {
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #d7d2ce;
+    border-radius: 8px;
+    background: #f3f1ef;
+}
+
+.btn {
+    height: 40px;
+    border: 0;
+    border-radius: 8px;
+    padding: 0 14px;
+    font-weight: 700;
+    background: #333;
+    color: #fff;
+}
+
+    .btn:hover {
+        background: #2a2a2a;
     }
 
-/* Lưới sản phẩm */
+.total-row {
+    margin-top: 10px;
+    color: #666;
+}
+
+/* ===== Lưới sản phẩm ===== */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0,1fr));
-    gap: 20px;
+    gap: 22px; /* = trang chủ */
 }
 
-/* Card */
+/* ===== Card: đồng bộ trang chủ ===== */
 .card {
-    background: var(--card);
+    position: relative;
+    background: #fff;
     border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 12px;
+    border-radius: var(--radius); /* 10px */
+    padding: 14px;
     text-align: center;
+    box-shadow: var(--shadow);
     transition: transform .15s ease, box-shadow .15s ease;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
 }
 
     .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0,0,0,.08);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-hover);
     }
 
     .card img {
-        width: 78%;
+        width: 100%; /* = trang chủ */
         aspect-ratio: 4/3;
         object-fit: contain;
-        display: block;
-        margin: 8px auto 10px;
+        margin: 0 auto 8px;
     }
 
-.spec {
-    font-size: 13px;
-    font-weight: 500;
+/* Thông số hiển thị như .spec của trang chủ */
+.spec-lines {
+    font-size: 12px;
+    color: var(--muted);
     line-height: 1.35;
-    margin: 0 0 6px;
-    color: #333;
+    margin: 2px 0 6px;
+    white-space: normal;
+    word-break: break-word;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
 }
 
+.spec-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+}
+
+    .spec-line span + span::before {
+        content: "|";
+        margin: 0 8px;
+        color: #a8a8a8;
+        font-weight: 700;
+    }
+/* bỏ màu đỏ, đồng bộ muted */
+.spec-1, .spec-2 {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .2px;
+    text-transform: none;
+}
+
+/* Tên sản phẩm: giống trang chủ */
 .name {
-    font-size: 14px;
-    color: #222;
-    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 2px 0 4px;
+    white-space: normal;
+    word-break: break-word;
 }
 
+/* Giá: giống trang chủ, căn giữa */
 .price {
-    font-weight: 700;
+    margin-top: auto;
     color: var(--price);
-    margin: 0;
+    font-weight: 900;
+    font-size: 16px;
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    justify-content: center;
+}
+    /* hỗ trợ hiển thị giá gốc nếu có */
+    .price .old {
+        color: #9ca3af;
+        text-decoration: line-through;
+        font-size: 12px;
+    }
+
+/* ===== Pager ===== */
+.pager {
+    grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media (max-width:1100px) {
     .product-grid {
         grid-template-columns: repeat(2, minmax(0,1fr));

@@ -5,39 +5,22 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <div class="detail-wrap">
-    <!-- CỘT TRÁI: GALLERY + THÔNG SỐ -->
+    <!-- LEFT: GALLERY + SPECS -->
     <section class="gallery-card card">
-<!-- ẢNH LỚN -->
-<!--        <div class="main-img">
-          <img id="jsMainImg" src="anh/sp_legion_pro5.jpg" alt="Lenovo Legion Pro 5" />
-        </div>
+      <div class="main-img">
+        <img id="jsMainImg" src='<%= ResolveUrl("~/anh/sp_legion_pro5.jpg") %>' alt="Lenovo Legion Pro 5" />
+      </div>
 
-        <!-- THUMBNAILS 
-        <ul class="thumbs">
-          <li><img class="jsThumb" src="anh/sp_legion_pro5.jpg" data-large="anh/sp_legion_pro5.jpg" alt=""></li>
-          <li><img class="jsThumb" src="anh/sp_legion_side.png"   data-large="anh/sp_legion_side.jpg"   alt=""></li>
-          <li><img class="jsThumb" src="anh/sp_legion_open.jpg"   data-large="anh/sp_legion_open.jpg"   alt=""></li>
-          <li><img class="jsThumb" src="anh/sp_legion_back.jpg"   data-large="anh/sp_legion_back.jpg"   alt=""></li>
-          <li><img class="jsThumb" src="anh/sp_legion_ports.jpg"  data-large="anh/sp_legion_ports.jpg"  alt=""></li>
-        </ul> -->
-
-                <div class="main-img">
-          <img id="jsMainImg" src='<%= ResolveUrl("~/anh/sp_legion_pro5") %>' alt="Lenovo Legion Pro 5" />
-        </div>
-
-        <!-- THUMBNAILS (KHÔNG cần data-large nếu dùng cùng file) -->
-        <ul class="thumbs">
-          <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_pro5.jpg") %>' alt=""></li>
-          <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_side.png") %>' alt=""></li>
-          <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_open.png") %>' alt=""></li>
-          <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_back.png") %>' alt=""></li>
-          <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_port.png") %>' alt=""></li>
-        </ul>
-        
+      <ul class="thumbs">
+        <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_pro5.jpg") %>' alt=""></li>
+        <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_side.png") %>' alt=""></li>
+        <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_open.png") %>' alt=""></li>
+        <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_back.png") %>' alt=""></li>
+        <li><img class="jsThumb" src='<%= ResolveUrl("~/anh/sp_legion_port.png") %>' alt=""></li>
+      </ul>
 
       <div class="specs">
         <h3>Cấu hình và đặc điểm chi tiết:</h3>
-
         <div class="kv">
           <div class="k">Loại CPU:</div><div class="v">Intel Core i5 12400HX, 24C/32T</div>
           <div class="k">Tốc độ:</div><div class="v">2.2GHz, Lên tới 5.8GHz</div>
@@ -66,7 +49,7 @@
       </div>
     </section>
 
-    <!-- CỘT PHẢI: MUA HÀNG -->
+    <!-- RIGHT: BUY BOX -->
     <aside class="buy-card card">
       <h2 class="title">Lenovo Legion Pro 5 16IRX9 83DF0047VN</h2>
 
@@ -145,4 +128,67 @@
       </div>
     </aside>
   </div>
+
+  <!-- ===================== RELATED ===================== -->
+  <section class="rel-section" aria-label="Sản phẩm tương tự">
+    <h3 class="rel-title">Sản phẩm tương tự</h3>
+
+    <div class="rel-track-wrap">
+      <button type="button" class="rel-arrow left" aria-label="Sản phẩm trước">‹</button>
+
+      <div id="relTrack" class="rel-track">
+        <!-- 1 -->
+        <article class="p-card">
+          <div class="p-img">
+            <img src="anh/sp_legion_pro5.jpg" alt="Laptop Legion pro 5">
+          </div>
+          <a class="p-name" href="#">Laptop Legion pro 5</a>
+          <p class="p-spec">i5 12400hx • RTX 4060 • 16GB • 512GB • 16” FHD</p>
+          <div class="p-price">25.000.000đ</div>
+        </article>
+
+        <!-- 2 -->
+        <article class="p-card">
+          <div class="p-img">
+            <img src="anh/sp_rog_strix16.jpg" alt="Laptop rog strix 16">
+          </div>
+          <a class="p-name" href="#">Laptop rog strix 16</a>
+          <p class="p-spec">i7 12900hx • RTX 4070 • 32GB • 1TB • 16” QHD</p>
+          <div class="p-price">45.000.000đ</div>
+        </article>
+
+        <!-- 3 -->
+        <article class="p-card">
+          <div class="p-img">
+            <img src="anh/sp_yoga9i.jpg" alt="Lenovo yoga 9i">
+          </div>
+          <a class="p-name" href="#">Laptop lenovo yoga 9i</a>
+          <p class="p-spec">R7 7840HS • 780M • 32GB • 1TB • 14” QHD</p>
+          <div class="p-price">35.000.000đ</div>
+        </article>
+
+        <!-- 4 -->
+        <article class="p-card">
+          <div class="p-img">
+            <img src="anh/sp_xps14.jpg" alt="Dell XPS 14">
+          </div>
+          <a class="p-name" href="#">Dell XPS 14</a>
+          <p class="p-spec">i7-1260P • Iris Xe • 16GB • 512GB • 14” FHD</p>
+          <div class="p-price">40.000.000đ</div>
+        </article>
+
+        <!-- 5 -->
+        <article class="p-card">
+          <div class="p-img">
+            <img src="anh/sp_thinkbook14p.jpg" alt="ThinkBook 14p">
+          </div>
+          <a class="p-name" href="#">ThinkBook 14p</a>
+          <p class="p-spec">R7 5800U • Vega 8 • 16GB • 512GB • 14” FHD</p>
+          <div class="p-price">15.000.000đ</div>
+        </article>
+      </div>
+
+      <button type="button" class="rel-arrow right" aria-label="Sản phẩm tiếp">›</button>
+    </div>
+  </section>
 </asp:Content>

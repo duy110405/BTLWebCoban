@@ -3,12 +3,12 @@
     <link rel="stylesheet" href="css/Taikhoan.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-     <div class="login-wrap">
-     <section class="login-card" role="group" aria-label="Đăng nhập tài khoản">
+<div class="login-wrap">
+    <section class="login-card" role="group" aria-label="Đăng nhập tài khoản">
       <h2 class="login-title">Đăng nhập tài khoản</h2>
 
       <div class="form-group">
-        <asp:TextBox ID="txtUsername" runat="server" CssClass="input" placeholder="Tên đăng nhập"></asp:TextBox>
+        <asp:TextBox ID="txtUsername" runat="server" CssClass="input" placeholder="Email hoặc SĐT"></asp:TextBox>
       </div>
 
       <div class="form-group">
@@ -16,13 +16,15 @@
       </div>
 
       <div class="row-between">
-        <a href="Dangky.aspx">
-          <span class="pseudo-link">Đăng ký</span>
-        </a>
+        <a href="Dangky.aspx"><span class="pseudo-link">Đăng ký</span></a>
         <span class="pseudo-link">Quên mật khẩu?</span>
       </div>
 
-      <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary" Text="Đăng nhập" />
+      <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-primary" Text="Đăng nhập"
+                  OnClick="btnLogin_Click" />
+
+      <!-- thông báo -->
+      <asp:Literal ID="ltMsg" runat="server"></asp:Literal>
 
       <div class="divider"><span>hoặc đăng nhập bằng</span></div>
 
