@@ -2,34 +2,58 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="css/Giohang.css" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-    <div class="cart-wrap">
 
+<asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
+  <div class="cart-wrap">
     <h2 class="cart-title">Giỏ hàng của bạn</h2>
 
     <div class="cart-grid">
       <!-- CỘT TRÁI -->
       <section class="cart-left">
+        <!-- Khi rỗng -->
+        <asp:Panel ID="pEmpty" runat="server" Visible="false">
+          <article class="card" style="padding:12px">Giỏ hàng đang trống.</article>
+        </asp:Panel>
 
-        <!-- Sản phẩm 1 -->
-        <article class="cart-item card">
-          <img class="thumb" src="<%= ResolveUrl("~/anh/sp_legion_pro5.jpg") %>" alt="Lenovo ThinkPad X1 Carbon" />
-          <div class="info">
-            <h3 class="name">Lenovo ThinkPad X1 Carbon Gen 11</h3>
-            <p class="desc">i7 1356U, 16GB, 256GB, FHD+ Touch, Black, Outlet, Nhập khẩu</p>
+        <!-- Danh sách sản phẩm -->
+        <asp:Repeater ID="rptCart" runat="server" OnItemCommand="rptCart_ItemCommand">
+          <ItemTemplate>
+            <article class="cart-item card">
+              <img class="thumb"
+                   src='<%# ResolveUrl(Eval("Anh") as string ?? "~/anh/no-image.png") %>'
+                   alt='<%# Eval("TenSP") %>' />
 
-            <div class="controls">
-              <div class="qty">
-                <button type="button" class="stepper minus" aria-label="Giảm">−</button>
-                <input type="text" value="1" inputmode="numeric" />
-                <button type="button" class="stepper plus" aria-label="Tăng">+</button>
+              <div class="info">
+                <h3 class="name"><%# Eval("TenSP") %></h3>
+                <p class="desc"><%# Eval("MoTaNgan") %></p>
+
+                <div class="controls">
+                  <div class="qty">
+                    <asp:LinkButton runat="server" CssClass="stepper minus"
+                                    CommandName="Minus" CommandArgument='<%# Eval("MaSP") %>'
+                                    CausesValidation="false" Text="−" />
+                    <asp:TextBox runat="server" ReadOnly="true" Text='<%# Eval("Qty") %>' />
+                    <asp:LinkButton runat="server" CssClass="stepper plus"
+                                    CommandName="Plus" CommandArgument='<%# Eval("MaSP") %>'
+                                    CausesValidation="false" Text="+" />
+                  </div>
+
+                  <asp:LinkButton runat="server" CssClass="btn-remove"
+                                  CommandName="Remove" CommandArgument='<%# Eval("MaSP") %>'
+                                  CausesValidation="false" Text="Xóa" />
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="price">23.000.000đ</div>
-        </article>
 
-        <!-- Quà tặng -->
+              <div class="price">
+                <%# string.Format(new System.Globalization.CultureInfo("vi-VN"),
+                                  "{0:N0}đ",
+                                  Convert.ToDecimal(Eval("Gia")) * Convert.ToInt32(Eval("Qty"))) %>
+              </div>
+            </article>
+          </ItemTemplate>
+        </asp:Repeater>
+
+        <!-- Quà tặng (tham khảo) -->
         <article class="gift card">
           <header class="gift-head">Tặng kèm: Trị giá tới 400.000đ</header>
           <div class="gift-body">
@@ -39,57 +63,37 @@
           </div>
         </article>
 
-        <!-- Sản phẩm 2 -->
-        <article class="cart-item card">
-          <img class="thumb" src="<%= ResolveUrl("~/anh/sp_legion_pro5.jpg") %>" alt="Lenovo Legion Pro 5" />
-          <div class="info">
-            <h3 class="name">Lenovo Legion Pro 5</h3>
-            <p class="desc">i9 14900HX, RTX 4070 8GB, 32GB, 1TB, WQXGA 240Hz, Grey, Mới, Full box, Chính hãng</p>
-
-            <div class="controls">
-              <div class="qty">
-                <button type="button" class="stepper minus" aria-label="Giảm">−</button>
-                <input type="text" value="1" inputmode="numeric" />
-                <button type="button" class="stepper plus" aria-label="Tăng">+</button>
-              </div>
-            </div>
-          </div>
-          <div class="price">25.000.000đ</div>
-        </article>
-
-        <!-- Thông tin người đặt -->
+        <!-- Form thông tin khách -->
         <section class="customer card">
           <h3 class="block-title">Thông tin người đặt hàng:</h3>
-
           <div class="form-grid">
             <label>Họ tên:</label>
-            <input type="text" class="input" />
+            <asp:TextBox ID="txtHoTen" runat="server" CssClass="input" />
 
             <label>Số điện thoại:</label>
-            <input type="text" class="input" />
+            <asp:TextBox ID="txtSDT" runat="server" CssClass="input" />
 
             <label>Email:</label>
-            <input type="email" class="input" />
+            <asp:TextBox ID="txtEmail" runat="server" CssClass="input" TextMode="Email" />
 
             <label>Địa chỉ:</label>
-            <input type="text" class="input" />
+            <asp:TextBox ID="txtDiaChi" runat="server" CssClass="input" />
 
             <label>Phương thức thanh toán:</label>
-            <select class="select">
-              <option>Thanh toán trực tiếp</option>
-              <option>Chuyển khoản</option>
-              <option>COD</option>
-            </select>
+            <asp:DropDownList ID="ddlPTTT" runat="server" CssClass="select">
+              <asp:ListItem Text="Thanh toán trực tiếp" Value="Thanh toán trực tiếp" Selected="True" />
+              <asp:ListItem Text="Chuyển khoản" Value="Chuyển khoản" />
+              <asp:ListItem Text="COD" Value="COD" />
+            </asp:DropDownList>
 
             <label>Ghi chú:</label>
-            <textarea class="textarea" rows="3"></textarea>
+            <asp:TextBox ID="txtGhiChu" runat="server" CssClass="textarea" TextMode="MultiLine" Rows="3" />
           </div>
         </section>
       </section>
 
       <!-- CỘT PHẢI -->
       <aside class="cart-right">
-
         <section class="coupon card">
           <h3 class="block-title">Khuyến mãi</h3>
           <button type="button" class="btn btn-ghost">Chọn hoặc nhập khuyến mãi</button>
@@ -100,21 +104,55 @@
 
           <div class="row">
             <span>Tạm tính:</span>
-            <strong class="money">48.000.000đ</strong>
+            <strong class="money"><asp:Literal ID="litSub" runat="server" /></strong>
           </div>
 
           <div class="row total">
             <span>Tổng cộng:</span>
-            <strong class="money">48.000.000đ</strong>
+            <strong class="money"><asp:Literal ID="litTotal" runat="server" /></strong>
           </div>
 
-          <!-- Nút thanh toán ở CUỐI và Ở GIỮA -->
           <div class="summary-actions">
-            <button type="button" class="btn btn-primary">Thanh toán</button>
+            <asp:Button ID="btnPay" runat="server" CssClass="btn btn-primary"
+                        Text="Thanh toán" OnClick="btnPay_Click" UseSubmitBehavior="false" />
           </div>
         </section>
-
       </aside>
     </div>
   </div>
+
+  <!-- ===== MODAL Thanh toán ===== -->
+  <div id="payModal" class="pay-modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="backdrop" onclick="closePayModal()"></div>
+    <div class="modal-box" role="document">
+      <div class="icon-wrap"><span class="icon">✓</span></div>
+      <h3 class="title" id="payModalTitle">Thanh toán thành công!</h3>
+      <p class="desc" id="payModalDesc">
+        Đơn hàng <b id="payOrderCode">#DHxxxx</b> đã được tạo. Cảm ơn bạn!
+      </p>
+      <div class="actions">
+        <a id="btnViewOrder" href="Chitiettaikhoan.aspx?tab=orders" class="btn btn-primary">Xem đơn hàng</a>
+        <button type="button" class="btn btn-ghost" onclick="closePayModal()">Tiếp tục mua sắm</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openPayModal(title, htmlDesc, orderCode) {
+      if (title)  document.getElementById('payModalTitle').textContent = title;
+      if (htmlDesc) document.getElementById('payModalDesc').innerHTML = htmlDesc;
+      if (orderCode) document.getElementById('payOrderCode').textContent = orderCode;
+
+      const el = document.getElementById('payModal');
+      el.classList.remove('hidden');
+      el.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePayModal() {
+      const el = document.getElementById('payModal');
+      el.classList.add('hidden');
+      el.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+  </script>
 </asp:Content>

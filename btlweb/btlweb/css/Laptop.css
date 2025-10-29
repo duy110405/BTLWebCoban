@@ -215,3 +215,31 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+
+/*them*/
+/* Link phủ toàn bộ card để click cả ô */
+.card {
+    position: relative;
+}
+
+    .card .card-link {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        border-radius: var(--radius);
+    }
+
+
+/*them tiep*/
+/* ==== Sidebar: full width + spacing cho nút Lọc sản phẩm ==== */
+.filter .auth-input {
+    width: 100%; /* đảm bảo các ô trong sidebar luôn full bề ngang */
+}
+
+.filter .btn-primary {
+    width: 100%; /* nút Lọc sản phẩm to ngang ô Khoảng giá */
+    display: block;
+    margin-top: 10px; /* tạo khoảng cách với ô 'Mới nhất' */
+}

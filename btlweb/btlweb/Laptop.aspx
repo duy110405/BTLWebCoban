@@ -43,20 +43,25 @@
       <asp:Repeater ID="rptProducts" runat="server">
         <ItemTemplate>
           <article class="card">
+            <!-- Link phủ toàn bộ card -->
+            <a class="card-link" href='<%# "ChitietLegion5.aspx?masp=" + Eval("MaSP") %>' aria-label='<%# "Xem " + Eval("TenSP") %>'></a>
+
             <img src='<%# Eval("AnhChinh") %>' alt='<%# Eval("TenSP") %>' />
             <div class="spec-lines">
-    <div class="spec-line spec-1">
-        <span><%# Eval("CPU") %></span>
-        <span><%# Eval("GPU") %></span>
-    </div>
-    <div class="spec-line spec-2">
-        <span>RAM <%# Eval("RAMGB") %>GB</span>
-        <span>SSD <%# Eval("SSDGB") %>GB</span>
-        <span><%# Eval("ManHinhInch") %>" <%# Eval("DoPhanGiai") %></span>
-    </div>
-</div>
+              <div class="spec-line spec-1">
+                  <span><%# Eval("CPU") %></span>
+                  <span><%# Eval("GPU") %></span>
+              </div>
+              <div class="spec-line spec-2">
+                  <span>RAM <%# Eval("RAMGB") %>GB</span>
+                  <span>SSD <%# Eval("SSDGB") %>GB</span>
+                  <span><%# Eval("ManHinhInch") %>" <%# Eval("DoPhanGiai") %></span>
+              </div>
+            </div>
             <p class="name"><%# Eval("TenSP") %></p>
-            <p class="price"><%# String.Format("{0:N0}đ", Eval("Gia")) %></p>
+            <p class="price">
+              <%# String.Format("{0:N0}đ", Eval("Gia")) %>
+            </p>
           </article>
         </ItemTemplate>
       </asp:Repeater>

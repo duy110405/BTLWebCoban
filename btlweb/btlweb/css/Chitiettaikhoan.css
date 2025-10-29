@@ -1,23 +1,23 @@
 ﻿:root {
     --brown: #371A16;
     --cream: #FFEED6;
-    --card: #ffffff;
+    --card: #fff;
     --line: #e8d6c8;
     --ink: #222;
     --muted: #666;
     --radius: 14px;
-    --gap-top: var(--body-gap-top, 32px); /* dùng biến của site nếu có */
+    --gap-top: var(--body-gap-top,32px);
 }
 
 /* Khối trang */
-.account {
+.account-page { /* đổi từ .account */
     background: var(--cream);
     padding: var(--gap-top) 0 56px;
 }
 
 .account-wrap {
     max-width: 1200px;
-    width: min(1200px, 92vw);
+    width: min(1200px,92vw);
     margin: 0 auto;
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -53,7 +53,7 @@
     color: var(--ink);
     text-decoration: none;
     border-bottom: 1px solid var(--line);
-    transition: background .15s ease;
+    transition: background .15s;
 }
 
     .acc-link:last-child {
@@ -70,14 +70,13 @@
         color: #2b1b16;
     }
 
-/* CONTENT AREA */
+/* CONTENT */
 .acc-content .section-title {
     margin: 0 0 14px;
     font-size: 20px;
     color: var(--ink);
 }
 
-/* Cards */
 .card {
     background: var(--card);
     border: 1px solid var(--line);
@@ -90,16 +89,15 @@
     font-size: 16px;
 }
 
-/* Layout grids */
 .grid-3 {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0,1fr));
+    grid-template-columns: repeat(3,minmax(0,1fr));
     gap: 16px;
 }
 
 .grid-2 {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
+    grid-template-columns: repeat(2,minmax(0,1fr));
     gap: 16px;
 }
 
@@ -116,7 +114,6 @@
     gap: 10px;
 }
 
-/* Progress */
 .progress {
     width: 100%;
     height: 8px;
@@ -131,7 +128,6 @@
         background: #87c27f;
     }
 
-/* Vouchers */
 .vouchers {
     display: flex;
     flex-wrap: wrap;
@@ -152,7 +148,6 @@
         border-color: #b9e2b5;
     }
 
-/* Buttons */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -164,7 +159,7 @@
     color: #fff;
     font-weight: 700;
     cursor: pointer;
-    transition: opacity .15s ease, transform .05s ease;
+    transition: opacity .15s,transform .05s;
 }
 
     .btn:hover {
@@ -185,13 +180,11 @@
         background: #d8534f;
     }
 
-/* Text utils */
 .muted {
     color: var(--muted);
     font-size: 13px;
 }
 
-/* Order list */
 .order {
     background: var(--card);
     border: 1px solid var(--line);
@@ -260,78 +253,10 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: flex-end
 }
 
-/* Timeline đơn */
-.timeline {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 12px 0 6px;
-}
-
-    .timeline .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: #ddd;
-    }
-
-        .timeline .dot.done {
-            background: #6fbd6d;
-        }
-
-        .timeline .dot.current {
-            background: #f0b35b;
-        }
-
-    .timeline .seg {
-        width: 36px;
-        height: 4px;
-        border-radius: 999px;
-        background: #ddd;
-    }
-
-        .timeline .seg.done {
-            background: #6fbd6d;
-        }
-
-/* Forms */
-.form {
-    display: grid;
-    gap: 10px;
-    margin: 10px 0 12px;
-}
-
-.inp {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #e6e2dc;
-    border-radius: 8px;
-    background: #fff;
-    font-size: 14px;
-    outline: none;
-}
-
-    .inp:focus {
-        border-color: #c9b9ad;
-        box-shadow: 0 0 0 3px rgba(124,78,60,.12);
-    }
-
-textarea.inp {
-    resize: vertical;
-    min-height: 96px;
-}
-
-/* Radios */
-.radio {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-}
-
-/* Views switching */
+/* Views */
 .view {
     display: none;
 }
@@ -341,7 +266,7 @@ textarea.inp {
     }
 
 /* Responsive */
-@media (max-width: 980px) {
+@media(max-width:980px) {
     .account-wrap {
         grid-template-columns: 1fr;
     }
@@ -359,11 +284,7 @@ textarea.inp {
         display: grid;
     }
 
-    .grid-3 {
-        grid-template-columns: 1fr;
-    }
-
-    .grid-2 {
+    .grid-3, .grid-2 {
         grid-template-columns: 1fr;
     }
 

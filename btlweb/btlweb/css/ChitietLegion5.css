@@ -1,12 +1,15 @@
 ﻿:root {
     --cream: #FFEED6;
     --card: #fff;
-    --line: #d9cfc4;
+    --line: #ececec; /* đồng bộ Laptop */
     --text: #222;
-    --sub: #666;
-    --accent: #d62929;
-    --radius: 14px;
+    --ink: #111827; /* đồng bộ Laptop */
+    --muted: #6b7280; /* đồng bộ Laptop */
+    --price: #dc2626; /* đồng bộ Laptop */
+    --radius: 10px; /* card Laptop = 10px */
     --gap: 22px;
+    --shadow: 0 1px 3px rgba(0,0,0,.05);
+    --shadow-hover: 0 6px 16px rgba(0,0,0,.08);
     /* khung ảnh lớn */
     --stage-max-w: 560px;
     --stage-ratio-w: 4;
@@ -29,8 +32,8 @@
 
 .card {
     background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border: 1px solid #d9cfc4;
+    border-radius: 14px;
     padding: 14px;
 }
 
@@ -63,7 +66,7 @@
 }
 
     .thumbs li {
-        border: 1px solid var(--line);
+        border: 1px solid #d9cfc4;
         border-radius: 12px;
         padding: 6px;
         background: #fff;
@@ -81,17 +84,11 @@
             border: 2px solid transparent;
             border-radius: 12px;
             opacity: .85;
-            outline: none;
             transition: opacity .15s, box-shadow .15s, border-color .15s;
         }
 
             .thumbs img.jsThumb:hover {
                 opacity: .95;
-            }
-
-            .thumbs img.jsThumb:focus-visible {
-                outline: 2px dashed #7fbf9f;
-                outline-offset: 2px;
             }
 
             .thumbs img.jsThumb.active {
@@ -155,7 +152,7 @@
 .select {
     width: 100%;
     height: 36px;
-    border: 1px solid var(--line);
+    border: 1px solid #d9cfc4;
     border-radius: 8px;
     padding: 0 10px;
     background: #f7efe7;
@@ -170,7 +167,7 @@
 .chip {
     height: 32px;
     padding: 0 14px;
-    border: 1px solid var(--line);
+    border: 1px solid #d9cfc4;
     border-radius: 8px;
     background: #f7efe7;
     cursor: default;
@@ -184,7 +181,7 @@
 }
 
     .price-row .price {
-        color: var(--accent);
+        color: var(--price);
         font-size: 18px;
     }
 
@@ -198,7 +195,7 @@
     flex: 1 1 0;
     height: 36px;
     border-radius: 8px;
-    border: 1px solid var(--line);
+    border: 1px solid #d9cfc4;
     font-weight: 600;
 }
 
@@ -250,7 +247,10 @@
         border-radius: 999px;
     }
 
-/* =============== RELATED STRIP =============== */
+/* ===================================================================== */
+/* ===================== RELATED STRIP (match Laptop) =================== */
+/* ===================================================================== */
+
 .rel-section {
     width: min(1200px,92vw);
     margin: 28px auto 64px;
@@ -267,13 +267,12 @@
 .rel-track-wrap {
     position: relative;
     background: #fff;
-    border: 1px solid var(--line);
+    border: 1px solid #d9cfc4;
     border-radius: 16px;
     padding: 14px 48px;
     overflow: hidden;
     box-shadow: 0 2px 0 rgba(0,0,0,.02);
 }
-
     /* mép mờ 2 bên theo nền trắng khung */
     .rel-track-wrap::before,
     .rel-track-wrap::after {
@@ -300,73 +299,95 @@
 .rel-track {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(260px,1fr);
-    gap: 20px;
+    grid-auto-columns: 260px; /* độ rộng card gần bằng Laptop grid */
+    gap: 22px; /* đồng bộ khoảng cách */
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     padding: 6px 8px 10px;
-    scrollbar-width: none; /* Firefox: ẩn thanh cuộn */
+    scrollbar-width: none;
+    justify-content: center; /* căn giữa khi ít item */
 }
 
     .rel-track::-webkit-scrollbar {
         height: 0;
         width: 0;
-        display: none; /* WebKit: ẩn thanh cuộn */
+        display: none;
     }
 
-/* card nhỏ */
+/* ===== Card của RELATED – làm giống card ở Laptop ===== */
 .p-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, box-shadow .15s ease;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding: 14px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #fff;
-    scroll-snap-align: start;
-    transition: transform .15s, box-shadow .15s;
+    min-width: 0;
+    align-items: center; /* canh giữa nội dung */
 }
 
     .p-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 24px rgba(0,0,0,.06);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-hover);
     }
 
-.p-img img {
+/* Ảnh – giống Laptop (4:3, contain, margin dưới 8px) */
+.p-img {
     width: 100%;
-    height: 150px;
-    object-fit: contain;
-    display: block;
-    background: #fafafa;
-    border-radius: 8px;
+    display: grid;
+    place-items: center;
 }
 
-.p-name {
-    margin-top: 6px;
-    line-height: 1.35;
-    min-height: calc(1.35em * 2);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    color: #333;
+    .p-img img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: contain;
+        margin: 0 auto 8px;
+        background: #fafafa;
+        border-radius: 8px;
+    }
+
+/* Spec line: giống .spec-lines ở Laptop (nhỏ, muted, căn giữa) */
+.p-spec {
+    font-size: 12px;
+    color: var(--muted);
     font-weight: 600;
+    letter-spacing: .2px;
+    line-height: 1.35;
+    margin: 2px 0 6px;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+    max-width: 90%;
+}
+
+/* Tên: giống .name ở Laptop */
+.p-name {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 2px 0 4px;
+    white-space: normal;
+    word-break: break-word;
     text-decoration: none;
 }
 
-.p-spec {
-    color: #666;
-    font-size: 13px;
-    min-height: 36px;
-    margin: 0;
-}
-
+/* Giá: giống .price ở Laptop */
 .p-price {
     margin-top: auto;
-    font-weight: 700;
-    color: var(--accent);
+    color: var(--price);
+    font-weight: 900;
     font-size: 16px;
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    justify-content: center;
 }
 
 /* nút điều hướng tròn */
@@ -431,8 +452,21 @@
     .rel-arrow {
         display: none;
     }
-    /* mobile vuốt tay là đủ */
+
     .rel-track-wrap::before, .rel-track-wrap::after {
         display: none;
     }
 }
+
+/* (Tuỳ chọn) Nếu bạn thêm thẻ <a class="p-card-link"> phủ toàn bộ card:
+   chỉ cần bật 2 rule dưới để “click cả card” y như Laptop */
+.p-card {
+    position: relative;
+}
+
+    .p-card .p-card-link {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        border-radius: var(--radius);
+    }

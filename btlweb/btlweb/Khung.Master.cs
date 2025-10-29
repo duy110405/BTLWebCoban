@@ -54,7 +54,7 @@ namespace btlweb
             string label = Page.Title ?? "";
             switch (file.ToLower())
             {
-                case "laptop.aspx": label = "Instock".Equals(Page.Title, StringComparison.OrdinalIgnoreCase) ? "Instock" : "Laptop"; break;
+                case "laptop.aspx": label = "Laptop"; break;
                 case "banphim.aspx": label = "Bàn phím"; break;
                 case "pc.aspx": label = "PC"; break;
                 case "giohang.aspx": label = "Giỏ hàng"; break;
@@ -79,6 +79,7 @@ namespace btlweb
             }
         }
 
+        // Logo + nav
         protected void btnTrangChuLogo_Click(object sender, EventArgs e) { Response.Redirect("Trangchu.aspx"); }
         protected void btnTrangChu_Click(object sender, EventArgs e) { Response.Redirect("Trangchu.aspx"); }
 
@@ -91,7 +92,15 @@ namespace btlweb
                 Response.Redirect("Laptop.aspx");
         }
 
-        // Account actions
+        // Account icon click: vào trang tài khoản phù hợp
+        protected void btnAccount_Click(object sender, EventArgs e)
+        {
+            if (Session["UserId"] != null)
+                Response.Redirect("Chitiettaikhoan.aspx");
+            else
+                Response.Redirect("Taikhoan.aspx");
+        }
+
         protected void lnkDangNhap_Click(object sender, EventArgs e) { Response.Redirect("Taikhoan.aspx"); }
         protected void lnkDangKy_Click(object sender, EventArgs e) { Response.Redirect("Taikhoan.aspx"); }
         protected void lnkDangXuat_Click(object sender, EventArgs e)
@@ -119,9 +128,9 @@ namespace btlweb
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static List<ProductSuggestion> GetSearchSuggestions(string searchText)
+        public static System.Collections.Generic.List<ProductSuggestion> GetSearchSuggestions(string searchText)
         {
-            var list = new List<ProductSuggestion>();
+            var list = new System.Collections.Generic.List<ProductSuggestion>();
             var connStr = ConfigurationManager.ConnectionStrings["Baitaplonlaptrinhweb"].ConnectionString;
             if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2) return list;
 

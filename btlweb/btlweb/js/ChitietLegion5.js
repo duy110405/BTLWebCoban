@@ -2,10 +2,10 @@
     /* ===== Gallery: đổi ảnh lớn theo thumbnail ===== */
     const mainImg = document.getElementById('jsMainImg');
     const thumbs = document.querySelectorAll('.jsThumb');
-    if (thumbs.length) {
+    if (mainImg && thumbs.length) {
         thumbs.forEach(t => {
             t.addEventListener('click', () => {
-                mainImg.src = t.src;               // nếu có ảnh lớn riêng, thay bằng t.dataset.large
+                mainImg.src = t.src;     // Nếu có ảnh lớn riêng, thay = t.dataset.large
                 thumbs.forEach(x => x.classList.remove('active'));
                 t.classList.add('active');
             });
@@ -33,13 +33,8 @@
             btnR.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - tol;
         };
 
-        btnL.addEventListener('click', () => {
-            track.scrollBy({ left: -cardWidth(), behavior: 'smooth' });
-        });
-        btnR.addEventListener('click', () => {
-            track.scrollBy({ left: cardWidth(), behavior: 'smooth' });
-        });
-
+        btnL.addEventListener('click', () => track.scrollBy({ left: -cardWidth(), behavior: 'smooth' }));
+        btnR.addEventListener('click', () => track.scrollBy({ left: cardWidth(), behavior: 'smooth' }));
         track.addEventListener('scroll', updateArrows);
         window.addEventListener('resize', updateArrows);
         updateArrows();

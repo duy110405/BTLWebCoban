@@ -24,12 +24,12 @@
         </div>
 
         <div class="actions">
-          <!-- ACCOUNT DROPDOWN: mở bằng hover -->
-          <div class="taiKhoan account">
-            <button type="button" class="account-trigger">
+          <!-- ACCOUNT DROPDOWN (đổi class: acc-menu) -->
+          <div class="taiKhoan acc-menu">
+            <asp:LinkButton ID="btnAccount" runat="server" OnClick="btnAccount_Click" CssClass="account-trigger">
               <img src="anh/account.png" alt="Tài khoản" />
               <p>Tài khoản</p>
-            </button>
+            </asp:LinkButton>
 
             <div class="account-menu">
               <!-- Chưa đăng nhập -->
@@ -76,7 +76,6 @@
     </header>
 
     <main class="main">
-      <!-- BREADCRUMB -->
       <div id="breadcrumbWrap" runat="server" class="breadcrumb">
         <a href="Trangchu.aspx">Trang chủ</a>
         <span class="sep">›</span>
@@ -114,7 +113,11 @@
 
     <script type="text/javascript">
         // mega-menu hover
-        (function () { var dd = document.getElementById('navDropdown'); if (!dd) return;['mouseenter', 'focusin'].forEach(function (ev) { dd.addEventListener(ev, function () { dd.classList.add('open'); }); });['mouseleave', 'focusout'].forEach(function (ev) { dd.addEventListener(ev, function () { dd.classList.remove('open'); }); }); })();
+        (function () {
+            var dd = document.getElementById('navDropdown'); if (!dd) return;
+            ['mouseenter', 'focusin'].forEach(ev => dd.addEventListener(ev, () => dd.classList.add('open')));
+            ['mouseleave', 'focusout'].forEach(ev => dd.addEventListener(ev, () => dd.classList.remove('open')));
+        })();
     </script>
 
     <script type="text/javascript">
