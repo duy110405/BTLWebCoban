@@ -1,9 +1,6 @@
 ﻿create database Baitaplonlaptrinhweb
 
-select * From DiaChiNguoiDung WHERE UserId = 1 ;
-delete from DonHang
-select * From NguoiDung
-
+ALTER TABLE dbo.NguoiDung ADD IsAdmin bit NOT NULL DEFAULT(0)
     CREATE TABLE dbo.NguoiDung (
         Id         INT IDENTITY(1,1) PRIMARY KEY,
         HoTen      NVARCHAR(100) NOT NULL,
@@ -14,6 +11,13 @@ select * From NguoiDung
     );
     -- Khóa duy nhất theo Email để chặn trùng
     CREATE UNIQUE INDEX UX_NguoiDung_Email ON dbo.NguoiDung(Email);
+
+INSERT INTO dbo.NguoiDung (HoTen, Email, MatKhau, SoDienThoai)
+VALUES (N'Quản trị viên', N'admin123@gmail.com', N'admin123', N'0123456789');
+
+UPDATE dbo.NguoiDung
+SET IsAdmin = 1
+WHERE Email = 'admin123@gmail.com';
 
 	CREATE TABLE dbo.NhaCungCap
 (

@@ -13,7 +13,7 @@ namespace btlweb
         {
 
             var username = Convert.ToString(Session["UserName"]);
-            if (!"admin".Equals(username, StringComparison.OrdinalIgnoreCase))
+            if (!"admin123@gmail.com".Equals(username, StringComparison.OrdinalIgnoreCase))
             {
                 Response.Redirect("Taikhoan.aspx?return=Admin.aspx&error=forbidden");
                 return;
