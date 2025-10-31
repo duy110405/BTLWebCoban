@@ -100,6 +100,7 @@
     <Content Include="Banphim.aspx" />
     <Content Include="ChitietLegion5.aspx" />
     <Content Include="Chitiettaikhoan.aspx" />
+    <Content Include="css\Admin.css" />
     <Content Include="css\Aula3MODEF75.css" />
     <Content Include="css\Banphim.css" />
     <Content Include="css\ChitietLegion5.css" />

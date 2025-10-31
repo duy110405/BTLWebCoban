@@ -1,0 +1,495 @@
+﻿/* ===================== Admin.css (NO BORDERS) ===================== */
+/* Palette & spacing theo site */
+:root {
+    --cream: #FFEED6;
+    --card: #fff;
+    --line: #d9cfc4;
+    --text: #2b1b16;
+    --muted: #6b6158;
+    --brand: #371A16; /* màu header/footer site */
+    --brand-2: #2a1310;
+    --ghost: #f7efe7;
+    --radius: 14px;
+    --gap: 22px;
+}
+
+/* ===== Nền & layout chính ===== */
+.admin {
+    background: var(--cream);
+}
+
+    .admin .admin-wrap {
+        max-width: 1200px;
+        margin: clamp(16px,3vw,40px) auto 48px;
+        padding: 0 16px;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: var(--gap);
+    }
+
+/* ===== Sidebar ===== */
+.acc-nav {
+    position: sticky;
+    top: 16px;
+    align-self: start;
+}
+
+.acc-nav-toggle {
+    display: none;
+    width: 100%;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--card);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.acc-nav-inner {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.acc-link {
+    display: block;
+    padding: 12px 14px;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: background .15s ease,color .15s ease;
+}
+
+    .acc-link:last-child {
+        border-bottom: 0;
+    }
+
+    .acc-link:hover {
+        background: #faf6f1;
+    }
+
+    .acc-link.is-active, [aria-current="page"] {
+        background: #efe6db;
+        font-weight: 800;
+    }
+
+/* ===== Main card ===== */
+.acc-main {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px;
+    overflow: auto; /* cho phép scroll ngang bảng nếu cần */
+}
+
+.block-title {
+    margin: 2px 2px 14px;
+    font-size: 18px;
+    color: var(--text);
+}
+
+/* ===== Bọc bảng để cuộn ngang không chạm pager ===== */
+.table-wrap {
+    overflow: auto;
+    border-radius: 12px;
+}
+
+/* ================== BẢNG (GridView) ================== */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed; /* kiểm soát cột */
+    min-width: 1400px; /* nhiều cột -> tránh bẹp */
+    border: none !important; /* KHÔNG viền ngoài */
+    border-radius: 12px;
+}
+
+    .table th, .table td {
+        padding: 12px 14px;
+        border: none !important; /* KHÔNG kẻ ô */
+        vertical-align: middle;
+    }
+
+    .table thead th {
+        background: #f4ebe1;
+        color: var(--text);
+        font-weight: 800;
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        box-shadow: none !important; /* KHÔNG line dưới header */
+    }
+
+    /* zebra + hover để dễ đọc khi không có kẻ ô */
+    .table tbody tr:nth-child(odd) {
+        background: #fff;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background: #fffaf5;
+    }
+
+    .table tbody tr:hover {
+        background: #f9f3ec;
+    }
+
+    /* Kích thước cột – theo thứ tự hiện tại */
+    .table th:nth-child(1), .table td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+    }
+    /* Mã */
+    .table th:nth-child(2), .table td:nth-child(2) {
+        width: 220px;
+    }
+    /* Tên */
+    .table th:nth-child(3), .table td:nth-child(3) {
+        width: 110px;
+    }
+    /* NCC */
+    .table th:nth-child(4), .table td:nth-child(4) {
+        width: 90px;
+        text-align: center;
+    }
+    /* Loại */
+    .table th:nth-child(5), .table td:nth-child(5) {
+        width: 260px;
+    }
+    /* Cấu hình */
+    .table th:nth-child(6), .table td:nth-child(6) {
+        width: 170px;
+    }
+    /* Màn hình */
+    .table th:nth-child(7), .table td:nth-child(7) {
+        width: 80px;
+        text-align: center;
+    }
+    /* Màu */
+    .table th:nth-child(8), .table td:nth-child(8) {
+        width: 90px;
+        text-align: center;
+    }
+    /* Nặng */
+    .table th:nth-child(9), .table td:nth-child(9) {
+        width: 70px;
+        text-align: center;
+    }
+    /* SL */
+    .table th:nth-child(10), .table td:nth-child(10),
+    .table th:nth-child(11), .table td:nth-child(11) {
+        width: 120px;
+        text-align: right;
+    }
+    /* Giá/Giá gốc */
+    .table th:nth-child(12), .table td:nth-child(12) {
+        width: 90px;
+        text-align: center;
+    }
+    /* Giảm % */
+    .table th:nth-child(13), .table td:nth-child(13) {
+        width: 260px;
+    }
+    /* Ghi chú */
+    .table th:last-child, .table td:last-child {
+        width: 120px;
+    }
+    /* Thao tác */
+
+    /* Cột dài – kẹp dòng gọn gàng */
+    .table td:nth-child(2),
+    .table td:nth-child(5),
+    .table td:nth-child(13) {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+
+    /* Sticky cột đầu & cuối – KHÔNG vẽ line ở mép */
+    .table th:nth-child(1), .table td:nth-child(1) {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background: inherit;
+        box-shadow: none !important;
+        background-clip: padding-box;
+    }
+
+    .table th:last-child, .table td:last-child {
+        position: sticky;
+        right: 0;
+        z-index: 2;
+        background: inherit;
+        box-shadow: none !important;
+        background-clip: padding-box;
+    }
+
+/* Nhóm thông số trong “Cấu hình” */
+.col-spec {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text);
+}
+
+    .col-spec b {
+        color: var(--muted);
+        font-weight: 700;
+    }
+
+    .col-spec div {
+        margin-bottom: 4px;
+    }
+
+        .col-spec div:last-child {
+            margin-bottom: 0;
+        }
+
+/* ================== NÚT ================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 14px;
+    gap: 8px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: transform .05s ease, background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+    .btn:active {
+        transform: translateY(1px);
+    }
+
+.btn-sm {
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    font-size: 13px;
+}
+
+.btn-primary {
+    background: var(--brand);
+    color: #fff;
+    border-color: var(--brand);
+}
+
+    .btn-primary:hover {
+        background: var(--brand-2);
+        border-color: var(--brand-2);
+    }
+
+.btn-ghost {
+    background: var(--ghost);
+    color: var(--text);
+}
+
+    .btn-ghost:hover {
+        background: #efe6db;
+    }
+
+/* nút Xoá đỏ nhã */
+.btn-danger {
+    background: #fff;
+    color: #b00020;
+    border-color: rgba(176,0,32,.30);
+}
+
+    .btn-danger:hover {
+        background: #fff3f3;
+    }
+
+/* Nút trong cột thao tác */
+.table .btn {
+    margin-right: 8px;
+}
+
+    .table .btn:last-child {
+        margin-right: 0;
+    }
+
+/* ================== PAGER (phân trang) ================== */
+.pager {
+    margin-top: 12px;
+    padding: 10px 0 0;
+    border-top: 1px solid var(--line);
+    text-align: center; /* GridView pager render dưới dạng td */
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(#fff, #fff 70%, rgba(255,255,255,0));
+}
+
+    .pager a,
+    .pager span,
+    .pager .aspNetDisabled {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        padding: 0 12px;
+        margin: 0 4px;
+        border: 1px solid rgba(55,26,22,.18);
+        border-radius: 999px;
+        background: #fff;
+        color: var(--text);
+        font-weight: 800;
+        line-height: 1;
+        text-decoration: none;
+        user-select: none;
+    }
+
+        .pager a:hover {
+            background: #faf6f1;
+        }
+
+    .pager span {
+        background: var(--brand);
+        color: #fff;
+        border-color: var(--brand);
+    }
+
+    .pager a:first-child,
+    .pager a:nth-child(2),
+    .pager a:nth-last-child(2),
+    .pager a:last-child,
+    .pager .aspNetDisabled:first-child,
+    .pager .aspNetDisabled:nth-child(2),
+    .pager .aspNetDisabled:nth-last-child(2),
+    .pager .aspNetDisabled:last-child {
+        min-width: 44px;
+        font-weight: 900; /* « ‹ › » rộng hơn */
+    }
+
+    .pager .aspNetDisabled {
+        opacity: .45;
+        cursor: not-allowed;
+    }
+
+    .pager a:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(55,26,22,.14);
+    }
+
+/* ================== ALERT ================== */
+.alert {
+    margin: 8px 0 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid;
+    font-size: 14px;
+}
+
+    .alert.ok {
+        background: #eaf7ea;
+        color: #215e21;
+        border-color: #cde7ce;
+    }
+
+    .alert.err {
+        background: #ffe8e6;
+        color: #a11;
+        border-color: #f3b4ae;
+    }
+
+/* ================== FORM THÊM / SỬA ================== */
+.form-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    column-gap: 16px;
+    row-gap: 12px;
+    margin-bottom: 16px;
+}
+
+    .form-grid label {
+        align-self: center;
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    .form-grid .input,
+    .form-grid .select,
+    .form-grid .textarea {
+        grid-column: 2;
+    }
+
+/* Ô nhập chung */
+.input, .select, .textarea {
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--text);
+}
+
+.textarea {
+    min-height: 92px;
+    padding: 10px 12px;
+    resize: vertical;
+}
+
+    /* focus ring */
+    .input:focus, .select:focus, .textarea:focus {
+        outline: none;
+        border-color: var(--brand);
+        box-shadow: 0 0 0 3px rgba(55,26,22,.12);
+    }
+
+/* Mô tả chiếm full hàng */
+.form-grid textarea.textarea {
+    grid-column: 1 / -1;
+}
+
+/* Hàng nút dưới form */
+.summary-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 6px;
+}
+
+/* ================== Responsive ================== */
+@media (max-width:1160px) {
+    .admin .admin-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .acc-nav-toggle {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .acc-nav[aria-expanded="false"] .acc-nav-inner {
+        display: none;
+    }
+}
+
+@media (max-width:720px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+        .form-grid .input, .form-grid .select, .form-grid .textarea {
+            grid-column: 1;
+        }
+
+    .table {
+        min-width: 1100px;
+    }
+    /* vẫn có scroll ngang trong .table-wrap/.acc-main */
+    .pager a, .pager span, .pager .aspNetDisabled {
+        min-width: 32px;
+        height: 32px;
+        padding: 0 10px;
+        margin: 0 3px;
+        font-weight: 700;
+    }
+}
