@@ -23,9 +23,15 @@ namespace btlweb
 
         private bool IsAdmin()
         {
-            var username = Convert.ToString(Session["UserName"]);
-            return !string.IsNullOrWhiteSpace(username)
-                   && username.Equals("admin", StringComparison.OrdinalIgnoreCase);
+            // Ưu tiên cờ IsAdmin trong session
+            if (Session["IsAdmin"] is bool b) return b;
+
+            // Fallback: nếu bạn muốn coi 1 email cụ thể là admin
+            var email = Convert.ToString(Session["UserEmail"]);
+            if (!string.IsNullOrWhiteSpace(email) &&
+                email.Equals("admin123@gmail.com", StringComparison.OrdinalIgnoreCase)) return true;
+
+            return false;
         }
 
         private void HighlightCurrent()
@@ -79,11 +85,15 @@ namespace btlweb
             bool loggedIn = (Session["UserId"] != null);
             pnlAccountGuest.Visible = !loggedIn;
             pnlAccountUser.Visible = loggedIn;
+
             if (loggedIn)
             {
-                var name = Convert.ToString(Session["UserName"]);
-                if (string.IsNullOrWhiteSpace(name)) name = "Tài khoản";
-                litUserName.Text = Server.HtmlEncode(name);
+                // Ưu tiên Hiển thị tên có ý nghĩa
+                var display = Convert.ToString(Session["UserName"]);
+                if (string.IsNullOrWhiteSpace(display)) display = Convert.ToString(Session["HoTen"]);
+                if (string.IsNullOrWhiteSpace(display)) display = Convert.ToString(Session["UserEmail"]);
+                if (string.IsNullOrWhiteSpace(display)) display = "Tài khoản";
+                litUserName.Text = Server.HtmlEncode(display);
             }
         }
 
@@ -93,7 +103,7 @@ namespace btlweb
             if (!IsAdmin())
             {
                 // Không phải admin -> đá về trang đăng nhập, kèm return
-                Response.Redirect("Taikhoan.aspx?return=Admin.aspx&error=forbidden");
+                Response.Redirect("TaiKhoan.aspx?return=Admin.aspx&error=forbidden");
                 return;
             }
 

@@ -14,22 +14,12 @@ namespace btlweb
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string user = (txtUsername.Text ?? "").Trim(); 
+            string user = (txtUsername.Text ?? "").Trim(); // email hoặc sđt
             string pass = txtPassword.Text ?? "";
 
             if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(pass))
             {
                 ShowError("Vui lòng nhập đầy đủ thông tin.");
-                return;
-            }
-
-            // Đặc quyền admin theo yêu cầu đề bài: admin / admin
-            if (user.Equals("admin", StringComparison.OrdinalIgnoreCase) && pass == "admin123")
-            {
-                Session["UserId"] = -1;              // sentinel id cho admin
-                Session["UserName"] = "admin123@gmail.com";       // dùng để IsAdmin() nhận diện
-                var ret = Request.QueryString["return"];
-                Response.Redirect(string.IsNullOrEmpty(ret) ? "Trangchu.aspx" : ret);
                 return;
             }
 
@@ -41,38 +31,60 @@ namespace btlweb
                 using (var cmd = conn.CreateCommand())
                 {
                     conn.Open();
-
-                    // Cho phép đăng nhập bằng Email hoặc SĐT + mật khẩu chuỗi
                     cmd.CommandText = @"
-SELECT TOP 1 Id, HoTen, Email
+SELECT TOP 1 Id, HoTen, Email, MatKhau, IsAdmin
 FROM dbo.NguoiDung
-WHERE (Email = @u OR SoDienThoai = @u) AND MatKhau = @p";
+WHERE (Email = @u OR SoDienThoai = @u)";
                     cmd.Parameters.AddWithValue("@u", user);
-                    cmd.Parameters.AddWithValue("@p", pass);
 
                     using (var rd = cmd.ExecuteReader())
                     {
-                        if (rd.Read())
+                        if (!rd.Read())
                         {
-                            Session["UserId"] = rd.GetInt32(0);
-                            Session["HoTen"] = rd["HoTen"] as string ?? "";
-                            Session["UserEmail"] = rd["Email"] as string ?? "";
-
-                            // Login ok: về trang chủ (hoặc nơi bạn muốn)
-                            Response.Redirect("Trangchu.aspx", false);
-                            Context.ApplicationInstance.CompleteRequest();
+                            ShowError("Email hoặc mật khẩu không đúng.");
                             return;
                         }
-                    }
 
-                    ShowError("Thông tin đăng nhập không đúng.");
+                        var dbPass = Convert.ToString(rd["MatKhau"]);
+                        var email = Convert.ToString(rd["Email"]);
+                        var hoTen = Convert.ToString(rd["HoTen"]);
+                        var userId = Convert.ToInt32(rd["Id"]);
+                        var isAdmin = rd["IsAdmin"] != DBNull.Value && Convert.ToBoolean(rd["IsAdmin"]);
+
+                        // So khớp mật khẩu (nếu bạn dùng hash, thay bằng VerifyHash)
+                        if (pass != dbPass)
+                        {
+                            ShowError("Email hoặc mật khẩu không đúng.");
+                            return;
+                        }
+
+                        // ===== Set session CHUẨN =====
+                        Session["UserId"] = userId;
+                        Session["UserName"] = string.IsNullOrWhiteSpace(hoTen) ? email : hoTen; // cho menu
+                        Session["UserEmail"] = email;
+                        Session["HoTen"] = hoTen;
+                        Session["IsAdmin"] = isAdmin;
+
+                        // Nếu bạn muốn coi email cụ thể là admin dù IsAdmin=0:
+                        // if (!isAdmin && email.Equals("admin123@gmail.com", StringComparison.OrdinalIgnoreCase)) 
+                        //     Session["IsAdmin"] = true;
+
+                        var ret = Request.QueryString["return"];
+                        Response.Redirect(string.IsNullOrEmpty(ret) ? "Trangchu.aspx" : ret, false);
+                        Context.ApplicationInstance.CompleteRequest();
+                        return;
+                    }
                 }
+
+                // Không còn rd.Read() => rơi xuống đây là sai
+                ShowError("Email hoặc mật khẩu không đúng.");
             }
             catch
             {
                 ShowError("Không thể kết nối máy chủ. Thử lại sau.");
             }
         }
+
 
         private void ShowError(string msg)
         {
