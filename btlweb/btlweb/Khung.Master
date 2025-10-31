@@ -72,6 +72,7 @@
         </nav>
         <asp:LinkButton ID="btnLienHe" runat="server" CssClass="lienhe" Text="Liên hệ" OnClick="btnLienHe_Click" />
         <asp:LinkButton ID="btnGioiThieu" runat="server" CssClass="gioithieu" Text="Giới thiệu" OnClick="btnGioiThieu_Click" />
+        <asp:LinkButton ID="btnAdmin" runat="server" CssClass="admin" Text="Quản trị" OnClick="btnAdmin_Click" />
       </div>
     </header>
 

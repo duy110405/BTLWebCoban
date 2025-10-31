@@ -191,3 +191,14 @@
         color: #146c2e;
         border: 1px solid #9fd3ad;
     }
+
+.auth-form .js-error {
+    grid-column: 2 / -1; /* luôn ở cột input */
+    display: block;
+    min-height: 18px; /* chừa chỗ để form đỡ “nhảy” */
+    margin-top: -4px;
+    margin-bottom: 6px;
+    color: #d93025;
+    font-size: 13px;
+    line-height: 1.2;
+}

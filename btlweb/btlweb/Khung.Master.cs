@@ -18,6 +18,14 @@ namespace btlweb
                 SetupBreadcrumb();
                 BuildAccountMenu();
             }
+            btnAdmin.Visible = IsAdmin();
+        }
+
+        private bool IsAdmin()
+        {
+            var username = Convert.ToString(Session["UserName"]);
+            return !string.IsNullOrWhiteSpace(username)
+                   && username.Equals("admin", StringComparison.OrdinalIgnoreCase);
         }
 
         private void HighlightCurrent()
@@ -80,6 +88,18 @@ namespace btlweb
         }
 
         // Logo + nav
+        protected void btnAdmin_Click(object sender, EventArgs e)
+        {
+            if (!IsAdmin())
+            {
+                // Không phải admin -> đá về trang đăng nhập, kèm return
+                Response.Redirect("Taikhoan.aspx?return=Admin.aspx&error=forbidden");
+                return;
+            }
+
+            Response.Redirect("Admin.aspx");
+        }
+
         protected void btnTrangChuLogo_Click(object sender, EventArgs e) { Response.Redirect("Trangchu.aspx"); }
         protected void btnTrangChu_Click(object sender, EventArgs e) { Response.Redirect("Trangchu.aspx"); }
 

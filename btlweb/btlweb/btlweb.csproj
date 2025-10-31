@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin.aspx" />
     <Content Include="anh\account.png" />
     <Content Include="anh\logoEmail.jpg" />
     <Content Include="anh\logoFB.jpg" />
@@ -119,6 +120,8 @@
     <Content Include="Gioithieu.aspx" />
     <Content Include="js\Aula3MODEF75.js" />
     <Content Include="js\ChitietLegion5.js" />
+    <Content Include="js\ChitietTaikhoan.js" />
+    <Content Include="js\DangKy.js" />
     <Content Include="js\LenovoThinkCentre.js" />
     <Content Include="js\TrangChu.js" />
     <Content Include="Laptop.aspx" />
@@ -130,6 +133,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Aula3MODEF75.aspx.cs">
       <DependentUpon>Aula3MODEF75.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

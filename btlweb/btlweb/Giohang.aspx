@@ -63,34 +63,33 @@
           </div>
         </article>
 
-        <!-- Form thông tin khách -->
-        <section class="customer card">
-          <h3 class="block-title">Thông tin người đặt hàng:</h3>
-          <div class="form-grid">
-            <label>Họ tên:</label>
-            <asp:TextBox ID="txtHoTen" runat="server" CssClass="input" />
+       <!-- CHỌN ĐỊA CHỈ ĐÃ LƯU -->
+<section class="customer card">
+  <h3 class="block-title">Địa chỉ giao hàng</h3>
 
-            <label>Số điện thoại:</label>
-            <asp:TextBox ID="txtSDT" runat="server" CssClass="input" />
+  <div class="form-grid">
+    <label>Chọn địa chỉ:</label>
+    <asp:DropDownList ID="ddlAddress" runat="server" CssClass="select">
+      <asp:ListItem Value="">-- Chọn địa chỉ đã lưu --</asp:ListItem>
+    </asp:DropDownList>
 
-            <label>Email:</label>
-            <asp:TextBox ID="txtEmail" runat="server" CssClass="input" TextMode="Email" />
+    <span></span>
+    <asp:HyperLink ID="lnkManageAddr" runat="server"
+                   NavigateUrl="Chitiettaikhoan.aspx?tab=addresses"
+                   CssClass="link">+ Quản lý / thêm địa chỉ</asp:HyperLink>
+  </div>
 
-            <label>Địa chỉ:</label>
-            <asp:TextBox ID="txtDiaChi" runat="server" CssClass="input" />
+  <!-- Ô xem nhanh địa chỉ đã chọn -->
+  <asp:Panel ID="pAddrPreview" runat="server" CssClass="addr-preview" Visible="false">
+    <p class="name"><asp:Literal ID="litAddrName" runat="server" /></p>
+    <p class="muted">📞 <asp:Literal ID="litAddrPhone" runat="server" /> • ✉️ <asp:Literal ID="litAddrEmail" runat="server" /></p>
+    <p class="address">📍 <asp:Literal ID="litAddrFull" runat="server" /></p>
+    <p class="muted">PT thanh toán ưa dùng: <asp:Literal ID="litAddrPTTT" runat="server" /></p>
+    <asp:Literal ID="litAddrNote" runat="server" />
+  </asp:Panel>
 
-            <label>Phương thức thanh toán:</label>
-            <asp:DropDownList ID="ddlPTTT" runat="server" CssClass="select">
-              <asp:ListItem Text="Thanh toán trực tiếp" Value="Thanh toán trực tiếp" Selected="True" />
-              <asp:ListItem Text="Chuyển khoản" Value="Chuyển khoản" />
-              <asp:ListItem Text="COD" Value="COD" />
-            </asp:DropDownList>
-
-            <label>Ghi chú:</label>
-            <asp:TextBox ID="txtGhiChu" runat="server" CssClass="textarea" TextMode="MultiLine" Rows="3" />
-          </div>
-        </section>
-      </section>
+  <asp:HiddenField ID="hfAddressId" runat="server" />
+</section>
 
       <!-- CỘT PHẢI -->
       <aside class="cart-right">

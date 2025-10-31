@@ -1,8 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Khung.Master"
+﻿  <%@ Page Title="" Language="C#" MasterPageFile="~/Khung.Master"
     AutoEventWireup="true" CodeBehind="Chitiettaikhoan.aspx.cs" Inherits="btlweb.Chitiettaikhoan" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
   <link rel="stylesheet" href="css/Chitiettaikhoan.css" />
+   <script src="js/ChitietTaikhoan.js" defer></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
@@ -62,6 +63,85 @@
         </asp:Repeater>
       </section>
 
+         <!-- ------------------------Địa chỉ-----------------------  -->
+         <section class="view active" id="view-addresses">
+        <h2 class="section-title">Địa chỉ của bạn</h2>
+         <!-- Form thông tin khách -->
+        <section class="customer card">
+          <h3 class="block-title">Thông tin người đặt hàng:</h3>
+          <div class="form-grid">
+
+            <label>Họ tên:</label>
+            <asp:TextBox ID="txtHoTen"  ClientIDMode="Static" runat="server" CssClass="input" />
+            <asp:Label   ID="errHoten"  runat="server" CssClass="field-error" Visible="false" />
+
+            <label>Số điện thoại:</label>
+            <asp:TextBox ID="txtSDT"    ClientIDMode="Static" runat="server" CssClass="input" />
+            <asp:Label   ID="errSdt"    runat="server" CssClass="field-error" Visible="false" />
+
+
+            <label>Email:</label>
+            <asp:TextBox ID="txtEmail"  ClientIDMode="Static" runat="server" CssClass="input" TextMode="Email" />
+            <asp:Label   ID="errEmail"  runat="server" CssClass="field-error" Visible="false" />
+
+            <label>Địa chỉ:</label>
+            <asp:TextBox ID="txtDiaChi" ClientIDMode="Static" runat="server" CssClass="input" />
+            <asp:Label   ID="errDiachi" runat="server" CssClass="field-error" Visible="false" />
+
+            <label>Phương thức thanh toán:</label>
+            <asp:DropDownList ID="ddlPTTT" runat="server" CssClass="select">
+              <asp:ListItem Text="Thanh toán trực tiếp" Value="Thanh toán trực tiếp" Selected="True" />
+              <asp:ListItem Text="Chuyển khoản" Value="Chuyển khoản" />
+              <asp:ListItem Text="COD" Value="COD" />
+            </asp:DropDownList>
+
+            <label>Ghi chú:</label>
+            <asp:TextBox ID="txtGhiChu" runat="server" CssClass="textarea" TextMode="MultiLine" Rows="3" />
+            <asp:Button ID ="btnThemdiachi" runat="server" CssClass="button" OnClick="btnThemdiachi_Click"   OnClientClick="return ThemDiaChijs_Click();"   UseSubmitBehavior="true" Text="Thêm địa chỉ"/>
+          </div>
+        </section>
+
+              <!-- Hiển thị địa chỉ đã lưu -->
+   <asp:PlaceHolder ID="phAddresses" runat="server" Visible="false">
+  <asp:Repeater ID="rptAddresses" runat="server" OnItemCommand="rptAddresses_ItemCommand">
+    <HeaderTemplate>
+      <div class="addresses-grid">
+    </HeaderTemplate>
+
+    <ItemTemplate>
+      <article class='address-card <%# Convert.ToBoolean(Eval("IsDefault")) ? "is-default" : "" %>'>
+        <div class="addr-head">
+          <span class="badge"><%# Convert.ToBoolean(Eval("IsDefault")) ? "Mặc định" : "" %></span>
+          <span class="created"><%# ((DateTime)Eval("NgayTao")).ToString("dd/MM/yyyy HH:mm") %></span>
+        </div>
+
+        <h4 class="name"><%# Eval("HoTen") %></h4>
+        <p class="muted">📞 <%# Eval("SDT") %> • ✉️ <%# Eval("Email") %></p>
+        <p class="address">📍 <%# Eval("DiaChi") %></p>
+        <p class="muted">PT thanh toán: <%# Eval("PhuongThucTT") %></p>
+        <p class="note"><%# Eval("GhiChu") %></p>
+
+        <div class="actions">
+          <asp:LinkButton runat="server" CssClass="btn"
+            CommandName="makeDefault" CommandArgument='<%# Eval("Id") %>'
+            Visible='<%# !Convert.ToBoolean(Eval("IsDefault")) %>'>Đặt mặc định</asp:LinkButton>
+
+          <asp:LinkButton runat="server" CssClass="btn danger"
+            CommandName="delete" CommandArgument='<%# Eval("Id") %>'
+            OnClientClick="return confirm('Xoá địa chỉ này?');">Xoá</asp:LinkButton>
+        </div>
+      </article>
+    </ItemTemplate>
+
+    <FooterTemplate>
+      </div>
+    </FooterTemplate>
+  </asp:Repeater>
+</asp:PlaceHolder>
+
+
+      </section>
+
       <!-- Hóa đơn -->
       <section class="view" id="view-billing">
         <h2 class="section-title">Hóa đơn của bạn</h2>
@@ -101,44 +181,4 @@
   </div>
 </section>
 
-<script>
-    (function () {
-        const root = document.querySelector('.account');
-        if (!root) return;
-        const nav = root.querySelector('.acc-nav');
-        const links = root.querySelectorAll('.acc-link');
-        const views = root.querySelectorAll('.view');
-        const toggle = root.querySelector('.acc-nav-toggle');
-
-        function qs(name) { const m = new URLSearchParams(location.search).get(name); return m || ''; }
-        function activate(tab) {
-            links.forEach(a => a.classList.toggle('active', a.dataset.tab === tab));
-            views.forEach(v => v.classList.toggle('active', v.id === 'view-' + tab));
-        }
-        let tab = qs('tab') || 'orders';
-        if (!root.querySelector('#view-' + tab)) tab = 'orders';
-        activate(tab);
-
-        links.forEach(a => {
-            a.addEventListener('click', e => {
-                e.preventDefault();
-                const t = a.dataset.tab;
-                history.pushState({}, '', '?tab=' + t);
-                activate(t);
-                if (nav.classList.contains('open')) {
-                    nav.classList.remove('open');
-                    toggle?.setAttribute('aria-expanded', 'false');
-                }
-            })
-        });
-        toggle?.addEventListener('click', () => {
-            const open = nav.classList.toggle('open');
-            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-        window.addEventListener('popstate', () => {
-            const t = qs('tab') || 'orders';
-            activate(t);
-        });
-    })();
-</script>
 </asp:Content>

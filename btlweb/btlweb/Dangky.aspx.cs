@@ -11,6 +11,7 @@ namespace btlweb
 
         protected void btnDangKy_Click(object sender, EventArgs e)
         {
+       
             string ho = (txtHo.Text ?? "").Trim();
             string ten = (txtTen.Text ?? "").Trim();
             string hoTen = (ho + " " + ten).Trim();
@@ -30,7 +31,7 @@ namespace btlweb
             {
                 ShowError("Email không hợp lệ.");
                 return;
-            }
+            }   
             if (pass.Length < 6)
             {
                 ShowError("Mật khẩu tối thiểu 6 ký tự.");

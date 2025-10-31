@@ -139,58 +139,96 @@
     </aside>
   </div>
 
+
   <!-- RELATED -->
-  <section class="rel-section" aria-label="Sản phẩm tương tự">
-    <h3 class="rel-title">Sản phẩm tương tự</h3>
+  <section class="rel-section" aria-label="Có thể bạn sẽ thích">
+  <!-- === TIÊU ĐỀ + TAB === -->
+  <!-- TIÊU ĐỀ + TAB -->
+<div class="rel-header">
+  <h3 class="rel-title">Thông tin liên quan</h3>
+  <div class="rel-tabs" role="tablist" aria-label="Tabs liên quan">
+    <button id="btnSimilar" class="rel-tab active" type="button"
+        aria-controls="similarSection" aria-selected="true">Sản phẩm tương tự</button>
+<button id="btnReview" class="rel-tab" type="button"
+        aria-controls="reviewSection" aria-selected="false">Đánh giá</button>
+  </div>
+</div>
 
-    <div class="rel-track-wrap">
-      <button type="button" class="rel-arrow left" aria-label="Sản phẩm trước">‹</button>
+  <!-- === PHẦN SẢN PHẨM TƯƠNG TỰ === -->
+  <div id="similarSection" class="rel-track-wrap" role="tabpanel" aria-labelledby="btnSimilar">
+  <button type="button" class="rel-arrow left" aria-label="Sản phẩm trước">‹</button>
 
-      <div id="relTrack" class="rel-track">
-        <article class="p-card">
-          <div class="p-img"><img src="anh/sp_legion_pro5.jpg" alt="Laptop Legion pro 5"></div>
-          <a class="p-name" href="#">Laptop Legion pro 5</a>
-          <p class="p-spec">i5 12400hx • RTX 4060 • 16GB • 512GB • 16” FHD</p>
-          <div class="p-price">25.000.000đ</div>
-        </article>
+    <div id="relTrack" class="rel-track">
+      <article class="p-card">
+        <div class="p-img"><img src="anh/sp_legion_pro5.jpg" alt="Laptop Legion pro 5"></div>
+        <a class="p-name" href="#">Laptop Legion pro 5</a>
+        <p class="p-spec">i5 12400hx • RTX 4060 • 16GB • 512GB • 16” FHD</p>
+        <div class="p-price">25.000.000đ</div>
+      </article>
 
-        <article class="p-card">
-          <div class="p-img"><img src="anh/sp_rog_strix16.jpg" alt="Laptop ROG Strix 16"></div>
-          <a class="p-name" href="#">Laptop ROG Strix 16</a>
-          <p class="p-spec">i7 12900HX • RTX 4070 • 32GB • 1TB • 16” QHD</p>
-          <div class="p-price">45.000.000đ</div>
-        </article>
+      <article class="p-card">
+        <div class="p-img"><img src="anh/sp_rog_strix16.jpg" alt="Laptop ROG Strix 16"></div>
+        <a class="p-name" href="#">Laptop ROG Strix 16</a>
+        <p class="p-spec">i7 12900HX • RTX 4070 • 32GB • 1TB • 16” QHD</p>
+        <div class="p-price">45.000.000đ</div>
+      </article>
+   
+      
+      <article class="p-card">
+        <div class="p-img"><img src="anh/sp_rog_strix16.jpg" alt="Laptop ROG Strix 16"></div>
+        <a class="p-name" href="#">Laptop ROG Strix 16</a>
+        <p class="p-spec">i7 12900HX • RTX 4070 • 32GB • 1TB • 16” QHD</p>
+        <div class="p-price">45.000.000đ</div>
+      </article>
+   
 
-        <article class="p-card">
-          <div class="p-img"><img src="anh/sp_yoga9i.jpg" alt="Lenovo Yoga 9i"></div>
-          <a class="p-name" href="#">Lenovo Yoga 9i</a>
-          <p class="p-spec">R7 7840HS • 780M • 32GB • 1TB • 14” QHD</p>
-          <div class="p-price">35.000.000đ</div>
-        </article>
+      <article class="p-card">
+        <div class="p-img"><img src="anh/sp_rog_strix16.jpg" alt="Laptop ROG Strix 16"></div>
+        <a class="p-name" href="#">Laptop ROG Strix 16</a>
+        <p class="p-spec">i7 12900HX • RTX 4070 • 32GB • 1TB • 16” QHD</p>
+        <div class="p-price">45.000.000đ</div>
+      </article>
 
-        <article class="p-card">
-          <div class="p-img"><img src="anh/sp_xps14.jpg" alt="Dell XPS 14"></div>
-          <a class="p-name" href="#">Dell XPS 14</a>
-          <p class="p-spec">i7-1260P • Iris Xe • 16GB • 512GB • 14” FHD</p>
-          <div class="p-price">40.000.000đ</div>
-        </article>
+     </div>
+  </div>
 
-        <article class="p-card">
-          <div class="p-img"><img src="anh/sp_thinkbook14p.jpg" alt="ThinkBook 14p"></div>
-          <a class="p-name" href="#">ThinkBook 14p</a>
-          <p class="p-spec">R7 5800U • Vega 8 • 16GB • 512GB • 14” FHD</p>
-          <div class="p-price">15.000.000đ</div>
-        </article>
+    
 
-        <article class="p-card">
-          <div class="p-img"><img src="anh/sp_msi_katana15.jpg" alt="MSI Katana 15 B13"></div>
-          <a class="p-name" href="#">MSI Katana 15 B13</a>
-          <p class="p-spec">i7-13620H • RTX 4060 • 16GB • 512GB • 15.6” 144Hz</p>
-          <div class="p-price">28.990.000đ</div>
-        </article>
+    <button type="button" class="rel-arrow right" aria-label="Sản phẩm tiếp">›</button>
+  </div>
+
+  <!-- === PHẦN ĐÁNH GIÁ (ẨN MẶC ĐỊNH) === -->
+ <div id="reviewSection" class="review-wrap is-hidden">
+    <h4>Đánh giá của khách hàng</h4>
+
+    <div id="reviewList">
+     <div class="review">
+        <strong>Nguyễn Minh</strong> <span class="stars">★★★★★</span>
+        <p>Máy chạy rất mượt, chơi game ổn định, pin khá tốt.</p>
       </div>
-
-      <button type="button" class="rel-arrow right" aria-label="Sản phẩm tiếp">›</button>
+      <div class="review">
+        <strong>Trần Anh</strong> <span class="stars">★★★★☆</span>
+        <p>Thiết kế đẹp, hơi nóng nhẹ khi chơi lâu nhưng chấp nhận được.</p>
+      </div>
     </div>
-  </section>
+
+    <!-- FORM GỬI ĐÁNH GIÁ -->
+    <div class="review-form">
+      <h5>Viết đánh giá của bạn</h5>
+      <input type="text" id="reviewName" placeholder="Tên của bạn">
+      <select id="reviewRating">
+        <option value="5">5 sao</option>
+        <option value="4">4 sao</option>
+        <option value="3">3 sao</option>
+        <option value="2">2 sao</option>
+        <option value="1">1 sao</option>
+      </select>
+      <textarea id="reviewText" placeholder="Nội dung đánh giá..." rows="3"></textarea>
+    <button id="btnSendReview" type="button">Gửi đánh giá</button>
+    </div>
+
+  </div>
+</section>
+
+
 </asp:Content>

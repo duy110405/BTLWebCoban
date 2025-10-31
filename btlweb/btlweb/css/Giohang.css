@@ -29,9 +29,11 @@
 
 /* ===== Lưới 2 cột ===== */
 .cart-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: var(--gap);
+    display:grid;
+    grid-template-columns: minmax(0,1fr) clamp(300px, 32vw, 380px);
+     gap: var(--gap);
+    align-items: start; /* để cột phải không tụt theo chiều cao cột trái */
+    
 }
 
 /* ===== Card chung ===== */
@@ -194,34 +196,26 @@
     text-align: right;
 }
 
-/* ==================== CUSTOMER FORM ==================== */
-.customer .block-title {
-    margin: 4px 0 12px;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 10px 14px;
-}
-
-.input, .select, .textarea {
-    width: 100%;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: #fff;
-    padding: 8px 10px;
-    font-size: 14px;
-}
-
-.textarea {
-    resize: vertical;
+/*============================Địa chỉ ==========================*/
+.addr-preview {
+    margin-top: 10px;
+    border: 1px solid #ddd6c7;
+    background: #fffdf7;
+    padding: 10px 12px;
+    border-radius: 10px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 /* ==================== RIGHT COLUMN ==================== */
 .cart-right {
-    display: grid;
-    gap: var(--gap);
+     display:grid;
+     gap: var(--gap);
+     align-self:start;
+    position: sticky;
+     top:16px; /* khoảng cách từ mép trên */
+    
 }
 
 .block-title {
@@ -288,12 +282,16 @@
 }
 
 /* ==================== RESPONSIVE ==================== */
-@media (max-width:980px) {
-    .cart-grid {
+@media (max-width:720px) {
+     .cart-grid {
         grid-template-columns: 1fr;
     }
 
-    .cart-item {
+     .cart-right {
+        position: static;
+    }
+    /* tắt sticky trên mobile */
+     .cart-item {
         grid-template-columns: 100px 1fr 120px;
     }
 
@@ -301,7 +299,7 @@
         grid-template-columns: 1fr;
     }
 
-        .form-grid label {
+       .form-grid label {
             margin-top: 6px;
         }
 }

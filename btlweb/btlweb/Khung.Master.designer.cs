@@ -204,6 +204,15 @@ namespace btlweb
         protected global::System.Web.UI.WebControls.LinkButton btnGioiThieu;
 
         /// <summary>
+        /// btnAdmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAdmin;
+
+        /// <summary>
         /// breadcrumbWrap control.
         /// </summary>
         /// <remarks>

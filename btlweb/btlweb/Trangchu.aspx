@@ -165,6 +165,9 @@
                     <asp:Repeater ID="rptLaptop" runat="server">
                         <ItemTemplate>
                             <article class="card">
+
+                                 <a class="card-link" href='<%# "ChitietLegion5.aspx?masp=" + Eval("MaSP") %>' aria-label='<%# "Xem " + Eval("TenSP") %>'></a>
+
                                 <img src="<%# Eval("AnhChinh") %>" alt="<%# Eval("TenSP") %>" />
                                 <h4 class="spec"><%# Eval("SpecHTML") %></h4>
                                 <p class="name"><%# Eval("TenSP") %></p>

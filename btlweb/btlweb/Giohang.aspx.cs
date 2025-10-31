@@ -13,13 +13,18 @@ namespace btlweb
     public partial class Giohang : Page
     {
         string ConnStr => ConfigurationManager.ConnectionStrings["Baitaplonlaptrinhweb"].ConnectionString;
+        int? UserId => Session["UserId"] is int id ? id : (int?)null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             // Tránh yêu cầu jQuery của UnobtrusiveValidation
             System.Web.UI.ValidationSettings.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
 
-            if (!IsPostBack) BindCart();
+            if (!IsPostBack)
+            {
+                BindCart();
+                BindAddresses();
+            }
         }
 
         // ===== Cart helpers =====
@@ -97,6 +102,56 @@ namespace btlweb
             BindCart();
         }
 
+        private void BindAddresses()
+        {
+            ddlAddress.Items.Clear();
+
+            if (UserId == null)
+            {
+                ddlAddress.Items.Add(new ListItem("-- Đăng nhập để chọn địa chỉ --", ""));
+                return;
+            }
+
+            using (var con = new SqlConnection(ConnStr))
+            using (var cmd = new SqlCommand(@"
+        SELECT Id,
+               (HoTen + ' | ' + SDT + ' | ' + DiaChi) AS Text,
+               IsDefault
+        FROM dbo.DiaChiNguoiDung
+        WHERE UserId = @uid
+        ORDER BY IsDefault DESC, Id DESC;", con))
+            {
+                cmd.Parameters.Add("@uid", SqlDbType.Int).Value = UserId.Value;
+                con.Open();
+                using (var rd = cmd.ExecuteReader())
+                {
+                    ddlAddress.DataSource = rd;
+                    ddlAddress.DataTextField = "Text";
+                    ddlAddress.DataValueField = "Id";
+                    ddlAddress.DataBind();
+                }
+            }
+
+            ddlAddress.Items.Insert(0, new ListItem("-- Chọn địa chỉ đã lưu --", ""));
+
+            // Auto chọn địa chỉ mặc định (nếu có)
+            using (var con2 = new SqlConnection(ConnStr))
+            using (var cmd2 = new SqlCommand(@"
+        SELECT TOP 1 Id FROM dbo.DiaChiNguoiDung
+        WHERE UserId=@uid AND IsDefault=1 ORDER BY Id DESC;", con2))
+            {
+                cmd2.Parameters.Add("@uid", SqlDbType.Int).Value = UserId.Value;
+                con2.Open();
+                var defIdObj = cmd2.ExecuteScalar();
+                if (defIdObj != null)
+                {
+                    var defId = defIdObj.ToString();
+                    if (ddlAddress.Items.FindByValue(defId) != null)
+                        ddlAddress.SelectedValue = defId;
+                }
+            }
+        }
+
         // ===== Thanh toán =====
         protected void btnPay_Click(object sender, EventArgs e)
         {
@@ -108,22 +163,46 @@ namespace btlweb
                 return;
             }
 
-            // Lấy & kiểm tra thông tin
-            string hoten = txtHoTen.Text.Trim();
-            string sdt = txtSDT.Text.Trim();
-            string email = txtEmail.Text.Trim();
-            string diachi = txtDiaChi.Text.Trim();
-            string pttt = ddlPTTT.SelectedValue;
-            string ghichu = txtGhiChu.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(hoten) ||
-                string.IsNullOrWhiteSpace(sdt) ||
-                string.IsNullOrWhiteSpace(email) ||
-                string.IsNullOrWhiteSpace(diachi))
+            if (UserId == null)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "pay_missing",
-                    "openPayModal('Thiếu thông tin', 'Vui lòng nhập đầy đủ <b>Họ tên, SĐT, Email, Địa chỉ</b>.', '');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "need_login",
+                    "openPayModal('Cần đăng nhập', 'Vui lòng đăng nhập và thêm địa chỉ trước khi thanh toán.', 'Dangnhap.aspx');", true);
                 return;
+            }
+
+            if (string.IsNullOrEmpty(ddlAddress.SelectedValue) || !int.TryParse(ddlAddress.SelectedValue, out var addressId))
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "addr_need",
+                    "openPayModal('Chưa chọn địa chỉ', 'Hãy chọn một địa chỉ giao hàng trong danh sách.', 'Chitiettaikhoan.aspx?tab=addresses');", true);
+                return;
+            }
+
+            // Lấy snapshot địa chỉ đã chọn
+            string hoten, sdt, email, diachi, pttt, ghichu;
+            using (var con = new SqlConnection(ConnStr))
+            using (var cmd = new SqlCommand(@"
+        SELECT HoTen, SDT, Email, DiaChi, PhuongThucTT, GhiChu
+        FROM dbo.DiaChiNguoiDung
+        WHERE Id=@id AND UserId=@uid;", con))
+            {
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = addressId;
+                cmd.Parameters.Add("@uid", SqlDbType.Int).Value = UserId.Value;
+                con.Open();
+                using (var rd = cmd.ExecuteReader())
+                {
+                    if (!rd.Read())
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "addr_invalid",
+                            "openPayModal('Địa chỉ không hợp lệ', 'Vui lòng chọn lại địa chỉ.', '');", true);
+                        return;
+                    }
+                    hoten = rd["HoTen"].ToString();
+                    sdt = rd["SDT"].ToString();
+                    email = rd["Email"].ToString();
+                    diachi = rd["DiaChi"].ToString();
+                    pttt = rd["PhuongThucTT"] as string ?? "COD";
+                    ghichu = rd["GhiChu"] as string ?? "";
+                }
             }
 
             var vi = CultureInfo.GetCultureInfo("vi-VN");
@@ -140,19 +219,22 @@ namespace btlweb
                         // DonHang
                         int donHangId;
                         using (var cmd = new SqlCommand(@"
-INSERT INTO dbo.DonHang(MaDon, UserId, HoTen, SDT, Email, DiaChi, PhuongThucTT, GhiChu, TongTien, TrangThai, NgayTao)
-VALUES (@MaDon, @UserId, @HoTen, @SDT, @Email, @DiaChi, @PTTT, @GhiChu, @TongTien, N'Đã thanh toán', GETDATE());
+INSERT INTO dbo.DonHang(MaDon, UserId, AddressId, HoTen, SDT, Email, DiaChi, PhuongThucTT, GhiChu, TongTien, TrangThai, NgayTao)
+VALUES (@MaDon, @UserId, @AddressId, @HoTen, @SDT, @Email, @DiaChi, @PTTT, @GhiChu, @TongTien, N'Đã thanh toán', GETDATE());
 SELECT CAST(SCOPE_IDENTITY() AS INT);", con, tran))
                         {
                             cmd.Parameters.AddWithValue("@MaDon", maDon);
-                            cmd.Parameters.AddWithValue("@UserId", (object)(Session["userId"] as int?) ?? DBNull.Value);
+                            cmd.Parameters.AddWithValue("@UserId", (object)UserId ?? DBNull.Value);
+                            cmd.Parameters.AddWithValue("@AddressId", addressId); // cần cột AddressId trong DonHang
                             cmd.Parameters.AddWithValue("@HoTen", hoten);
                             cmd.Parameters.AddWithValue("@SDT", sdt);
                             cmd.Parameters.AddWithValue("@Email", email);
                             cmd.Parameters.AddWithValue("@DiaChi", diachi);
                             cmd.Parameters.AddWithValue("@PTTT", pttt);
                             cmd.Parameters.AddWithValue("@GhiChu", (object)ghichu ?? DBNull.Value);
-                            cmd.Parameters.Add("@TongTien", SqlDbType.Decimal).Value = tong;
+                            var pTong = cmd.Parameters.Add("@TongTien", SqlDbType.Decimal);
+                            pTong.Precision = 18; pTong.Scale = 2; pTong.Value = tong;
+
                             donHangId = (int)cmd.ExecuteScalar();
                         }
 
@@ -166,9 +248,11 @@ VALUES (@DonHangId, @MaSP, @TenSP, @DonGia, @SoLuong, @ThanhTien);", con, tran))
                                 cmd.Parameters.AddWithValue("@DonHangId", donHangId);
                                 cmd.Parameters.AddWithValue("@MaSP", it.MaSP);
                                 cmd.Parameters.AddWithValue("@TenSP", it.TenSP);
-                                cmd.Parameters.Add("@DonGia", SqlDbType.Decimal).Value = it.Gia;
+                                var pDonGia = cmd.Parameters.Add("@DonGia", SqlDbType.Decimal);
+                                pDonGia.Precision = 18; pDonGia.Scale = 2; pDonGia.Value = it.Gia;
                                 cmd.Parameters.AddWithValue("@SoLuong", it.Qty);
-                                cmd.Parameters.Add("@ThanhTien", SqlDbType.Decimal).Value = it.Gia * it.Qty;
+                                var pTT = cmd.Parameters.Add("@ThanhTien", SqlDbType.Decimal);
+                                pTT.Precision = 18; pTT.Scale = 2; pTT.Value = it.Gia * it.Qty;
                                 cmd.ExecuteNonQuery();
                             }
                         }
@@ -183,7 +267,8 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);", con, tran))
                         {
                             cmd.Parameters.AddWithValue("@DonHangId", donHangId);
                             cmd.Parameters.AddWithValue("@SoHoaDon", soHD);
-                            cmd.Parameters.Add("@TongTien", SqlDbType.Decimal).Value = tong;
+                            var pTong = cmd.Parameters.Add("@TongTien", SqlDbType.Decimal);
+                            pTong.Precision = 18; pTong.Scale = 2; pTong.Value = tong;
                             cmd.Parameters.AddWithValue("@PTTT", pttt);
                             hoaDonId = (int)cmd.ExecuteScalar();
                         }
@@ -198,9 +283,11 @@ VALUES (@HoaDonId, @MaSP, @TenSP, @DonGia, @SoLuong, @ThanhTien);", con, tran))
                                 cmd.Parameters.AddWithValue("@HoaDonId", hoaDonId);
                                 cmd.Parameters.AddWithValue("@MaSP", it.MaSP);
                                 cmd.Parameters.AddWithValue("@TenSP", it.TenSP);
-                                cmd.Parameters.Add("@DonGia", SqlDbType.Decimal).Value = it.Gia;
+                                var pDonGia = cmd.Parameters.Add("@DonGia", SqlDbType.Decimal);
+                                pDonGia.Precision = 18; pDonGia.Scale = 2; pDonGia.Value = it.Gia;
                                 cmd.Parameters.AddWithValue("@SoLuong", it.Qty);
-                                cmd.Parameters.Add("@ThanhTien", SqlDbType.Decimal).Value = it.Gia * it.Qty;
+                                var pTT = cmd.Parameters.Add("@ThanhTien", SqlDbType.Decimal);
+                                pTT.Precision = 18; pTT.Scale = 2; pTT.Value = it.Gia * it.Qty;
                                 cmd.ExecuteNonQuery();
                             }
                         }
@@ -224,5 +311,6 @@ VALUES (@HoaDonId, @MaSP, @TenSP, @DonGia, @SoLuong, @ThanhTien);", con, tran))
                 }
             }
         }
+
     }
 }

@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Khung.Master" AutoEventWireup="true" CodeBehind="Dangky.aspx.cs" Inherits="btlweb.Dangky" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Khung.Master" AutoEventWireup="true" CodeBehind="Dangky.aspx.cs" Inherits="btlweb.Dangky" ClientIDMode="Static" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="css/Dangky.css" />
+     <script src="js/DangKy.js" defer></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <section class="auth-page">
@@ -13,15 +14,19 @@
 
             <div class="auth-form">
                 <asp:TextBox ID="txtHo"    runat="server" CssClass="auth-input" placeholder="Họ"></asp:TextBox>
+
                 <asp:TextBox ID="txtTen"   runat="server" CssClass="auth-input" placeholder="Tên"></asp:TextBox>
+                
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="auth-input" placeholder="Email" TextMode="Email"></asp:TextBox>
+                 
                 <asp:TextBox ID="txtPhone" runat="server" CssClass="auth-input" placeholder="Số điện thoại"></asp:TextBox>
-
+                 
                 <asp:TextBox ID="txtPass"  runat="server" CssClass="auth-input" placeholder="Mật khẩu" TextMode="Password"></asp:TextBox>
+                 
                 <asp:TextBox ID="txtPass2" runat="server" CssClass="auth-input" placeholder="Nhập lại mật khẩu" TextMode="Password"></asp:TextBox>
-
+            
                 <asp:Button ID="btnDangKy" runat="server" Text="Đăng ký" CssClass="btn-primary"
-                    OnClick="btnDangKy_Click" />
+                    OnClick="btnDangKy_Click" OnClientClick="return Dangkyjs_Click();" UseSubmitBehavior="true"/>
 
                 <!-- Thông báo -->
                 <asp:Literal ID="ltMsg" runat="server"></asp:Literal>

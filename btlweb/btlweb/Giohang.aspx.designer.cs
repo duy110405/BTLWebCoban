@@ -33,58 +33,94 @@ namespace btlweb
         protected global::System.Web.UI.WebControls.Repeater rptCart;
 
         /// <summary>
-        /// txtHoTen control.
+        /// ddlAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHoTen;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAddress;
 
         /// <summary>
-        /// txtSDT control.
+        /// lnkManageAddr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSDT;
+        protected global::System.Web.UI.WebControls.HyperLink lnkManageAddr;
 
         /// <summary>
-        /// txtEmail control.
+        /// pAddrPreview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.Panel pAddrPreview;
 
         /// <summary>
-        /// txtDiaChi control.
+        /// litAddrName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDiaChi;
+        protected global::System.Web.UI.WebControls.Literal litAddrName;
 
         /// <summary>
-        /// ddlPTTT control.
+        /// litAddrPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPTTT;
+        protected global::System.Web.UI.WebControls.Literal litAddrPhone;
 
         /// <summary>
-        /// txtGhiChu control.
+        /// litAddrEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGhiChu;
+        protected global::System.Web.UI.WebControls.Literal litAddrEmail;
+
+        /// <summary>
+        /// litAddrFull control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litAddrFull;
+
+        /// <summary>
+        /// litAddrPTTT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litAddrPTTT;
+
+        /// <summary>
+        /// litAddrNote control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litAddrNote;
+
+        /// <summary>
+        /// hfAddressId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfAddressId;
 
         /// <summary>
         /// litSub control.

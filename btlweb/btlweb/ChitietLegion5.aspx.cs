@@ -33,6 +33,7 @@ namespace btlweb
         {
             using (var con = new SqlConnection(ConnStr))
             using (var cmd = new SqlCommand("dbo.usp_SanPham_GetById", con))
+
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@MaSP", maSP);

@@ -378,6 +378,18 @@ a {
         display: block
     }
 
+
+/* Link phủ toàn bộ card để click cả ô */
+.card {
+    position: relative;
+}
+
+    .card .card-link {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        border-radius: var(--radius);
+    }
 /* RESPONSIVE */
 @media (max-width:1024px) {
     .hero .hero-grid {

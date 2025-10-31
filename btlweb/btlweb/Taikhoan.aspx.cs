@@ -14,12 +14,22 @@ namespace btlweb
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string user = (txtUsername.Text ?? "").Trim(); // email hoặc SĐT
+            string user = (txtUsername.Text ?? "").Trim(); 
             string pass = txtPassword.Text ?? "";
 
             if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(pass))
             {
                 ShowError("Vui lòng nhập đầy đủ thông tin.");
+                return;
+            }
+
+            // Đặc quyền admin theo yêu cầu đề bài: admin / admin
+            if (user.Equals("admin", StringComparison.OrdinalIgnoreCase) && pass == "admin123")
+            {
+                Session["UserId"] = -1;              // sentinel id cho admin
+                Session["UserName"] = "admin123@gmail.com";       // dùng để IsAdmin() nhận diện
+                var ret = Request.QueryString["return"];
+                Response.Redirect(string.IsNullOrEmpty(ret) ? "Trangchu.aspx" : ret);
                 return;
             }
 

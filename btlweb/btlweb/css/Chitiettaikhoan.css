@@ -255,6 +255,133 @@
     flex-wrap: wrap;
     justify-content: flex-end
 }
+/* ==================== CUSTOMER FORM ==================== */
+.customer .block-title {
+    margin: 4px 0 12px;
+}
+
+/* Lưới form gọn gàng */
+.form-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 8px 12px;
+    align-items: center;
+}
+
+    /* Dòng lỗi nằm dưới input (cột 2), không đẩy layout loạn xạ */
+    .form-grid .field-error {
+        grid-column: 2 / -1; /* luôn ở cột input */
+        display: block;
+        min-height: 18px; /* chừa chỗ để form đỡ “nhảy” */
+        margin-top: -4px;
+        margin-bottom: 6px;
+        color: #d93025;
+        font-size: 13px;
+        line-height: 1.2;
+    }
+    .form-grid .js-error {
+        grid-column: 2 / -1; /* luôn ở cột input */
+        display: block;
+        min-height: 18px; /* chừa chỗ để form đỡ “nhảy” */
+        margin-top: -4px;
+        margin-bottom: 6px;
+        color: #d93025;
+        font-size: 13px;
+        line-height: 1.2;
+    }
+
+/* Viền đỏ khi lỗi */
+.input.is-invalid,
+.select.is-invalid,
+.textarea.is-invalid {
+    border-color: #d93025 !important;
+    box-shadow: 0 0 0 3px rgba(217,48,37,.08);
+}
+.input, .select, .textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px 10px;
+    font-size: 14px;
+}
+
+.textarea {
+    resize: vertical;
+}
+
+.customer .form-grid .error {
+    color: red;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+}
+
+/*=============================================Địa chỉ=============================== */
+
+.customer .button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    grid-column-start: 2; /* Bắt đầu ở cột thứ 2 (cột của input) */
+    justify-self: end;
+}
+
+    .customer .button:hover {
+        background-color: #0056b3;
+    }
+.addresses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    gap: 16px
+}
+
+.address-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    border: 1px solid #eee
+}
+
+    .address-card.is-default {
+        border-color: #2ecc71
+    }
+
+.addr-head {
+    display: flex;
+    justify-content: space-between
+}
+
+.badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #2ecc71;
+    color: #fff
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px
+}
+
+.btn {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px
+}
+
+    .btn.danger {
+        border-color: #ff6b6b;
+        color: #c0392b
+    }
 
 /* Views */
 .view {
