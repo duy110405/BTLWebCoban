@@ -315,5 +315,12 @@ WHERE ct.HoaDonId = @id;", con))
                 child.DataBind();
             }
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+            Response.Redirect("Taikhoan.aspx"); // hoặc "Trangchu.aspx" tùy UX bạn muốn
+        }
     }
 }

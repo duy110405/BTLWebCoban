@@ -22,7 +22,7 @@
         <a href="?tab=security"  data-tab="security"  class="acc-link">Bảo mật</a>
         <a href="?tab=support"   data-tab="support"   class="acc-link">Hỗ trợ</a>
         <a href="?tab=privacy"   data-tab="privacy"   class="acc-link">Quyền riêng tư</a>
-
+        <a href="?tab=logout"   data-tab="logout"   class="acc-link">đăng xuất</a>
       </nav>
     </aside>
 
@@ -178,6 +178,16 @@
         </asp:Repeater>
       </section>
 
+       <!-- Đăng xuất -->
+     <section class="view" id="view-logout">
+      <h2 class="section-title">Bạn có chắc muốn đăng xuất không</h2>
+     <asp:Button ID="btnLogout" runat="server"
+              CssClass="button"
+              Text="Đăng xuất"
+              OnClick="btnLogout_Click" />
+     </section>
+
+        
     </div>
   </div>
 </section>
