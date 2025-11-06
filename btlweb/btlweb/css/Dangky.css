@@ -50,6 +50,19 @@
 .auth-form {
 }
 
+/* ====== Field + Label ====== */
+.auth-field {
+    margin-bottom: 16px; /* thưa hơn một chút */
+}
+
+.auth-label {
+    display: block;
+    margin: 0 0 10px 2px; /* đẩy label xa ô nhập hơn */
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brown);
+}
+
 /* Inputs */
 .auth-input {
     width: 100%;
@@ -61,7 +74,7 @@
     font-size: 14px;
     color: #222;
     outline: none;
-    margin-bottom: 14px;
+    margin-bottom: 0; /* khoảng cách đã xử lý ở .auth-field */
 }
 
     .auth-input:focus {
@@ -193,7 +206,6 @@
     }
 
 .auth-form .js-error {
-    grid-column: 2 / -1; /* luôn ở cột input */
     display: block;
     min-height: 18px; /* chừa chỗ để form đỡ “nhảy” */
     margin-top: -4px;

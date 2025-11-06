@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -29,11 +30,37 @@ namespace btlweb
             }
         }
 
+        // ================== LOGIN GATE (thêm mới) ==================
+        private bool IsLoggedIn() => Session["UserId"] != null;
+
+        private string CurrentDetailUrl()
+        {
+            var masp = hfMaSP.Value;
+            var url = string.IsNullOrWhiteSpace(masp)
+                ? Request.RawUrl
+                : $"ChitietLegion5.aspx?masp={Server.UrlEncode(masp)}";
+            return url;
+        }
+
+        /// <summary>
+        /// Kiểm tra đăng nhập; nếu chưa thì chuyển về TaiKhoan.aspx kèm return để login xong quay lại.
+        /// Trả về true nếu đã đăng nhập, false nếu đã redirect (handler nên return ngay).
+        /// </summary>
+        private bool EnsureLoggedInOrRedirect()
+        {
+            if (IsLoggedIn()) return true;
+
+            var returnUrl = CurrentDetailUrl();
+            var target = $"TaiKhoan.aspx?return={Server.UrlEncode(returnUrl)}&error=login_required";
+            Response.Redirect(target);
+            return false;
+        }
+        // ===========================================================
+
         private void LoadBasic(int maSP)
         {
             using (var con = new SqlConnection(ConnStr))
             using (var cmd = new SqlCommand("dbo.usp_SanPham_GetById", con))
-
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@MaSP", maSP);
@@ -95,14 +122,21 @@ namespace btlweb
         // ========= SỰ KIỆN GIỎ HÀNG =========
         protected void BtnAddToCart_Click(object sender, EventArgs e)
         {
+            // chặn khách chưa đăng nhập
+            if (!EnsureLoggedInOrRedirect()) return;
+
             if (int.TryParse(hfMaSP.Value, out var maSP))
             {
                 AddToCart(maSP, 1);
+                // ở lại trang chi tiết để user chọn tiếp
             }
         }
 
         protected void BtnBuyNow_Click(object sender, EventArgs e)
         {
+            // chặn khách chưa đăng nhập
+            if (!EnsureLoggedInOrRedirect()) return;
+
             if (int.TryParse(hfMaSP.Value, out var maSP))
             {
                 AddToCart(maSP, 1);

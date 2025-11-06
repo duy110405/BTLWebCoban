@@ -10,7 +10,7 @@
     --body-gap-top: clamp(16px,3vw,40px);
 }
 
-/* ===== Nền body ===== */
+/* ===== Nền body (theo master .main) ===== */
 .main {
     background: var(--cream);
 }
@@ -20,28 +20,34 @@
     max-width: 1200px;
     margin: var(--body-gap-top) auto 48px;
     padding: 0 16px;
+    color: var(--text);
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
 .cart-title {
-    font-size: 18px;
-    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 12px;
 }
 
 /* ===== Lưới 2 cột ===== */
 .cart-grid {
-    display:grid;
-    grid-template-columns: minmax(0,1fr) clamp(300px, 32vw, 380px);
-     gap: var(--gap);
-    align-items: start; /* để cột phải không tụt theo chiều cao cột trái */
-    
+    display: grid;
+    grid-template-columns: minmax(0,1fr) clamp(300px,32vw,380px);
+    gap: var(--gap);
+    align-items: start;
 }
 
-/* ===== Card chung ===== */
+/* ===== Card ===== */
 .card {
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 12px;
+    padding: 14px;
+}
+
+.cart-left .card + .card {
+    margin-top: var(--gap);
 }
 
 /* ==================== CART ITEMS ==================== */
@@ -67,6 +73,7 @@
     .cart-item .name {
         font-size: 16px;
         margin: 0 0 4px;
+        font-weight: 700;
     }
 
     .cart-item .desc {
@@ -81,7 +88,7 @@
     align-items: center;
 }
 
-/* === Cụm số lượng === */
+/* === Qty stepper === */
 .qty {
     display: inline-flex;
     align-items: center;
@@ -106,7 +113,7 @@
         cursor: pointer;
         color: #111 !important;
         text-decoration: none !important;
-        transition: transform .05s ease, background .15s ease, border-color .15s ease;
+        transition: transform .05s ease,background .15s ease,border-color .15s ease;
     }
 
         .qty .stepper:hover {
@@ -129,7 +136,7 @@
         outline: none;
     }
 
-/* === Nút Xóa === */
+/* === Remove === */
 .btn-remove {
     display: inline-flex;
     align-items: center;
@@ -142,7 +149,7 @@
     font-weight: 700;
     text-decoration: none !important;
     cursor: pointer;
-    transition: background .15s ease, border-color .15s ease, color .15s ease;
+    transition: background .15s ease,border-color .15s ease,color .15s ease;
 }
 
     .btn-remove::before {
@@ -160,13 +167,13 @@
 .cart-item .price {
     text-align: right;
     color: var(--accent);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 16px;
 }
 
 /* ==================== GIFT ==================== */
 .gift .gift-head {
-    font-weight: 700;
+    font-weight: 800;
     margin: 4px 4px 10px;
     color: #333;
     padding-bottom: 8px;
@@ -196,7 +203,99 @@
     text-align: right;
 }
 
-/*============================Địa chỉ ==========================*/
+/* ==================== ĐỊA CHỈ ==================== */
+.customer .block-title {
+    font-size: 16px;
+    font-weight: 800;
+    margin: 2px 0 12px;
+}
+
+/* layout label + control */
+.form-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr; /* label | control */
+    gap: 10px 12px;
+    align-items: center;
+}
+
+    .form-grid label {
+        font-weight: 600;
+        color: #2d2a28;
+    }
+
+/* style dropdown (CĂN GIỮA DỌC & NGANG) */
+.select {
+    height: 38px;
+    line-height: 38px; /* căn giữa dọc text */
+    padding: 0 36px 0 12px; /* chừa chỗ cho mũi tên */
+    border: 1px solid #d9cfc4;
+    border-radius: 10px;
+    background: #fff;
+    appearance: none;
+    width: 100%;
+    /* căn giữa NGANG */
+    text-align: center; /* Chrome/Edge/WebKit */
+    text-align-last: center; /* Chrome/Edge */
+    -moz-text-align-last: center; /* Firefox */
+    /* mũi tên giữa theo trục dọc */
+    background-image: linear-gradient(45deg,transparent 50%,#7d6f64 50%), linear-gradient(135deg,#7d6f64 50%,transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+    background-size: 6px 6px,6px 6px;
+    background-repeat: no-repeat;
+}
+
+    .select:focus {
+        outline: none;
+        border-color: #cbbfb3;
+        box-shadow: 0 0 0 3px rgba(203,191,179,.35);
+    }
+    /* menu option cũng giữa ngang (tùy trình duyệt hỗ trợ) */
+    .select option {
+        text-align: center;
+    }
+
+/* ẩn span đệm */
+.form-grid span {
+    display: none;
+}
+
+/* === Link "Quản lý / thêm địa chỉ" -> full width như dropdown === */
+.form-grid .link {
+    grid-column: 2 / 3;
+    justify-self: stretch; /* kéo full cột control */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px; /* bằng .select */
+    padding: 0 12px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d8cfc9;
+    border-radius: 10px;
+    background: #f7efe7;
+    color: #5c3a35;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 6px;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+    /* bỏ icon “+” tự sinh vì HTML đã có “+” rồi */
+    .form-grid .link::before {
+        content: none;
+    }
+
+    .form-grid .link:hover {
+        background: #f1e6dc;
+        border-color: #cdbfb4;
+        color: #4a2f29;
+    }
+
+    .form-grid .link:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(203,191,179,.35);
+    }
+
+/* ô xem nhanh địa chỉ */
 .addr-preview {
     margin-top: 10px;
     border: 1px solid #ddd6c7;
@@ -208,19 +307,46 @@
     word-break: break-word;
 }
 
+    .addr-preview .name {
+        font-weight: 700;
+        margin: 0 0 2px;
+    }
+
+.muted {
+    color: #777;
+    font-size: 14px;
+}
+
+.addr-preview .address {
+    margin: 6px 0;
+}
+
 /* ==================== RIGHT COLUMN ==================== */
 .cart-right {
-     display:grid;
-     gap: var(--gap);
-     align-self:start;
+    display: grid;
+    gap: var(--gap);
+    align-self: start;
     position: sticky;
-     top:16px; /* khoảng cách từ mép trên */
-    
+    top: 16px;
 }
 
 .block-title {
     font-size: 16px;
     margin: 2px 0 10px;
+    font-weight: 800;
+}
+
+/* Coupon */
+.coupon .btn {
+    width: 100%;
+    font-weight: 400;
+    font-size: 15px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-style: normal;
+    font-family: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .summary {
@@ -247,6 +373,7 @@
 
     .summary .total .money {
         font-size: 18px;
+        font-weight: 900;
     }
 
 .summary-actions {
@@ -265,9 +392,9 @@
 .btn {
     height: 38px;
     padding: 0 16px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid var(--line);
-    font-weight: 700;
+    font-weight: 800;
     cursor: pointer;
 }
 
@@ -277,21 +404,29 @@
     border-color: #222;
 }
 
+    .btn-primary:hover {
+        filter: brightness(0.95);
+    }
+
 .btn-ghost {
     background: #f7efe7;
 }
 
+    .btn-ghost:hover {
+        background: #f1e6dc;
+    }
+
 /* ==================== RESPONSIVE ==================== */
 @media (max-width:720px) {
-     .cart-grid {
+    .cart-grid {
         grid-template-columns: 1fr;
     }
 
-     .cart-right {
+    .cart-right {
         position: static;
     }
-    /* tắt sticky trên mobile */
-     .cart-item {
+    /* tắt sticky mobile */
+    .cart-item {
         grid-template-columns: 100px 1fr 120px;
     }
 
@@ -299,8 +434,15 @@
         grid-template-columns: 1fr;
     }
 
-       .form-grid label {
+        .form-grid label {
             margin-top: 6px;
+        }
+
+        .form-grid .link {
+            grid-column: 1 / -1; /* full hàng trên mobile */
+            width: 100%;
+            justify-self: stretch;
+            margin-top: 8px;
         }
 }
 
@@ -335,7 +477,7 @@
 
     .pay-modal .modal-box {
         position: relative;
-        width: min(440px, 92vw);
+        width: min(440px,92vw);
         margin: 12vh auto 0;
         background: #fff;
         border: 1px solid var(--line);
@@ -377,7 +519,6 @@
         justify-content: center;
     }
 
-        /* Nút trong modal: giống “Tiếp tục mua sắm” */
         .pay-modal .actions .btn,
         .pay-modal .actions a.btn,
         .pay-modal .actions .btn-primary,
