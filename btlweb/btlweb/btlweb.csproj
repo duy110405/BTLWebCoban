@@ -116,13 +116,13 @@
     <Content Include="css\Taikhoan.css" />
     <Content Include="css\Trangchu.css" />
     <Content Include="Dangky.aspx" />
-    <Content Include="Dangnhap.aspx" />
     <Content Include="Giohang.aspx" />
     <Content Include="Gioithieu.aspx" />
     <Content Include="js\Aula3MODEF75.js" />
     <Content Include="js\ChitietLegion5.js" />
     <Content Include="js\ChitietTaikhoan.js" />
     <Content Include="js\DangKy.js" />
+    <Content Include="js\DangNhap.js" />
     <Content Include="js\LenovoThinkCentre.js" />
     <Content Include="js\TrangChu.js" />
     <Content Include="Laptop.aspx" />
@@ -176,13 +176,6 @@
     </Compile>
     <Compile Include="Dangky.aspx.designer.cs">
       <DependentUpon>Dangky.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Dangnhap.aspx.cs">
-      <DependentUpon>Dangnhap.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Dangnhap.aspx.designer.cs">
-      <DependentUpon>Dangnhap.aspx</DependentUpon>
     </Compile>
     <Compile Include="Giohang.aspx.cs">
       <DependentUpon>Giohang.aspx</DependentUpon>

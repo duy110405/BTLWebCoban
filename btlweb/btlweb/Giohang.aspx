@@ -90,6 +90,7 @@
 
   <asp:HiddenField ID="hfAddressId" runat="server" />
 </section>
+          </section>
 
       <!-- CỘT PHẢI -->
       <aside class="cart-right">

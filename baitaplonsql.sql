@@ -1,5 +1,6 @@
 ﻿create database Baitaplonlaptrinhweb
 
+Select * from NguoiDung
 ALTER TABLE dbo.NguoiDung ADD IsAdmin bit NOT NULL DEFAULT(0)
     CREATE TABLE dbo.NguoiDung (
         Id         INT IDENTITY(1,1) PRIMARY KEY,
@@ -13,7 +14,9 @@ ALTER TABLE dbo.NguoiDung ADD IsAdmin bit NOT NULL DEFAULT(0)
     CREATE UNIQUE INDEX UX_NguoiDung_Email ON dbo.NguoiDung(Email);
 
 INSERT INTO dbo.NguoiDung (HoTen, Email, MatKhau, SoDienThoai)
-VALUES (N'Quản trị viên', N'admin123@gmail.com', N'admin123', N'0123456789');
+VALUES (N'Quản trị viên', N'admin123@gmail.com', N'admin123', N'0123456789')
+
+select * from NguoiDung
 
 UPDATE dbo.NguoiDung
 SET IsAdmin = 1

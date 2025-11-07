@@ -208,7 +208,7 @@
 .auth-form .js-error {
     display: block;
     min-height: 18px; /* chừa chỗ để form đỡ “nhảy” */
-    margin-top: -4px;
+    margin-top: 6px;
     margin-bottom: 6px;
     color: #d93025;
     font-size: 13px;

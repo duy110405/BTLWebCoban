@@ -11,7 +11,15 @@
     --gg: #de4b3a;
     --radius: 10px;
 }
-
+.login-wrap .js-error {
+    display: block;
+    min-height: 18px; /* chừa chỗ để form đỡ “nhảy” */
+    margin-top: 6px;
+    margin-bottom: 6px;
+    color: #d93025;
+    font-size: 13px;
+    line-height: 1.2;
+}
 /* Canh giữa phần body, tạo khoảng cách với header */
 .login-wrap {
     display: flex;
