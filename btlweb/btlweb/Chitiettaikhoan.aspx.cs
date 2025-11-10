@@ -18,9 +18,80 @@ namespace btlweb
             UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
             if (!IsPostBack)
             {
+                BindOverview();
                 BindOrders();
                 BindInvoices();
                 BindAddresses();
+
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "tab_default",
+            "if(!location.search.includes('tab=')){history.replaceState({},'', '?tab=overview');}", true);
+            }
+
+
+        }
+        // phan lam them
+        void BindOverview()
+        {
+            // Chưa đăng nhập -> hiển thị placeholder nhẹ nhàng
+            if (UserId == null)
+            {
+                ltHoTen.Text = "Khách vãng lai";
+                ltEmail.Text = "—";
+                ltSDT.Text = "—";
+                ltNgayTao.Text = "—";
+                ltSoDon.Text = "0";
+                ltDiaChiMacDinh.Text = "—";
+                return;
+            }
+
+            using (var con = new SqlConnection(ConnStr))
+            {
+                con.Open();
+
+                // 1) Thông tin người dùng
+                using (var cmd = new SqlCommand(@"
+            SELECT HoTen, Email, SoDienThoai, NgayTao
+            FROM dbo.NguoiDung
+            WHERE Id = @uid;", con))
+                {
+                    cmd.Parameters.Add("@uid", SqlDbType.Int).Value = UserId.Value;
+                    using (var r = cmd.ExecuteReader())
+                    {
+                        if (r.Read())
+                        {
+                            ltHoTen.Text = r["HoTen"]?.ToString();
+                            ltEmail.Text = r["Email"]?.ToString();
+                            ltSDT.Text = string.IsNullOrWhiteSpace(r["SoDienThoai"]?.ToString()) ? "—" : r["SoDienThoai"].ToString();
+                            if (DateTime.TryParse(r["NgayTao"]?.ToString(), out var created))
+                                ltNgayTao.Text = created.ToString("dd/MM/yyyy HH:mm");
+                            else
+                                ltNgayTao.Text = "—";
+                        }
+                    }
+                }
+
+                // 2) Tổng số đơn hàng
+                using (var cmd = new SqlCommand(@"
+            SELECT COUNT(*) FROM dbo.DonHang WHERE UserId=@uid;", con))
+                {
+                    cmd.Parameters.Add("@uid", SqlDbType.Int).Value = UserId.Value;
+                    ltSoDon.Text = ((int)cmd.ExecuteScalar()).ToString();
+                }
+
+                // 3) Địa chỉ mặc định
+                using (var cmd = new SqlCommand(@"
+            SELECT TOP 1 DiaChi
+            FROM dbo.DiaChiNguoiDung
+            WHERE UserId=@uid AND IsDefault=1
+            ORDER BY Id DESC;", con))
+                {
+                    cmd.Parameters.Add("@uid", SqlDbType.Int).Value = UserId.Value;
+                    var result = cmd.ExecuteScalar();
+                    ltDiaChiMacDinh.Text = result == null || result == DBNull.Value
+                        ? "Chưa có"
+                        : result.ToString();
+                }
             }
         }
 

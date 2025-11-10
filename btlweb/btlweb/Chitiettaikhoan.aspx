@@ -29,6 +29,37 @@
     <!-- CONTENT -->
     <div class="acc-content">
 
+        <!-- ==================== TỔNG QUAN ==================== -->
+        <!-- phan này dùng để đi thi -->
+<section class="view active" id="view-overview">
+  <h2 class="section-title">Tổng quan tài khoản</h2>
+
+  <div class="grid-2">
+    <!-- Hồ sơ -->
+    <article class="card">
+      <h3 class="block-title">Hồ sơ</h3>
+      <ul class="kv">
+        <li><span>Họ tên</span>         <b><asp:Literal ID="ltHoTen"       runat="server" /></b></li>
+        <li><span>Email</span>          <b><asp:Literal ID="ltEmail"       runat="server" /></b></li>
+        <li><span>Số điện thoại</span>  <b><asp:Literal ID="ltSDT"         runat="server" /></b></li>
+        <li><span>Ngày tạo</span>       <b><asp:Literal ID="ltNgayTao"     runat="server" /></b></li>
+      </ul>
+    </article>
+
+    <!-- Mua sắm -->
+    <article class="card">
+      <h3 class="block-title">Mua sắm</h3>
+      <ul class="kv">
+        <li><span>Tổng số đơn</span>    <b><asp:Literal ID="ltSoDon"       runat="server" /></b></li>
+        <li><span>Địa chỉ mặc định</span>
+          <b><asp:Literal ID="ltDiaChiMacDinh" runat="server" /></b></li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+    <!-- đến đây -->
+
       <!-- Đơn hàng -->
       <section class="view active" id="view-orders">
         <h2 class="section-title">Đơn hàng của bạn</h2>

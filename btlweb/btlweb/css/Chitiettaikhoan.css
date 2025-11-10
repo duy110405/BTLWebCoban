@@ -434,3 +434,35 @@
     transition: background-color 0.3s ease;
     justify-self: end;
 }
+
+
+/* them */
+/* Key–Value list cho Tổng quan */
+.kv {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+}
+
+    .kv li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 0;
+        border-bottom: 1px dashed var(--line);
+    }
+
+        .kv li:last-child {
+            border-bottom: 0;
+        }
+
+        .kv li span {
+            color: var(--muted);
+        }
+
+        .kv li b {
+            font-weight: 700;
+        }
