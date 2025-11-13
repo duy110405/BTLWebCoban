@@ -1,14 +1,25 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
     // Hàm hiển thị lỗi
     function showJsError(input, message) {
-        // Xóa lỗi cũ cạnh ô
-        const next = input.nextElementSibling;
-        if (next && next.classList && next.classList.contains('js-error')) next.remove();
-
+        const container = input.closest('.auth-field');
+        // Xóa lỗi cũ trong phạm vi container
+        if (container) {
+            container.querySelectorAll('.js-error').forEach(n => n.remove());
+        } else {
+            //Xóa lỗi cũ theo cách ban đầu
+            const next = input.nextElementSibling;
+            if (next && next.classList && next.classList.contains('js-error')) next.remove();
+        }
         const span = document.createElement('span');
         span.className = 'js-error';
         span.textContent = message;
-        input.insertAdjacentElement('afterend', span);
+        if (container && (input.type === 'radio' || input.type === 'checkbox')) {
+            // Nếu là Radio Button/Checkbox chèn vào cuối container
+            container.appendChild(span);
+        } else {
+            // Với các input text chèn ngay sau input
+            input.insertAdjacentElement('afterend', span);
+        }
     }
 
     window.Dangkyjs_Click = function () {

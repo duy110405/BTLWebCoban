@@ -10,6 +10,18 @@ ALTER TABLE dbo.NguoiDung ADD IsAdmin bit NOT NULL DEFAULT(0)
         SoDienThoai NVARCHAR(20)  NULL,
         NgayTao    DATETIME NOT NULL DEFAULT GETDATE()
     );
+
+	ALTER TABLE NguoiDung ADD DiaChi NVARCHAR (300) NULL ;
+	ALTER TABLE dbo.NguoiDung ADD SoThich NVARCHAR(100) NULL;
+	ALTER TABLE dbo.NguoiDung ADD NgaySinh DATE NULL;
+	ALTER TABLE dbo.NguoiDung ADD GioiTinh VARCHAR(20)  NULL;
+
+	ALTER TABLE NguoiDung
+	DROP COLUMN DiaChi , SoThich , NgaySinh;
+	DELETE FROM NguoiDung;
+	DELETE FROM DiaChiNguoiDung;
+	DELETE FROM DonHang;
+
     -- Khóa duy nhất theo Email để chặn trùng
     CREATE UNIQUE INDEX UX_NguoiDung_Email ON dbo.NguoiDung(Email);
 
